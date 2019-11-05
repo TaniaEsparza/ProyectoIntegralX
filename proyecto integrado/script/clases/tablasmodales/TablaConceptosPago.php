@@ -54,14 +54,15 @@ $Mysql->Conectar();
 					$datosC=$ver[0]."||".
 					$ver[2]."||".
 					$ver[1]."||".
-					$ver[3];
+					$ver[3]."||".
+					$ver[4];
 				//echo $datosM;
 					?>
 
 					<tr>
 						<td><?php echo $ver[2] ?></td>
 						<td><?php echo "$". $ver[1] ?></td>	
-						<td><?php if($ver[3] == 1){ echo "Activo"; } else { echo "Inactivo";} ?></td>	
+						<td><?php if($ver[4] == 1){ echo "Activo"; } else { echo "Inactivo";} ?></td>	
 						<td>
 							<button class="btn btn-success glyphicon glyphicon-pencil" data-toggle="modal" data-target="#modalEdicion" onclick="VerConceptosPago('<?php echo $datosC ?>')">
 								Modificar

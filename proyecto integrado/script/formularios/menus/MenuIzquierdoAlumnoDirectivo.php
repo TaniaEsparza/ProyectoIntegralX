@@ -6,13 +6,13 @@ if (!isset($_SESSION)) { session_start(); }
             <div class="dropdown-divider"></div>
             <a class="dropdown-item" href="ConsultaFichaIdentificacionDirectivos.php">Ficha de identificación</a>           
             <a class="dropdown-item" href="ConsultaTestAprendizajeDirectivos.php">Test Aprendizaje</a>
-            <a class="dropdown-item" href="ConsultasCartaCompromisoDirectivos.php">Carta compromiso</a>
+            <a class="dropdown-item" href="ConsultasCartaCompromisoDirectivos.php">Carta Compromiso</a>
             <a class="dropdown-item" href="ConsultaCartaResponsivaDirectivos.php">Carta Responsiva</a>
             <a class="dropdown-item" href="ConsultasTutoriaIndividualDirectivos.php">Tutoria Individual</a>
             <a class="dropdown-item" href="ConsultaEncuestasReprobacionDirectivos.php">Encuesta de reprobación</a>
             <a class="dropdown-item" href="ConsultasCanalizacionesDirectivos.php">Canalización</a>
             <a class="dropdown-item" href="ConsultasSolicitudBajaDirectivos.php">Solicitud de baja</a>
-            <a class="dropdown-item" href="#">Calificaciones</a>
+            <a class="dropdown-item" href="#">Calficaciones</a>
         </div>';
  
 ?>

@@ -1462,8 +1462,7 @@ public function AltaDatosBasicosAlumno($alumno,$lugarnacimiento,$secundaria,$dat
 			$consultaP = "SELECT * FROM `conceptodepago` where NombreConcepto = '".$ConceptosdePago->getNombreConcepto()."' and Monto = '".$ConceptosdePago->getMonto()."'; ";
 			$ResultadoP = $Mysql->Consulta($consultaP);
 			if(mysqli_num_rows($ResultadoP) == 0){
-
-				$Consulta = "INSERT INTO `conceptodepago` (`idConceptoDePago`, `Monto`, `NombreConcepto`, `Estatus`) VALUES (NULL, '".$ConceptosdePago->getMonto()."', '".$ConceptosdePago->getNombreConcepto()."', '1'); ";
+				$Consulta = "INSERT INTO `conceptodepago` (`idConceptoDePago`, `Monto`, `NombreConcepto`, `MontoLetra`, `Estatus`) VALUES (NULL, '".$ConceptosdePago->getMonto()."', '".$ConceptosdePago->getNombreConcepto()."', '".$ConceptosdePago->getLetraMonto()."' , '1'); ";
 				if ($Mysql->Consulta($Consulta) === true) {
 					return 1;
 				}else{
@@ -1481,7 +1480,7 @@ public function AltaDatosBasicosAlumno($alumno,$lugarnacimiento,$secundaria,$dat
 			$Mysql = new MySQLConector();
 			$Mysql->Conectar();
 
-			$Consulta = "UPDATE `conceptodepago` SET `Monto` = '".$ConceptosdePago->getMonto()."', `NombreConcepto` = '".$ConceptosdePago->getNombreConcepto()."', `Estatus` = ".$ConceptosdePago->getEstatus()." WHERE `conceptodepago`.`idConceptoDePago` = '".$ConceptosdePago->getidConceptoDePago()."'";
+			$Consulta = "UPDATE `conceptodepago` SET `Monto` = '".$ConceptosdePago->getMonto()."', `NombreConcepto` = '".$ConceptosdePago->getNombreConcepto()."', `MontoLetra` = '".$ConceptosdePago->getLetraMonto()."' ,`Estatus` = ".$ConceptosdePago->getEstatus()." WHERE `conceptodepago`.`idConceptoDePago` = '".$ConceptosdePago->getidConceptoDePago()."'";
 			if ($Mysql->Consulta($Consulta) === true) {
 				return 1;
 			}else{

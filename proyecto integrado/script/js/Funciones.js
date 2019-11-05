@@ -587,9 +587,10 @@ function ModificacionClausulas(){
 	});
 }
 
-function agregarConceptosPago(Concepto, Monto){
+function agregarConceptosPago(Concepto, Monto, LetraMonto){
 	cadena= "Concepto=" + Concepto + 
-	"&Monto=" + Monto;
+	"&Monto=" + Monto +
+	"&LetraMonto=" + LetraMonto ;
 
 	$.ajax({
 		type:"GET",
@@ -613,18 +614,21 @@ function VerConceptosPago(datos){
 	$('#idconcepto').val(d[0]);
 	$('#conceptou').val(d[1]);
 	$('#montou').val(d[2]);
-	$('#estatusu').val(d[3]);
+	$('#letramontou').val(d[3]);
+	$('#estatusu').val(d[4]);
 }
 
 function ModificacionConceptosPago(){
 	id=$('#idconcepto').val();
 	Concepto=$('#conceptou').val();
 	Monto=$('#montou').val();
+	LetraMonto=$('#letramontou').val();
 	Estatus=$('#estatusu').val();
 
 	cadena= "id=" + id +
 	"&Concepto=" + Concepto+
 	"&Monto=" + Monto+
+	"&LetraMonto=" + LetraMonto+
 	"&Estatus=" + Estatus;
 
 	$.ajax({

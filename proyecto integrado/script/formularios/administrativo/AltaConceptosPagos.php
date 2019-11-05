@@ -55,7 +55,7 @@ unset($_SESSION['ConsultaCP']);
 function soloLetras(e) {
 	key = e.keyCode || e.which;
 	tecla = String.fromCharCode(key).toString();
-    letras = " abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";//Se define todo el abecedario que se quiere que se muestre.
+    letras = " abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890/()";//Se define todo el abecedario que se quiere que se muestre.
     especiales = [8, 39, 46, 6, 44]; //Es la validación del KeyCodes, que teclas recibe el campo de texto.
 
     tecla_especial = false
@@ -89,6 +89,13 @@ function soloLetras(e) {
         	alert('Verifica el campo monto/costo esta vacio!');
         	return false;
         }
+
+        miCampoTexto = document.getElementById("letramonto").value;
+        //la condición
+        if (miCampoTexto.length == 0 || /^\s+$/.test(miCampoTexto)) {
+          alert('Verifica el campo letra monto esta vacio!');
+          return false;
+        }
         return true;
       }
     </script>
@@ -108,6 +115,13 @@ function soloLetras(e) {
         if (miCampoTexto.length == 0 || /^\s+$/.test(miCampoTexto)) {
         	alert('Verifica el campo monto/costo esta vacio!');
         	return false;
+        }
+
+        miCampoTexto = document.getElementById("letramontou").value;
+        //la condición
+        if (miCampoTexto.length == 0 || /^\s+$/.test(miCampoTexto)) {
+          alert('Verifica el campo letra monto esta vacio!');
+          return false;
         }
         return true;
       }
@@ -159,6 +173,8 @@ function soloLetras(e) {
              <input type="text" name="concepto" id="concepto" class="form-control input-sm" onKeyPress="return soloLetras(event);">
              <label>Monto/Costo:</label>
              <input type="text" name="monto" id="monto" class="form-control input-sm" onkeypress="return soloNumeros(event);" >
+             <label>Monto en letra:</label>
+             <input type="text" name="letramonto" id="letramonto" placeholder="Ejemplo: (Cantidad pesos 00/100 m.n.)" class="form-control input-sm" onkeypress="return soloLetras(event);" >
              <div class="modal-footer">
               <button type="button" class="btn btn-success"  id="GuardarRegistro" onclick="return validar()" >
                Agregar
@@ -186,6 +202,8 @@ function soloLetras(e) {
       <input type="text" name="conceptou" id="conceptou" class="form-control input-sm" onKeyPress="return soloLetras(event);" >
       <label>Monto/Costo:</label>
       <input type="text" name="montou" id="montou" class="form-control input-sm" onkeypress="return soloNumeros(event);">
+      <label>Monto en letra:</label>
+      <input type="text" name="letramontou" id="letramontou" class="form-control input-sm" placeholder="Ejemplo: (Cantidad pesos 00/100 m.n.)" onkeypress="return soloLetras(event);" >
       <label>Estado:</label>
       <select name="estatusu" id="estatusu" class="custom-select" style="width: 100%" >
         <option value="1">Activo</option>
@@ -231,10 +249,13 @@ function soloLetras(e) {
         event.preventDefault();
         if($('#concepto').val() == ''){
         }else if ($('#monto').val()=='') {
+        }else if ($('#letramonto').val()=='') {
         }else{
          Concepto=$('#concepto').val();
          monto=$('#monto').val();
-         agregarConceptosPago(Concepto,monto);
+         letramonto=$('#letramonto').val();
+
+         agregarConceptosPago(Concepto,monto,letramonto);
        }
      });
 
@@ -249,11 +270,18 @@ function soloLetras(e) {
          this.value = this.value.replace(/[^a-z0-9.\s]+/ig,"");
        }
      });
+
+       $('#letramonto').on('input', function (e) {
+        if (!/^[0-9./()\s]*$/i.test(this.value)) {
+         this.value = this.value.replace(/[^a-z0-9.\s]+/ig,"");
+       }
+     });
        
        $('#actualizadatos').click(function(event){
         event.preventDefault();
         if($('#conceptou').val() == ''){
         }else if ($('#montou').val()=='') {
+        }else if ($('#letramontou').val()=='') {
         }else{
           ModificacionConceptosPago();
         }
@@ -262,11 +290,15 @@ function soloLetras(e) {
        $('#CerrarRegistro').click(function() {
         $("#concepto").val("");
         $('#monto').val("");
+        $('#letramonto').val("");
+
       });
 
        $('#CerrarRegistroA').click(function() {
         $("#concepto").val("");
         $('#monto').val("");
+        $('#letramonto').val("");
+
       });
 
      });
