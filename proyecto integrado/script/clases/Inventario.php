@@ -1,3 +1,4 @@
+
 <?php
 
 class Inventario{
@@ -46,8 +47,8 @@ class Inventario{
 		$this->Categorias = null;
 		$this->EstadoFisico = null;
 		$this->Area = null;
-		$this->$Ubicacion = null;
-		$this->$Empleado =  null;
+		$this->Ubicacion = null;
+		$this->Empleado =  null;
 	}
 
 	public function setidInventario($idInventario){

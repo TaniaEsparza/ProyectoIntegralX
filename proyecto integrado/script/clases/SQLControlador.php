@@ -1488,7 +1488,33 @@ public function AltaDatosBasicosAlumno($alumno,$lugarnacimiento,$secundaria,$dat
 			}
 			$Mysql->CerrarConexion();
 		}
+
+		public function AgregarArticuloInventario($Inventario){
+			$Mysql = new MySQLConector();
+			$Mysql->Conectar();
+
+			$Consulta = "INSERT INTO `inventario` (`idInventario`, `Articulo`, `Descripcion`, `Precio`, `Cantidad`, `Proveedores`, `Origenes`, `NoSerie`, `FechaIngreso`, `Tipo`, `FechaRegistro`, `Estatus`, `Marca`, `Modelo`, `Mes`, `Anyo`, `Imagen`, `Categorias`, `Estado`, `Area`, `Ubicacion`, `Empleado`) VALUES (NULL, '".$Inventario->getArticulo()."', '".$Inventario->getDescripcion()."', '".$Inventario->getPrecio()."', '".$Inventario->getCantidadInventario()."', '".$Inventario->getProveedores()."', '".$Inventario->getOrigenes()."', '".$Inventario->getNoSerie()."', '".$Inventario->getFechaIngreso()."', '".$Inventario->getTipo()."', '".$Inventario->getFechaRegistroZac()."', '".$Inventario->getEstatus()."', '".$Inventario->getMarca()."', '".$Inventario->getModelo()."', '".$Inventario->getMes()."', '".$Inventario->getAnyo()."', 'null', '".$Inventario->getCategorias()."', '".$Inventario->getEstadoFisico()."', '".$Inventario->getArea()."', '".$Inventario->getUbicacion()."', '".$Inventario->getEmpleado()."');";
+
+			if ($Mysql->Consulta($Consulta) === true) {
+				return 1;
+			}else{
+				return 0;
+			}
+			$Mysql->CerrarConexion();
+		}
+
+		public function ModificarArticuloInventario($Inventario){
+			$Mysql = new MySQLConector();
+			$Mysql->Conectar();
+
+			$Consulta = "UPDATE `inventario` SET `Articulo` = '".$Inventario->getArticulo()."', `Descripcion` = '".$Inventario->getDescripcion()."', `Precio` = '".$Inventario->getPrecio()."', `Cantidad` = '".$Inventario->getCantidadInventario()."', `Proveedores` = '".$Inventario->getProveedores()."', `Origenes` = '".$Inventario->getOrigenes()."', `NoSerie` = '".$Inventario->getNoSerie()."', `FechaIngreso` = '".$Inventario->getFechaIngreso()."', `Tipo` = '".$Inventario->getTipo()."', `FechaRegistro` = '".$Inventario->getFechaRegistroZac()."', `Estatus` = '".$Inventario->getEstatus()."', `Marca` = '".$Inventario->getMarca()."', `Modelo` = '".$Inventario->getModelo()."', `Mes` = '".$Inventario->getMes()."', `Anyo` = '".$Inventario->getAnyo()."', `Imagen` = 'null', `Categorias` = '".$Inventario->getCategorias()."', `Estado` = '".$Inventario->getEstadoFisico()."', `Area` = '".$Inventario->getArea()."', `Ubicacion` = '".$Inventario->getUbicacion()."', `Empleado` = '".$Inventario->getEmpleado()."' WHERE `inventario`.`idInventario` = '".$Inventario->getidInventario()."';";
+
+			if ($Mysql->Consulta($Consulta) === true) {
+				return 1;
+			}else{
+				return 0;
+			}
+			$Mysql->CerrarConexion();
+		}
 	}
 	?>
-
-

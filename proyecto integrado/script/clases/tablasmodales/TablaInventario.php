@@ -107,7 +107,7 @@ $Mysql->Conectar();
 						<td><?php echo $ver[11]?></td>
 						<td><?php echo $ver[12]?></td>
 						<td><?php echo $ver[13]?></td>
-						<td><?php echo "<img width='150' height='150' src='data:imagen/jpeg;base64,".base64_encode($ver[16]). "' />";?></td>
+						<td><?php echo "<img width='150' height='150' src='data:imagen/jpeg;base64,".base64_encode($ver[16])."' />";?></td>
 						<td><?php echo $ver[14]?></td>
 						<td><?php echo $ver[15]?></td>
 						<td><?php echo $ver[17]?></td>
@@ -115,11 +115,9 @@ $Mysql->Conectar();
 						<td><?php echo $ver[19]?></td>
 						<td><?php echo $ver[20]?></td>
 						<td><?php echo $ver[21]?></td>	
-						<td>
-							<button class="btn btn-success glyphicon glyphicon-pencil" data-toggle="modal" data-target="#modalEdicion">
-								Modificar
-							</button>
-						</td>
+						
+						<?php echo"<td><a href=\"../../formularios/administrativo/CrearSessionDirectivoInventario.php?idInventario=".$ver[0]."\" ><button class=\"btn btn-success glyphicon glyphicon-pencil\">Modificar</button></a></td>"?>
+						
 					</tr>
 					<?php 
 				}

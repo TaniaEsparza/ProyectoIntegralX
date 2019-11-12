@@ -9,209 +9,227 @@ session_start();
       }*/
       ?>
       <?php
-//require('conexion.php');
-//REGISTRO NUEVO EN LA BASE DE DATOS
-/*if (isset($_POST['articulo']) AND $_POST['id'] == null AND isset($_FILES['imagen']) AND $_FILES['imagen']['error'] === UPLOAD_ERR_OK) {
-  $fileTmpPath = $_FILES['imagen']['tmp_name'];
-  $fileName = $_FILES['imagen']['name'];
-  $fileSize = $_FILES['imagen']['size'];
-  $fileType = $_FILES['imagen']['type'];
-  $fileNameCmps = explode(".", $fileName);
-  $fileExtension = strtolower(end($fileNameCmps));
-  $newFileName = md5(time() . $fileName) . '.' . $fileExtension;
-  $uploadFileDir = './imagenes/inventario/';
-  $dest_path = $uploadFileDir . $newFileName;
-  
-  if(move_uploaded_file($fileTmpPath, $dest_path))
-  {
-    $sql = "INSERT INTO inventario
-    (articulo, descripcion, precio, cantidad, proveedores, origenes, serie, fecha_ingreso, tipo, fecha_registro, estatus, marca, modelo,
-    mes, ano, imagen, categorias, estado, area, ubicacion, empleado)
-    VALUES ('$_POST[articulo]', '$_POST[descripcion]', '$_POST[precio]', '$_POST[cantidad]', '$_POST[proveedores]', '$_POST[origenes]', '$_POST[serie]', '$_POST[fecha_ingreso]', '$_POST[tipo]', 
-    '$_POST[fecha_registro]', '$_POST[estatus]', '$_POST[marca]', '$_POST[modelo]', '$_POST[mes]', '$_POST[ano]', '$newFileName', '$_POST[categorias]', '$_POST[estado]', '$_POST[area]', '$_POST[ubicacion]', 
-    '$_POST[empleado]')";
 
-    if ($conexion->query($sql) === TRUE){
-      echo "<h1>Operacion Exitosa!<h1>";
-      echo "<script> setTimeout(function () { window.location.href='index.php'; },3000); </script>";
-    } else {
-      echo "Error: ".$sql."<br>".$conexion->error;
-    }
-  }
-	
-}else if(isset($_POST['articulo']) AND $_POST['id'] != null) {
-  if(isset($_FILES['imagen']) AND $_FILES['imagen']['error'] === UPLOAD_ERR_OK){
-    $fileTmpPath = $_FILES['imagen']['tmp_name'];
-    $fileName = $_FILES['imagen']['name'];
-    $fileSize = $_FILES['imagen']['size'];
-    $fileType = $_FILES['imagen']['type'];
-    $fileNameCmps = explode(".", $fileName);
-    $fileExtension = strtolower(end($fileNameCmps));
-    $newFileName = md5(time() . $fileName) . '.' . $fileExtension;
-    $uploadFileDir = './imagenes/inventario/';
-    $dest_path = $uploadFileDir . $newFileName;
-    if(move_uploaded_file($fileTmpPath, $dest_path))
-    {
+      ?>
+      <!DOCTYPE html>
+      <html lang="es">
 
-      $sql = "UPDATE inventario SET 
-      articulo = '$_POST[articulo]', 
-      descripcion = '$_POST[descripcion]', 
-      precio = '$_POST[precio]', 
-      cantidad = '$_POST[cantidad]',
-      proveedores = '$_POST[proveedores]',
-      origenes = '$_POST[origenes]',
-      serie = '$_POST[serie]',
-      fecha_ingreso = '$_POST[fecha_ingreso]',
-      tipo = '$_POST[tipo]',
-      fecha_registro = '$_POST[fecha_registro]',
-      estatus = '$_POST[estatus]',
-      marca = '$_POST[marca]',
-      modelo = '$_POST[modelo]',
-      mes = '$_POST[mes]',
-      ano = '$_POST[ano]',
-      imagen = '$newFileName',
-      categorias = '$_POST[categorias]',
-      estado = '$_POST[estado]',
-      area = '$_POST[area]',
-      ubicacion = '$_POST[ubicacion]',
-      empleado = '$_POST[empleado]'
-      WHERE id = $_POST[id]";
-    }
-  }else{
-    $sql = "UPDATE inventario SET 
-      articulo = '$_POST[articulo]', 
-      descripcion = '$_POST[descripcion]', 
-      precio = '$_POST[precio]', 
-      cantidad = '$_POST[cantidad]',
-      proveedores = '$_POST[proveedores]',
-      origenes = '$_POST[origenes]',
-      serie = '$_POST[serie]',
-      fecha_ingreso = '$_POST[fecha_ingreso]',
-      tipo = '$_POST[tipo]',
-      fecha_registro = '$_POST[fecha_registro]',
-      estatus = '$_POST[estatus]',
-      marca = '$_POST[marca]',
-      modelo = '$_POST[modelo]',
-      mes = '$_POST[mes]',
-      ano = '$_POST[ano]',
-      categorias = '$_POST[categorias]',
-      estado = '$_POST[estado]',
-      area = '$_POST[area]',
-      ubicacion = '$_POST[ubicacion]',
-      empleado = '$_POST[empleado]'
-      WHERE id = $_POST[id]";
-  }
-        
-  if ($conexion->query($sql) === TRUE) {
-    echo "<h1>Operacion Exitosa!<h1>";
-    echo "<script> setTimeout(function () { window.location.href='index.php'; },3000); </script>";
-  } else {
-    echo "Error: " . $sql . "<br>" . $conexion->error;
-  }
-  
-  
-  //MUESTRA EL FORMULARIO Y EN CASO DE TENER ID MUESTRA LOS DATOS DEL REGISTRO
-} else {
-	if (isset($_GET['id'])) {
-	  $sql = "SELECT * FROM inventario WHERE id = $_GET[id]";
-	  $result = $conexion->query($sql);
-	  $row = $result->fetch_assoc();
-	}*/
-	
-  ?>
-  <!DOCTYPE html>
-  <html lang="es">
+      <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <link rel="stylesheet" type="text/css" href="./../../../css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="./../../../css/select2.css">
+        <link rel="stylesheet" type="text/css" href="./../../../css/select2.min.css">
 
-    <link rel="stylesheet" type="text/css" href="./../../../css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="./../../../css/select2.css">
-    <link rel="stylesheet" type="text/css" href="./../../../css/select2.min.css">
+        <!-- Optional JavaScript -->
+        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+        <script src="./../../../js/jquery-3.3.1.js"></script>
+        <script src="../../js/Funciones.js"></script>
+        <script src="./../../../js/jquery-3.3.1.min.js"></script>
+        <script src="./../../../js/popper.min.js"></script>
+        <script src="./../../../js/bootstrap.min.js"></script>
+        <script src="./../../../js/select2.js"></script>
 
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
-    <script src="./../../../js/jquery-3.3.1.js"></script>
-    <script src="../../js/Funciones.js"></script>
-    <script src="./../../../js/jquery-3.3.1.min.js"></script>
-    <script src="./../../../js/popper.min.js"></script>
-    <script src="./../../../js/bootstrap.min.js"></script>
-    <script src="./../../../js/select2.js"></script>
+        <!--Icono en pestaña-->
+        <link rel="icon" type="image/vnd.microsoft.icon" href="../../imagenes/Mapa.ico">
 
-    <!--Icono en pestaña-->
-    <link rel="icon" type="image/vnd.microsoft.icon" href="../../imagenes/Mapa.ico">
+        <!--STYLOS-->
+        <link rel="stylesheet" type="text/css" href="./../../../css/EstiloMenuLogin.css">
+        <link rel="stylesheet" type="text/css" href="./../../../css/EstiloPiePagina.css">
+        <link rel="stylesheet" type="text/css" href="./../../../css/EstiloMenuIzquierdoAlumno.css">
 
-    <!--STYLOS-->
-    <link rel="stylesheet" type="text/css" href="./../../../css/EstiloMenuLogin.css">
-    <link rel="stylesheet" type="text/css" href="./../../../css/EstiloPiePagina.css">
-    <link rel="stylesheet" type="text/css" href="./../../../css/EstiloMenuIzquierdoAlumno.css">
+        <!--Iconos-->
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
 
-    <!--Iconos-->
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
 
-    <script src="js/validCampoFranz.js"></script>
-    <script type="text/javascript">
-      $(function(){
-                //Para escribir solo letras
-                $('#Articulo').validCampoFranz(' abcdefghijklmnñopqrstuvwxyzáéiou');
-                $('#Marca').validCampoFranz(' abcdefghijklmnñopqrstuvwxyzáéiou');
-                $('#provedor').validCampoFranz(' abcdefghijklmnñopqrstuvwxyzáéiou');
-                $('#origen').validCampoFranz(' abcdefghijklmnñopqrstuvwxyzáéiou');
-                $('#categoria').validCampoFranz(' abcdefghijklmnñopqrstuvwxyzáéiou');
-                $('#area').validCampoFranz(' abcdefghijklmnñopqrstuvwxyzáéiou');
-                $('#ubicacion').validCampoFranz(' abcdefghijklmnñopqrstuvwxyzáéiou');
-                $('#empleado').validCampoFranz(' abcdefghijklmnñopqrstuvwxyzáéiou');
-                $('#preciou').validCampoFranz('0123456789'); 
-                $('#cant').validCampoFranz('0123456789'); 
-                $('#id').validCampoFranz('0123456789');
-                $('#ano').validCampoFranz('0123456789');
-                
-              });
-            </script>        
 
-          </head>
+        <script language="javascript" type="text/javascript">
+          function validar() {
+              //obteniendo el valor que se puso en el campo text del formulario
+              miCampoTexto = document.getElementById('Articulo').value;  
+              if (miCampoTexto.length == 0 || /^\s+$/.test(miCampoTexto)) {
+                alert('Establezca el Nombre del Articulo, el campo se encuentra vacio!');
+                return false;
+              }
 
-          <body>
-            <div class="container">
-             <?php include "../menus/MenuDocenteTutor.php";
-             MenuAlumnoDocenteTutor();?>
-           </div>
+              miCampoTexto = document.getElementById('Descripcion').value;  
+              if (miCampoTexto.length == 0 || /^\s+$/.test(miCampoTexto)) {
+                alert('Establezca una Descripción, el campo se encuentra vacio!');
+                return false;
+              }
 
-           <div class="container">
-            <div class="row">
-              <div class="col-sm-2">
-                <?php //include 'MenuLateral.php' ?>
-              </div>
+              miCampoTexto = document.getElementById('Preciou').value;  
+              if (miCampoTexto.length == 0 || /^\s+$/.test(miCampoTexto)) {
+                alert('Establezca el Precio Unitario, el campo se encuentra vacio!');
+                return false;
+              }
 
-              <div class="col-sm-10">
+              miCampoTexto = document.getElementById('Cantidad').value;  
+              if (miCampoTexto.length == 0 || /^\s+$/.test(miCampoTexto)) {
+                alert('Establezca la Cantidad, el campo se encuentra vacio!');
+                return false;
+              }
 
-                <br>
-                <br>
+              miCampoTexto = document.getElementById('Proveedores').value;  
+              if (miCampoTexto.length == 0 || /^\s+$/.test(miCampoTexto)) {
+                alert('Establezca el Proveedor, el campo se encuentra vacio!');
+                return false;
+              }
 
-                <center>
-                  <h2 class="card-title">INVENTARIO</h2>
-                </center>
+              miCampoTexto = document.getElementById('Origenes').value;  
+              if (miCampoTexto.length == 0 || /^\s+$/.test(miCampoTexto)) {
+                alert('Establezca el Origen, el campo se encuentra vacio!');
+                return false;
+              }
+
+              miCampoTexto = document.getElementById('Serie').value;  
+              if (miCampoTexto.length == 0 || /^\s+$/.test(miCampoTexto)) {
+                alert('Establezca el Numero de Serie, el campo se encuentra vacio!');
+                return false;
+              }
+
+              txtFecha = document.getElementById('FechaIngreso').value;
+              if(!isNaN(txtFecha)){
+                alert('Seleccione o introduzca la fecha de ingreso!');
+                return false;
+              }
+
+              miCampoTexto = document.getElementById('Tipo').value;  
+              if (miCampoTexto.length == 0 || /^\s+$/.test(miCampoTexto)) {
+                alert('Establezca el Tipo de Inventario, el campo se encuentra vacio!');
+                return false;
+              }
+
+              txtFecha = document.getElementById('FechaRegistro').value;
+              if(!isNaN(txtFecha)){
+                alert('Seleccione o introduzca la fecha de registro!');
+                return false;
+              }
+
+              miCampoTexto = document.getElementById('idEstatus').value;  
+              if (miCampoTexto.length == 0 || /^\s+$/.test(miCampoTexto)) {
+                alert('Establezca el ID Estatus, el campo se encuentra vacio!');
+                return false;
+              }
+
+              miCampoTexto = document.getElementById('Marca').value;  
+              if (miCampoTexto.length == 0 || /^\s+$/.test(miCampoTexto)) {
+                alert('Establezca la Marca, el campo se encuentra vacio!');
+                return false;
+              }
+
+              miCampoTexto = document.getElementById('Modelo').value;  
+              if (miCampoTexto.length == 0 || /^\s+$/.test(miCampoTexto)) {
+                alert('Establezca el Modelo, el campo se encuentra vacio!');
+                return false;
+              }
+
+              miCampoTexto = document.getElementById('Anyo').value;  
+              if (miCampoTexto.length == 0 || /^\s+$/.test(miCampoTexto)) {
+                alert('Establezca el Año, el campo se encuentra vacio!');
+                return false;
+              }
+
+              miCampoTexto = document.getElementById('Categorias').value;  
+              if (miCampoTexto.length == 0 || /^\s+$/.test(miCampoTexto)) {
+                alert('Establezca la Categoria, el campo se encuentra vacio!');
+                return false;
+              }
+
+              miCampoTexto = document.getElementById('Area').value;  
+              if (miCampoTexto.length == 0 || /^\s+$/.test(miCampoTexto)) {
+                alert('Establezca el Area, el campo se encuentra vacio!');
+                return false;
+              }
+
+              miCampoTexto = document.getElementById('Ubicacion').value;  
+              if (miCampoTexto.length == 0 || /^\s+$/.test(miCampoTexto)) {
+                alert('Establezca la Ubicacion, el campo se encuentra vacio!');
+                return false;
+              }
+
+              return true;
+            }
+
+          </script>
+
+          <script>
+            function soloLetras(e) {
+              key = e.keyCode || e.which;
+              tecla = String.fromCharCode(key).toString();
+              letras = " abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";//Se define todo el abecedario que se quiere que se muestre.
+              especiales = [8, 39, 46, 6, 44, 95 ,45]; //Es la validación del KeyCodes, que teclas recibe el campo de texto.
+
+              tecla_especial = false
+              for(var i in especiales) {
+                if(key == especiales[i]) {
+                  tecla_especial = true;
+                  break;
+                }
+              }
+
+              if(letras.indexOf(tecla) == -1 && !tecla_especial){
+                //alert('Tecla no aceptada');
+                return false;
+              }
+            }
+
+            function NumerosDecimales(e){
+              var key = window.Event ? e.which : e.keyCode
+              return (key >= 48 && key <= 57 || key == 46)
+            }
+
+            function SoloNumeros(e){
+              var key = window.Event ? e.which : e.keyCode
+              return (key >= 48 && key <= 57)
+            }
+
+          </script>        
+
+        </head>
+
+        <body>
+          <div class="container">
+           <?php include "../menus/MenuDocenteTutor.php";
+           MenuAlumnoDocenteTutor();?>
+         </div>
+
+         <div class="container">
+          <div class="row">
+            <div class="col-sm-2">
+              <?php //include 'MenuLateral.php' ?>
+            </div>
+
+            <div class="col-sm-10">
+
+              <br>
+              <br>
+
+              <center>
+                <h2 class="card-title">INVENTARIO</h2>
+              </center>
+              <?php if(!isset($_POST['Articulo'])){?>
                 <div class="card border-success">
                   <div class="card-body">
-                    <form action="./GuardarInventario.php" method="POST" enctype="multipart/form-data">
+                    <form action="./GuardarInventario.php" method="POST" enctype="multipart/form-data" onsubmit="return validar()">
                      <form novalidate>
                       <input type="hidden" name="id" value="<?php echo isset($row['id']) ? $row['id'] : null ?>">
                       <div class="row">
 
                         <div class="col-md-3">
                           <STRONG>Artículo: </STRONG><br>
-                          <input type="text" class="form-control uppercase" id="Articulo" name="articulo" value="<?php echo isset($row['articulo']) ? $row['articulo'] : "" ?>"required>
+                          <input type="text" class="form-control uppercase" id="Articulo" name="Articulo">
                         </div>
                         <div class="col-md-6">
                           <STRONG>Descrpcion: </STRONG><br>
-                          <input type="text" class="form-control uppercase" name="descripcion" value="<?php echo isset($row['descripcion']) ? $row['descripcion'] : "" ?>"required>
+                          <input type="text" class="form-control uppercase" name="Descripcion" id="Descripcion">
                         </div>
                         <div class="col-md-3">
                           <STRONG>Precio Unitario: </STRONG><br>
-                          <input type="text" class="form-control uppercase" placeholder="$" id="preciou"  name="precio" value="<?php echo isset($row['precio']) ? $row['precio'] : "" ?>"required>
+                          <input type="text" class="form-control uppercase" placeholder="$" id="Preciou"  name="Preciou" onkeypress="return NumerosDecimales(event);" >
                         </div>
                       </div>
                       <br>
@@ -219,19 +237,19 @@ session_start();
                       <div class="row">
                         <div class="col-sm-2">
                           <STRONG>Cantidad:</STRONG><br>
-                          <input class="form-control" type="text" name="cantidad" id="cant" value="<?php echo isset($row['cantidad']) ? $row['cantidad'] : "" ?>"required>
+                          <input class="form-control" type="text" name="Cantidad" id="Cantidad" onkeypress="return SoloNumeros(event);">
                         </div>
                         <div class="col-sm-4">
                           <STRONG>Proveedores:</STRONG><br>
-                          <input class="form-control" type="text" name="proveedores" id="provedor" value="<?php echo isset($row['proveedores']) ? $row['proveedores'] : "" ?>"required>
+                          <input class="form-control" type="text" name="Proveedores" id="Proveedores">
                         </div>
                         <div class="col-sm-3">
                           <STRONG>Origenes:</STRONG><br>
-                          <input class="form-control" type="text" name="origenes" id="origen" value="<?php echo isset($row['origenes']) ? $row['origenes'] : "" ?>"required>
+                          <input class="form-control" type="text" name="Origenes" id="Origenes">
                         </div>
                         <div class="col-sm-3">
                           <STRONG>No de Serie:</STRONG><br>
-                          <input class="form-control" type="text" name="serie" value="<?php echo isset($row['serie']) ? $row['serie'] : "" ?>"required>
+                          <input class="form-control" type="text" name="Serie" id="Serie">
                         </div>
                       </div>
 
@@ -239,23 +257,23 @@ session_start();
                         <div class="col-sm-3">
                           <br>
                           <STRONG>Fecha ingreso Cecyt:</STRONG><br>
-                          <input class="form-control" type="date" name="fecha_ingreso" value="<?php echo isset($row['fecha_ingreso']) ? $row['fecha_ingreso'] : "" ?>"required>
+                          <input class="form-control" type="date" name="FechaIngreso" id="FechaIngreso">
                         </div>
                         <div class="col-sm-3">
                           <br>
                           <STRONG>Tipo de invenatario:</STRONG><br>
-                          <input class="form-control" placeholder="Información zac" type="text" name="tipo" value="<?php echo isset($row['tipo']) ? $row['tipo'] : "" ?>"required>
+                          <input class="form-control" placeholder="Información zac" type="text" name="Tipo" id="Tipo">
                         </div> 
 
                         <div class="col-sm-3">
                           <br>
                           <STRONG>Fecha de registro Zac:</STRONG><br>
-                          <input class="form-control" type="date" value="<?php echo isset($row['fecha_registro']) ? $row['fecha_registro'] : "" ?>"  name="fecha_registro" required>
+                          <input class="form-control" type="date" name="FechaRegistro" id="FechaRegistro">
                         </div>  
                         <div class="col-sm-3">
                           <br>
                           <STRONG>ID estatus:</STRONG><br>
-                          <input class="form-control" placeholder="Info zac" type="text" id="id" name="estatus" value="<?php echo isset($row['estatus']) ? $row['estatus'] : "" ?>"required>
+                          <input class="form-control" placeholder="Info zac" type="text" id="idEstatus" name="idEstatus">
                         </div>
                       </div>
                       <br>
@@ -263,23 +281,22 @@ session_start();
                       <div class="row">
                         <div class="col-sm-3">
                           <STRONG>Marca:</STRONG><br>
-                          <input class="form-control" type="text" name="marca" id="Marca" value="<?php echo isset($row['marca']) ? $row['marca'] : "" ?>"required>
+                          <input class="form-control" type="text" name="Marca" id="Marca">
                         </div>
                         <div class="col-sm-3">
                           <STRONG>Modelo:</STRONG><br>
-                          <input class="form-control" type="text" name="modelo" value="<?php echo isset($row['modelo']) ? $row['modelo'] : "" ?>"required>
+                          <input class="form-control" type="text" name="Modelo" id="Modelo">
                         </div>
                         <div class="col-sm-3">
                           <STRONG>Imagen:</STRONG><br>
-                          <img src="./imagenes/inventario/<?php echo isset($row['imagen']) ? $row['imagen'] : "" ?>" class="img-thumbnail"required>
+                          <img src="./imagenes/inventario/<?php echo isset($row['imagen']) ? $row['imagen'] : "" ?>" class="img-thumbnail">
                         </div>
                       </div>
                       <br>
                       <div class="row">
                         <div class="col-md-3">
                           <STRONG>Mes:</STRONG>
-                          <select class="form-control" name="mes">
-                            <option></option>
+                          <select class="form-control" name="Mes">
                             <option value="1" <?php if(isset($row['mes']) && $row['mes'] == "1"){ echo "selected"; } ?>>Enero</option>
                             <option value="2" <?php if(isset($row['mes']) && $row['mes'] == "2"){ echo "selected"; } ?>>Febrero</option>
                             <option value="3" <?php if(isset($row['mes']) && $row['mes'] == "3"){ echo "selected"; } ?>>Marzo</option>
@@ -297,26 +314,23 @@ session_start();
 
                         <div class="col-sm-3">
                           <STRONG>Año:</STRONG><br>
-                          <input class="form-control" type="text" name="ano" id="ano" value="<?php echo isset($row['ano']) ? $row['ano'] : "" ?>"required>
+                          <input class="form-control" type="text" name="Anyo" id="Anyo" onkeypress="return SoloNumeros(event);" maxlength="4">
                         </div>       
 
-
                         <div class="col-md-6">
-
                           <STRONG>Agregar Imagen:</STRONG>
-                          <input type="file" id="imagen" name="imagen">
+                          <input type="file" class="form-control" id="image" name="image" >
                         </div>
                       </div>   
                       <br>
                       <div class="row">
                         <div class="col-sm-6">
                          <STRONG>Categorias:</STRONG><br>
-                         <input class="form-control" type="text" name="categorias" id="categoria" value="<?php echo isset($row['categorias']) ? $row['categorias'] : "" ?>"required>
+                         <input class="form-control" type="text" name="Categorias" id="Categorias">
                        </div>
                        <div class="col-md-4">
                          <STRONG>Estado Fisico:</STRONG>
-                         <select class="form-control" name="estado"required>
-                          <option></option>
+                         <select class="form-control" name="Estado">
                           <option value="1" <?php if(isset($row['mes']) && $row['mes'] == "1"){ echo "selected"; } ?>>Bueno</option>
                           <option value="2" <?php if(isset($row['mes']) && $row['mes'] == "2"){ echo "selected"; } ?>>Regular</option>
                           <option value="3" <?php if(isset($row['mes']) && $row['mes'] == "3"){ echo "selected"; } ?>>Malo</option>
@@ -336,25 +350,137 @@ session_start();
                   <div class="row">
                     <div class="col-md-4">
                      <STRONG>Area: </STRONG><br>
-                     <input type="text" class="form-control uppercase" id="area" name="area" value="<?php echo isset($row['area']) ? $row['area'] : "" ?>"required>
+                     <input type="text" class="form-control uppercase" id="Area" name="Area">
                    </div>
 
                    <div class="col-md-4">
                      <STRONG>Ubicación:</STRONG><br>
-                     <input type="text" class="form-control uppercase" id="ubicacion" name="ubicacion" value="<?php echo isset($row['ubicacion']) ? $row['ubicacion'] : "" ?>"required>
+                     <input type="text" class="form-control uppercase" id="Ubicacion" name="Ubicacion">
                    </div>
 
                    <div class="col-md-4">
                      <STRONG>Empleado:</STRONG><br>
-                     <input type="text"class="form-control uppercase" id="empleado" name="empleado" value="<?php echo isset($row['empleado']) ? $row['empleado'] : "" ?>"required>
-                   </div>
-                 </div>
-                 <br>
+                     <select name="Empleado" id="Empleado" class="m-1 custom-select">
+                       <?php
+                       include_once "../../clases/MySQLConector.php";
+                       $Mysql = new MySQLConector();
+                       $Mysql->Conectar();
+                       $Consulta2 = "SELECT * FROM `personal`;";
+                       $Resultado2 = $Mysql->Consulta($Consulta2);
+                       if($Resultado2)
+                        while ($fila2 = mysqli_fetch_array($Resultado2)){           
+                          echo " <option value=\"{$fila2['idPersonal']}\">{$fila2['Nombre']} {$fila2['ApellidoP']} {$fila2['ApellidoM']}</option>";
+                        }
+                        ?>
+                      </select>
+                    </div>
+                  </div>
+                  <br>
+                  <button href="Historial_Ingresos/index.php" type="submit" name="agregar" class="btn btn-success"><span class="glyphicon glyphicon-floppy-disk"></span> Guardar Registro</button>
 
-                 <button href="Historial_Ingresos/index.php" type="submit" name="agregar" class="btn btn-success"><span class="glyphicon glyphicon-floppy-disk"></span> Guardar Registro</button>
+                </form>
+              <?php }else {
 
-               </form>
-               <script>
+                include_once "../../clases/SQLControlador.php";
+                include_once "../../clases/Inventario.php";
+
+                $Inventario = new Inventario();
+
+                $Articulo = $_POST['Articulo'];
+                $Descripcion = $_POST['Descripcion']; 
+                $Precio = $_POST['Preciou']; 
+                $Cantidad = $_POST['Cantidad'];
+                $Proveedores = $_POST['Proveedores'];
+                $Origenes = $_POST['Origenes'];
+                $Serie = $_POST['Serie'];
+                $FechaIngreso = $_POST['FechaIngreso'];
+                $Tipo = $_POST['Tipo'];
+                $FechaRegistro = $_POST['FechaRegistro'];
+                $Estatus = $_POST['idEstatus'];
+                $Marca = $_POST['Marca'];
+                $Modelo = $_POST['Modelo'];
+                $Mes = $_POST['Mes'];
+                $Anyo = $_POST['Anyo'];
+                  //$imagen = '$newFileName',
+                $Categorias = $_POST['Categorias'];
+                $Estado = $_POST['Estado'];
+                $Area = $_POST['Area'];
+                $Ubicacion = $_POST['Ubicacion'];
+                $Empleado = $_POST['Empleado'];
+
+
+                $Inventario->setArticulo($Articulo);
+                $Inventario->setDescripcion($Descripcion);
+                $Inventario->setPrecio($Precio);
+                $Inventario->setCantidadInventario($Cantidad);
+                $Inventario->setProveedores($Proveedores);
+                $Inventario->setOrigenes($Origenes);
+                $Inventario->setNoSerie($Serie);
+                $Inventario->setFechaIngreso($FechaIngreso);
+                $Inventario->setTipo($Tipo);
+                $Inventario->setFechaRegistroZac($FechaRegistro);
+                $Inventario->setEstatus($Estatus);
+                $Inventario->setMarca($Marca);
+                $Inventario->setModelo($Modelo);
+                $Inventario->setMes($Mes);
+                $Inventario->setAnyo($Anyo);
+                //$Inventario->setImagen($imgContent);
+                $Inventario->setCategorias($Categorias);
+                $Inventario->setEstadoFisico($Estado);
+                $Inventario->setArea($Area);
+                $Inventario->setUbicacion($Ubicacion);
+                $Inventario->setEmpleado($Empleado);
+
+                $SQLControlador = new SQLControlador();
+                $R = $SQLControlador->AgregarArticuloInventario($Inventario);
+
+                if($R == 1){
+
+                 include_once "../../clases/MySQLConector.php";
+                 $Mysql = new MySQLConector();
+                 $Mysql->Conectar();
+                 $Consulta2 = "SELECT MAX(inventario.idInventario) AS idInventario FROM inventario";
+                 $Resultado2 = $Mysql->Consulta($Consulta2);
+                 while ($fila = $Resultado2->fetch_assoc()) {
+                  $idInv = $fila['idInventario'];
+                }
+                echo "<script language='javascript'>alert('".$idInv."')</script>";                
+
+                $check = getimagesize($_FILES["image"]["tmp_name"]);
+                if($check !== false){
+                  $image = $_FILES['image']['tmp_name'];
+                  $imgContent = addslashes(file_get_contents($image));
+                  $dbHost     = 'localhost';
+                  $dbUsername = 'root';
+                  $dbPassword = '';
+                  $dbName     = 'cecyte';
+
+                  $db = new mysqli($dbHost, $dbUsername, $dbPassword, $dbName);
+
+                  if($db->connect_error){
+                    die("Connection failed: " . $db->connect_error);
+                  }
+
+                //Insert image content into database
+
+                  $insert = $db->query("UPDATE inventario SET imagen ='$imgContent' where idInventario = '".$idInv
+                    ."';");
+                  if($insert){
+                //echo "File uploaded successfully.";
+                    echo "<script language='javascript'>alert('La imagen se subio exitosamente')</script>";
+                    echo "<script language='javascript'>window.location = 'ConsultaInventario.php'</script>";
+                  }else{
+              // echo "File upload failed, please try again.";
+                    echo "<script language='javascript'>alert('Error al subir imagen')</script>";
+                  } 
+                }else{
+          //echo "Please select an image file to upload.";
+                  echo "<script language='javascript'>alert('Selecciona una imagen con el formato correcto')</script>";
+                }
+              }
+
+            }?>
+            <script>
 
 // Agregue el siguiente código si desea que aparezca el nombre del archivo en seleccionar
 $(".custom-file-input").on("change", function() {
@@ -367,3 +493,5 @@ $(".custom-file-input").on("change", function() {
 </div>
 </html>
 <?php //} ?>
+
+
