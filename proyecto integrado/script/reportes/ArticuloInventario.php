@@ -106,76 +106,90 @@ $Resultado3 = $Mysql->Consulta($Consulta3);
 while ($fila3 = $Resultado3->fetch_assoc()) {
 
 // create some HTML content
-	$html = '<h2 align="center">ARTÍCULO INVENTARIO</h2>
-	<table  border="1" cellpadding="3" cellspacing="2" nobr="true">
-	<tr> 
-	<th align="center"><b>Artículo</b></th>
-	<th align="center"><b>Descripción</b></th>
-	<th align="center"><b>Precio Unitario</b></th>
-	<th align="center"><b>Cantidad</b></th>
+	$html = '<h2 align="center">ARTÍCULO DE INVENTARIO</h2>
+	<table  border="1" cellpadding="4" cellspacing="4" nobr="true">
+	<tr style="background-color:#E7E4E4;"> 
+	
+	<th colspan="6" align="center"><b>Descripción General</b></th>
 	</tr>
 	<tr align="center">
-	<td>'. $fila3['Articulo'] .'</td>
-	<td>'. $fila3['Descripcion'] .'</td>
-	<td>$ '. $fila3['Precio'].'.00 </td>
-	<td>'. $fila3['Cantidad'].'</td>
-	</tr>
-	<tr> 
-	<th align="center"><b>Proveedores</b></th>
-	<th align="center"><b>Origenes</b></th>
-	<th align="center"><b>No. Serie</b></th>
-	<th align="center"><b>Tipo de inventario</b></th>
-	</tr>
-	<tr align="center">
-	<td>'. $fila3['Proveedores'] .'</td>
-	<td>'. $fila3['Origenes'] .'</td>
-	<td>'. $fila3['NoSerie'].'</td>
-	<td>'. $fila3['Tipo'].'</td>
-	</tr>
-	<tr > 
-	<th align="center"><b>Fecha de Ingreso CECyTE</b></th>
-	<th align="center"><b>Fecha de Registro Zacatecas</b></th>
-	<th align="center"><b>ID Estatus</b></th>
-	<th align="center"><b>Marca</b></th>
-	</tr>
-	<tr align="center">
-	<td>'. $fila3['FechaIngreso'] .'</td>
-	<td>'. $fila3['FechaRegistro'] .'</td>
-	<td>'. $fila3['Estatus'].'</td>
-	<td>'. $fila3['Marca'].'</td>
-	</tr>
-
-	<tr > 
-	<th align="center"><b>Modelo</b></th>
-	<th align="center"><b>Mes</b></th>
-	<th align="center"><b>Año</b></th>
-	<th align="center"><b>Categoría</b></th>
-	</tr>
-
-	<tr align="center">
-	<td>'. $fila3['Modelo'] .'</td>
-	<td>'. $fila3['Mes'] .'</td>
-	<td>'. $fila3['Anyo'].'</td>
-	<td>'. $fila3['Categorias'].'</td>
-	</tr>
-
-	<tr> 
-	<th align="center"><b>Area</b></th>
-	<th align="center"><b>Ubicación</b></th>
-	<th align="center"><b>Empleado</b></th>
-	<th align="center"><b>Imagen</b></th>
-	</tr>
-
-	<tr align="center">
-	<td>'. $fila3['Area'] .'</td>
-	<td>'. $fila3['Ubicacion'] .'</td>
-	<td>'. $fila3['Nombre'].' '.$fila3['ApellidoP'].' '.$fila3['ApellidoM'] .'</td>';
+	<td colspan="2" rowspan="8" >';
 	$base64 = 'data:imagen/jpeg;base64,"'.base64_encode($fila3["Imagen"]).'"';
 	$imageContent = file_get_contents($base64);
 	$path = tempnam(sys_get_temp_dir(), 'prefix');
 	file_put_contents ($path, $imageContent);
-	$html .='<td><img width="150" height="150" src="'.$path.'"/></td>
+	$html.='<img width="170" height="220" src="'.$path.'"/></td>
+	<td><b>Articulo</b></td>
+	<td><b>Descripción</b></td>
+	<td><b>Precio Unitario</b></td>
+	<td><b>Cantidad</b></td>
 	</tr>
+	<tr align="center">
+	<td>'.$fila3['Articulo'].'</td>
+	<td>'.$fila3['Descripcion'].'</td>
+	<td> $'.$fila3['Precio'].'.00 </td>
+	<td>'.$fila3['Cantidad'].'</td>
+	</tr>
+	<tr>
+	<td colspan="4"></td>
+	</tr>
+	<tr align="center">
+	<td><b>Proveedores</b></td>
+	<td><b>Origenes</b></td>
+	<td><b>No. Serie</b></td>
+	<td><b>Tipo de Inventario</b></td>
+	</tr>
+	<tr align="center">
+	<td>'.$fila3['Proveedores'].'</td>
+	<td>'.$fila3['Origenes'].'</td>
+	<td>'.$fila3['NoSerie'].'</td>
+	<td>'.$fila3['Tipo'].'</td>
+	</tr>
+	<tr>
+	<td colspan="4"></td>
+	</tr>
+	<tr align="center">
+	<td><b>Marca</b></td>
+	<td><b>Modelo</b></td>
+	<td><b>Mes</b></td>
+	<td><b>Categoria</b></td>
+	</tr>
+	
+	<tr align="center">
+	<td>'.$fila3['Marca'].'</td>
+	<td>'.$fila3['Modelo'].'</td>
+	<td>'.$fila3['Mes'].'</td>
+	<td>'.$fila3['Anyo'].'</td>
+	</tr>
+
+	<tr>
+	<th colspan="6" align="center" style="background-color:#E7E4E4;"><b>Información Zacatecas</b></th>
+	</tr>
+	<tr align="center">
+	<td colspan="2"><b>Fecha de Ingreso CECyTE</b></td>
+	<td colspan="2"><b>Fecha de Registro Zacatecas</b></td>
+	<td colspan="2"><b>ID Estatus Zacatecas</b></td>
+	</tr>
+	<tr align="center">
+	<td colspan="2">'.$fila3['FechaIngreso'].'</td>
+	<td colspan="2">'.$fila3['FechaRegistro'].'</td>
+	<td colspan="2">'.$fila3['Estatus'].'</td>
+	</tr>
+
+	<tr>
+	<th colspan="6" align="center" style="background-color:#E7E4E4;"><b>Información de Ubicación</b></th>
+	</tr>
+	<tr align="center">
+	<td colspan="2"><b>Area</b></td>
+	<td colspan="2"><b>Ubicación</b></td>
+	<td colspan="2"><b>Empleado</b></td>
+	</tr>
+	<tr align="center">
+	<td colspan="2">'.$fila3['Area'].'</td>
+	<td colspan="2">'.$fila3['Ubicacion'].'</td>
+	<td colspan="2">'.$fila3['Nombre'].' '.$fila3['ApellidoP'].' '.$fila3['ApellidoM'].'</td>
+	</tr>
+	
 	</table>
 	';
 }

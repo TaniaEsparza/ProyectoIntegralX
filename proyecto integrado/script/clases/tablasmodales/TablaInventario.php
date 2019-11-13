@@ -118,8 +118,7 @@ $Mysql->Conectar();
 						<td><?php echo $ver[21]?></td>	
 						
 						<?php echo"<td><a href=\"../../formularios/administrativo/CrearSessionDirectivoInventario.php?idInventario=".$ver[0]."\" ><button class=\"btn btn-success glyphicon glyphicon-pencil\">Modificar</button></a></td>"?>
-						<?php echo"<td><a href=\"../../reportes/ArticuloInventario.php?idInventario=".$ver[0]."\" target=\"_blank\" ><button class=\"btn btn-success glyphicon glyphicon-pencil\">Mostrar</button></a></td>"?>
-						
+						<?php echo"<td><a href=\"../../reportes/ArticuloInventario.php?idInventario=".$ver[0]."\" target=\"_blank\" ><button class=\"btn btn-success glyphicon glyphicon-pencil\">Mostrar</button></a></td>"?>		
 					</tr>
 					<?php 
 				}
