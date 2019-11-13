@@ -170,10 +170,11 @@ while ($fila3 = $Resultado3->fetch_assoc()) {
 	<td>'. $fila3['Area'] .'</td>
 	<td>'. $fila3['Ubicacion'] .'</td>
 	<td>'. $fila3['Nombre'].' '.$fila3['ApellidoP'].' '.$fila3['ApellidoM'] .'</td>';
-	$C = $fila3["Imagen"];
-	//echo $C;
-	$base64 = 'data:imagen/jpeg;base64,"'.base64_encode($C).'"';
-	$html .='<td><img width="50" height="50" src="'.$base64.'"/></td>
+	$base64 = 'data:imagen/jpeg;base64,"'.base64_encode($fila3["Imagen"]).'"';
+	$imageContent = file_get_contents($base64);
+	$path = tempnam(sys_get_temp_dir(), 'prefix');
+	file_put_contents ($path, $imageContent);
+	$html .='<td><img width="150" height="150" src="'.$path.'"/></td>
 	</tr>
 	</table>
 	';
