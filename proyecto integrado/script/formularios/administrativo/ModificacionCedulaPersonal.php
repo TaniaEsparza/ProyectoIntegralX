@@ -275,7 +275,8 @@ function soloLetras(e) {
 
 					$Mysql = new MySQLConector();
 					$Mysql->Conectar();
-					$Consulta = "SELECT * FROM `personal` WHERE idPersonal ='".$_SESSION['NombreUsuarioCAP']."';";
+
+					$Consulta = "SELECT * FROM `personal`, `esudiospersonal` WHERE idPersonal ='".$_SESSION['NombreUsuarioCAP']."' AND esudiospersonal.Personal_idPersonal = personal.idPersonal;";
 					$Resultado = $Mysql->Consulta($Consulta);
 					$row = mysqli_fetch_array($Resultado);
 
@@ -298,6 +299,8 @@ function soloLetras(e) {
 					$TipoSangre = $row['TipoSangre'];
 					$Sexo = $row['Sexo'];
 					$EstadoCivil = $row['EstadoCivil'];
+					$NombreEstudio = $row['NombreEstudio'];
+					$NivelEstudio = $row['NivelEstudio'];
 
 					
 					$Consulta2 = "SELECT * FROM `domicilio` WHERE idDomicilio = '".$idD."'; ";
@@ -531,14 +534,14 @@ function soloLetras(e) {
 									<div class="col-md-6">
 										<b>Último Grado de estudios:</b>
 										<select name="UltimoGradoEstudios" class="m-1 custom-select">
-											<option value="Maestria">Maestría</option>
-											<option value="Licenciatura">Licenciatura</option>
-											<option value="Barchillerato">Barchillerato</option>
+											<option value="Maestria"<?php if($NivelEstudio == 'Maestría'){ echo "selected"; }?>>Maestría</option>
+											<option value="Licenciatura"<?php if($NivelEstudio == 'Licenciatura'){ echo "selected"; }?>>Licenciatura</option>
+											<option value="Barchillerato"<?php if($NivelEstudio == 'Barchillerato'){ echo "selected"; }?>>Barchillerato</option>
 										</select>
 									</div>
 									<div class="col-md-6">
 										<b>Carrera o Especialidad:</b>
-										<input type="text" name="CarreraEspecialidad" class="form-control input-sm" onkeypress="return soloLetras(event);">
+										<input type="text" name="CarreraEspecialidad" class="form-control input-sm" value="<?php echo $NombreEstudio; ?>" onkeypress="return soloLetras(event);">
 									</div>
 								</div>
 								<button type="submit" class="btn btn-success glyphicon glyphicon-plus" > Guardar registro</button><br>

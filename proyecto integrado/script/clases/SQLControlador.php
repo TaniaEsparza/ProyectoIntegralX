@@ -1314,7 +1314,7 @@ public function AltaDatosBasicosAlumno($alumno,$lugarnacimiento,$secundaria,$dat
 		}
 
 		//Admin----------------------------------
-		public function AltaCedulaPersonal($personal, $lugarnacimiento, $domicilio){
+		public function AltaCedulaPersonal($personal, $lugarnacimiento, $domicilio, $estudiospersonal){
 			$Mysql = new MySQLConector();
 			$Mysql->Conectar();
 
@@ -1416,7 +1416,28 @@ public function AltaDatosBasicosAlumno($alumno,$lugarnacimiento,$secundaria,$dat
 						}
 					}
 				}
+//-----------------------------------------------------------------------Datos Estudio Personal ----------------------------------------------------------------
+				$ConsultaVer = "SELECT * FROM `esudiospersonal` WHERE esudiospersonal.Personal_idPersonal = '".$estudiospersonal->getPersonal_idPersonal()."'";
+				$ResultadoVer = $Mysql->Consulta($ConsultaVer);
 
+				if(mysqli_num_rows($ResultadoVer) == 0){
+					$Consulta4 = "INSERT INTO `esudiospersonal` (`idEsudiosPersonal`, `Personal_idPersonal`, `NombreEstudio`, `NivelEstudio`, `ComprobanteEstudio`, `Institucion`) VALUES (NULL, '".$estudiospersonal->getPersonal_idPersonal()."', '".$estudiospersonal->getNombreEstudio()."', '".$estudiospersonal->getNivelEstudio()."', NULL, NULL);";
+					if($Mysql->Consulta($Consulta4) === true){
+						echo "<script language='javascript'>alert('¡¡Si se inserto los estudiospersonal!!')</script>";
+					}else{
+
+						echo "<script language='javascript'>alert('¡¡No se inserto los estudiospersonal!!')</script>";
+					}
+
+				}else{
+					$Consulta4 = "UPDATE `esudiospersonal` SET `NombreEstudio` = '".$estudiospersonal->getNombreEstudio()."', `NivelEstudio` = '".$estudiospersonal->getNivelEstudio()."', `ComprobanteEstudio` = NULL, `Institucion` = NULL WHERE `esudiospersonal`.`idEsudiosPersonal` = '".$estudiospersonal->getPersonal_idPersonal()."'; ";
+					if($Mysql->Consulta($Consulta4) === true){
+						echo "<script language='javascript'>alert('¡¡Si se inserto los estudiospersonal!!')</script>";
+					}else{
+
+						echo "<script language='javascript'>alert('¡¡No se inserto los estudiospersonal!!')</script>";
+					}
+				}
 				echo "<script language='javascript'>alert('¡¡Datos almacenados exitosamente!!')</script>";
 			//echo "<script language='javascript'>window.location = './../formularios/alumno/ConsultaTestAprendizaje.php'</script>";
 			} else {

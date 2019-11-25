@@ -599,11 +599,24 @@ function soloLetras(e) {
 
             /*$SQLControlador = new SQLControlador();
             $SQLControlador-> AgregarDomicilioAlumno($Domicilio,$Alumno);*/
-            include_once "../../clases/SQLControlador.php";
+//--------------------------------------------------------------------------------------------------
+            
+            include_once "../../clases/EstudiosPersonal.php";
+            $EstudiosPersonal = new EstudiosPersonal();
+			
+			$UltimoGrado = $_POST['UltimoGradoEstudios'];
+            $CarreraEspecialidad = $_POST['CarreraEspecialidad'];
+            
+            $EstudiosPersonal->setPersonal_idPersonal($_SESSION['NombreUsuarioCAP']);
+            $EstudiosPersonal->setNivelEstudio($UltimoGrado);
+            $EstudiosPersonal->setNombreEstudio($CarreraEspecialidad);
 
+			include_once "../../clases/SQLControlador.php";
 
             $SQLControlador = new SQLControlador();
-            $SQLControlador->AltaCedulaPersonal($Personal,$LugarNacimiento,$Domicilio);
+            $SQLControlador->AltaCedulaPersonal($Personal,$LugarNacimiento,$Domicilio,$EstudiosPersonal);
+
+          
 //--------------------------------------------------------------------------------------------------
         }
         ?>
