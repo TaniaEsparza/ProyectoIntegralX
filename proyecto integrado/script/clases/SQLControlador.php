@@ -1537,5 +1537,33 @@ public function AltaDatosBasicosAlumno($alumno,$lugarnacimiento,$secundaria,$dat
 			}
 			$Mysql->CerrarConexion();
 		}
+
+		public function AgregarIncidencia($Incidencia){
+			$Mysql = new MySQLConector();
+			$Mysql->Conectar();
+
+			$Consulta = "INSERT INTO `incidencias` (`idIncidencias`, `idEmpleado`, `idClausulas`, `Observaciones`, `Fecha`, `HoraInicial`, `HoraFinal`, `Estatus`) VALUES (NULL, '".$Incidencia->getidPersonal()."', '".$Incidencia->getidClausula()."', '".$Incidencia->getObservaciones()."', '".$Incidencia->getFecha()."', '".$Incidencia->getHoraInicial()."', '".$Incidencia->getHoraFinal()."', '1');";
+			if ($Mysql->Consulta($Consulta) === true) {
+				echo "<script language='javascript'>alert('¡¡Se Guardo Correctamente la Incidencia!!')</script>";
+				echo "<script language='javascript'>window.location = 'ConsultaIncidencias.php'</script>";
+			}else{
+				return 0;
+			}
+			$Mysql->CerrarConexion();
+		}
+
+		public function ModificacionIncidencia($Incidencia){
+			$Mysql = new MySQLConector();
+			$Mysql->Conectar();
+
+			$Consulta = "UPDATE `incidencias` SET `idEmpleado` = '".$Incidencia->getidPersonal()."', `idClausulas` = '".$Incidencia->getidClausula()."', `Observaciones` = '".$Incidencia->getObservaciones()."', `Fecha` = '".$Incidencia->getFecha()."', `HoraInicial` = '".$Incidencia->getHoraInicial()."', `HoraFinal` = '".$Incidencia->getHoraFinal()."', `Estatus` = '1' WHERE `incidencias`.`idIncidencias` = '".$Incidencia->getidIncidencias()."'; ";
+			if ($Mysql->Consulta($Consulta) === true) {
+				echo "<script language='javascript'>alert('¡¡Se Modifico Correctamente la Incidencia!!')</script>";
+				echo "<script language='javascript'>window.location = 'ConsultaIncidencias.php'</script>";
+			}else{
+				return 0;
+			}
+			$Mysql->CerrarConexion();
+		}
 	}
 	?>

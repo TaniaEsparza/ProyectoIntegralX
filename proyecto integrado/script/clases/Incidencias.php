@@ -6,6 +6,8 @@ class Incidencias{
 	private $idPersonal;
 	private $Fecha;
 	private $Observaciones;
+	private $HoraInicial;
+	private $HoraFinal;
 	private $Estatus;
 
 	function __construct(){
@@ -14,6 +16,8 @@ class Incidencias{
 		$this->idPersonal = 0;
 		$this->Fecha = null;
 		$this->Observaciones = null;
+		$this->HoraInicial = null;
+		$this->HoraFinal = null;
 		$this->Estatus = null;
 	}
 
@@ -57,6 +61,21 @@ class Incidencias{
 	public function getObservaciones(){
 		return $this->Observaciones;
 	}
+	public function setHoraInicial($HoraInicial){
+		$this->HoraInicial=$HoraInicial;
+	}
+
+	public function getHoraInicial(){
+		return $this->HoraInicial;
+	}
+
+	public function setHoraFinal($HoraFinal){
+		$this->HoraFinal=$HoraFinal;
+	}
+
+	public function getHoraFinal(){
+		return $this->HoraFinal;
+	}
 
 	public function setEstatus($Estatus){
 		$this->Estatus=$Estatus;
@@ -64,14 +83,6 @@ class Incidencias{
 
 	public function getEstatus(){
 		return $this->Estatus;
-	}
-
-	public function setFecha($Fecha){
-		$this->Fecha=$Fecha;
-	}
-
-	public function getFecha(){
-		return $this->Fecha;
 	}
 }
 

@@ -15,8 +15,8 @@ $Mysql->Conectar();
 		<!--<h2>Tabla de carreras</h2>-->
 		<br>
 		<caption>
-			<a class="btn btn-success" href='../administrativo/GuardarInventario.php'>
-				Nueva articulo a inventario
+			<a class="btn btn-success" href='../administrativo/AltaInventario.php'>
+				Nuevo Articulo a Inventario
 				<span class="glyphicon glyphicon-plus"></span>
 			</a>
 			
