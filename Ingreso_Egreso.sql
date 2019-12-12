@@ -1,0 +1,21 @@
+CREATE TABLE Egresos (
+  idEgresos INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
+  NombreEgreso VARCHAR(100) NULL,
+  Detalle TEXT NULL,
+  Fecha DATE NULL,
+  Monto FLOAT NULL,
+  Estatus VARCHAR(2) NULL,
+  PRIMARY KEY(idEgresos)
+);
+
+CREATE TABLE Ingresos (
+  idIngresos INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
+  idConeptodePago INTEGER UNSIGNED NULL,
+  Fecha DATE NULL,
+  Observacion TEXT NULL,
+  Estatus VARCHAR(2) NULL,
+  Monto FLOAT NULL,
+  PRIMARY KEY(idIngresos)
+);
+
+
