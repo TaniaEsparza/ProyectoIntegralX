@@ -162,33 +162,7 @@ while ($fila3 = $Resultado3->fetch_assoc()) {
 	<td>'.$fila3['Anyo'].'</td>
 	</tr>
 
-	<tr>
-	<th colspan="6" align="center" style="background-color:#E7E4E4;"><b>Información Zacatecas</b></th>
-	</tr>
-	<tr align="center">
-	<td colspan="2"><b>Fecha de Ingreso CECyTE</b></td>
-	<td colspan="2"><b>Fecha de Registro Zacatecas</b></td>
-	<td colspan="2"><b>ID Estatus Zacatecas</b></td>
-	</tr>
-	<tr align="center">
-	<td colspan="2">'.$fila3['FechaIngreso'].'</td>
-	<td colspan="2">'.$fila3['FechaRegistro'].'</td>
-	<td colspan="2">'.$fila3['Estatus'].'</td>
-	</tr>
-
-	<tr>
-	<th colspan="6" align="center" style="background-color:#E7E4E4;"><b>Información de Ubicación</b></th>
-	</tr>
-	<tr align="center">
-	<td colspan="2"><b>Area</b></td>
-	<td colspan="2"><b>Ubicación</b></td>
-	<td colspan="2"><b>Empleado</b></td>
-	</tr>
-	<tr align="center">
-	<td colspan="2">'.$fila3['Area'].'</td>
-	<td colspan="2">'.$fila3['Ubicacion'].'</td>
-	<td colspan="2">'.$fila3['Nombre'].' '.$fila3['ApellidoP'].' '.$fila3['ApellidoM'].'</td>
-	</tr>
+	
 	
 	</table>
 	';
