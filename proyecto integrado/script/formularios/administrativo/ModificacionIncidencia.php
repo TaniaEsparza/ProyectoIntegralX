@@ -186,7 +186,7 @@ session_start();
 
                                       <div class="col-xl-8">
                                         <STRONG>Lo anterior por los siguientes motivos:</STRONG><br>
-                                        <textarea class="form-control" placeholder="Digite Motivos" rows="2" id="Observaciones"  name="Observaciones" ><?php echo $filaG['Observaciones'] ?></textarea>
+                                        <textarea class="form-control" placeholder="Digite Motivos" rows="2" id="Observaciones"  name="Observaciones"><?php echo $filaG['Observaciones'] ?></textarea>
                                       </div>
                                     </div>
                                     <br>
@@ -201,7 +201,7 @@ session_start();
                                      </div>
                                    </div>
                                    <br>
-                                   <button type="submit" name="agregar" class="btn btn-success"><span class="glyphicon glyphicon-floppy-disk"></span> Modificación </button>
+                                   <button type="submit" name="agregar" class="btn btn-success"><span class="glyphicon glyphicon-floppy-disk"></span> Guardar </button>
                                  </div>
                                </div>
                              </div>
@@ -209,9 +209,7 @@ session_start();
                          </form>
                          <?php
                        } 
-
                        ?>
-
                      </form>
                    <?php }else{
 

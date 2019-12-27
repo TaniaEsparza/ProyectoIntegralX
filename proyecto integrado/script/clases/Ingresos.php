@@ -3,24 +3,24 @@
 class Ingresos{
 	private $idIngresos;
 	private $idAlumno;
+	private $idGrupo;
 	private $idConceptodePago;
 	private $Fecha;
 	private $Observacion;
 	private $Estatus;
 	private $Monto;
-
-
+	private $Folio;
 
 	function __construct(){
 		$this->idIngresos = 0;
 		$this->idAlumno = 0;
+		$this->idGrupo = 0;
 		$this->idConceptodePago = 0;
 		$this->Fecha = null;
 		$this->Observacion = null;
 		$this->Estatus = null;
 		$this->Monto = null;
 	}
-
 
 	public function setidIngresos($idIngresos){
 		$this->idIngresos=$idIngresos;
@@ -36,6 +36,14 @@ class Ingresos{
 
 	public function getidAlumno(){
 		return $this->idAlumno;
+	}
+
+	public function setidGrupo($idGrupo){
+		$this->idGrupo=$idGrupo;
+	}
+
+	public function getidGrupo(){
+		return $this->idGrupo;
 	}
 
 	public function setidConceptodePago($idConceptodePago){
@@ -76,6 +84,14 @@ class Ingresos{
 
 	public function getMonto(){
 		return $this->Monto;
+	}
+
+	public function setFolio($Folio){
+		$this->Folio=$Folio;
+	}
+
+	public function getFolio(){
+		return $this->Folio;
 	}
 
 }

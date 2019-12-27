@@ -1544,10 +1544,10 @@ public function AltaDatosBasicosAlumno($alumno,$lugarnacimiento,$secundaria,$dat
 
 			$Consulta = "INSERT INTO `incidencias` (`idIncidencias`, `idEmpleado`, `idClausulas`, `Observaciones`, `Fecha`, `HoraInicial`, `HoraFinal`, `Estatus`) VALUES (NULL, '".$Incidencia->getidPersonal()."', '".$Incidencia->getidClausula()."', '".$Incidencia->getObservaciones()."', '".$Incidencia->getFecha()."', '".$Incidencia->getHoraInicial()."', '".$Incidencia->getHoraFinal()."', '1');";
 			if ($Mysql->Consulta($Consulta) === true) {
-				echo "<script language='javascript'>alert('¡¡Se Guardo Correctamente la Incidencia!!')</script>";
+				echo "<script language='javascript'>alert('¡¡Se Guardo Correctamente el Registro!!')</script>";
 				echo "<script language='javascript'>window.location = 'ConsultaIncidencias.php'</script>";
 			}else{
-				return 0;
+				echo "<script language='javascript'>alert('¡¡Error al realizar operación verifique los datos!!')</script>";
 			}
 			$Mysql->CerrarConexion();
 		}
@@ -1558,12 +1558,85 @@ public function AltaDatosBasicosAlumno($alumno,$lugarnacimiento,$secundaria,$dat
 
 			$Consulta = "UPDATE `incidencias` SET `idEmpleado` = '".$Incidencia->getidPersonal()."', `idClausulas` = '".$Incidencia->getidClausula()."', `Observaciones` = '".$Incidencia->getObservaciones()."', `Fecha` = '".$Incidencia->getFecha()."', `HoraInicial` = '".$Incidencia->getHoraInicial()."', `HoraFinal` = '".$Incidencia->getHoraFinal()."', `Estatus` = '1' WHERE `incidencias`.`idIncidencias` = '".$Incidencia->getidIncidencias()."'; ";
 			if ($Mysql->Consulta($Consulta) === true) {
-				echo "<script language='javascript'>alert('¡¡Se Modifico Correctamente la Incidencia!!')</script>";
+				echo "<script language='javascript'>alert('¡¡Se Modificó Correctamente la Incidencia!!')</script>";
 				echo "<script language='javascript'>window.location = 'ConsultaIncidencias.php'</script>";
 			}else{
-				return 0;
+				echo "<script language='javascript'>alert('¡¡Error al realizar operación verifique los datos!!')</script>";
 			}
 			$Mysql->CerrarConexion();
 		}
+
+		public function AgregarIngresos($Ingreso){
+			$Mysql =  new MySQLConector();
+			$Mysql->Conectar();
+
+			$Consulta = "INSERT INTO `ingresos` (`idIngresos`, `idConceptodePago`, `idAlumno`, `Fecha`, `Observacion`, `Estatus`, `Monto`, `Folio`, `idGrupo`) VALUES (NULL, '".$Ingreso->getidConceptoDePago()."', '".$Ingreso->getidAlumno()."', '".$Ingreso->getFecha()."', '".$Ingreso->getObservacion()."', '1', '".$Ingreso->getMonto()."', '".$Ingreso->getFolio()."' , '".$Ingreso->getidGrupo()."');";
+
+			if($Mysql->Consulta($Consulta) === true){
+				echo "<script language='javascript'>alert('¡¡Se añadio Correctamente!!')</script>";
+				echo "<script language='javascript'>window.location = 'ConsultaIngresos.php'</script>";
+			}else{
+				echo "<script language='javascript'>alert('¡¡Error al realizar la operacion!!')</script>";
+			}
+
+			$Mysql->CerrarConexion();
+
+		}
+
+		public function ModificarIngresos($Ingreso){
+			$Mysql =  new MySQLConector();
+			$Mysql->Conectar();
+
+			$Consulta = "UPDATE `ingresos` SET `idConceptodePago` = '".$Ingreso->getidConceptoDePago()."', `idAlumno` = '".$Ingreso->getidAlumno()."', `Fecha` = '".$Ingreso->getFecha()."', `Observacion` = '".$Ingreso->getObservacion()."', `Estatus` = '".$Ingreso->getEstatus()."', `Monto` = '".$Ingreso->getMonto()."', `Folio` = '".$Ingreso->getFolio()."', `idGrupo` = '".$Ingreso->getidGrupo()."'  WHERE `ingresos`.`idIngresos` = '".$Ingreso->getidIngresos()."'; ";
+
+			if($Mysql->Consulta($Consulta) === true){
+				echo "<script language='javascript'>alert('¡¡La modificación se realizó Correctamente!!')</script>";
+				echo "<script language='javascript'>window.location = 'ConsultaIngresos.php'</script>";
+			}else{
+				echo "<script language='javascript'>alert('¡¡Error al realizar la modificación!!')</script>";
+			}
+
+			$Mysql->CerrarConexion();
+
+		}
+
+		public function AgregarEgresos($Egreso){
+			$Mysql =  new MySQLConector();
+			$Mysql->Conectar();
+
+			$Consulta = "";
+
+			if($Mysql->Consulta($Consulta) === true){
+
+			}else{
+
+			}
+
+			$Mysql->CerrarConexion();
+
+		}
+
+		public function ModificarEgresos($Egreso){
+			$Mysql =  new MySQLConector();
+			$Mysql->Conectar();
+
+			$Consulta = "";
+
+			if($Mysql->Consulta($Consulta) === true){
+
+			}else{
+
+			}
+
+			$Mysql->CerrarConexion();
+
+		}
+
+		
+
+
+
+		
+		
 	}
 	?>

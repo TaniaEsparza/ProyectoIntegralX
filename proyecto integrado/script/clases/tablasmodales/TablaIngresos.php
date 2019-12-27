@@ -14,8 +14,8 @@ $Mysql->Conectar();
 		<!--<h2>Tabla de carreras</h2>-->
 		<br>
 		<caption>
-			<a class="btn btn-success" href='../administrativo/AltaIncidencia.php'>
-				Agregar Nueva Incidencia
+			<a class="btn btn-success" href='../administrativo/AltaIngreso.php'>
+				Agregar Nuevo Pago
 				<span class="glyphicon glyphicon-plus"></span>
 			</a>
 		</caption>
@@ -25,9 +25,10 @@ $Mysql->Conectar();
 			<table class="table table-hover table-bordered ">
 				<thead class="thead-light">
 					<tr>
-						<th>No. Incidencia</th>
-						<th>Empleado</th>
-						<th>Asunto/Clausula</th>
+						<th>No. Pago</th>
+						<th>Nombre</th>
+						<th>Folio</th>
+						<th>Concepto</th>
 						<th>Fecha</th>
 						<th>Operaciones</th>
 						<th>Ver</th>
@@ -41,10 +42,10 @@ $Mysql->Conectar();
 						$Consulta = "SELECT * FROM `clausulas` WHERE clausulas.idClausulas = '$IdClausulas' ";
 
 					}else{
-						$Consulta = "SELECT incidencias.idIncidencias, incidencias.idEmpleado, incidencias.idClausulas, incidencias.Fecha, clausulas.idClausulas, clausulas.Asunto, personal.idPersonal, personal.Nombre, personal.ApellidoP, personal.ApellidoM FROM incidencias, clausulas, personal WHERE incidencias.idEmpleado = personal.idPersonal and incidencias.idClausulas = clausulas.idClausulas;";
+						$Consulta = "SELECT ingresos.Folio, ingresos.Fecha, ingresos.idAlumno, ingresos.idConceptodePago, alumno.Nombre, alumno.ApellidoP, alumno.ApellidoM, conceptodepago.NombreConcepto, ingresos.idIngresos FROM ingresos, alumno, conceptodepago WHERE ingresos.idConceptodePago = conceptodepago.idConceptoDePago AND ingresos.idAlumno = alumno.idAlumno ";
 					}
 				}else{
-					$Consulta = "SELECT incidencias.idIncidencias, incidencias.idEmpleado, incidencias.idClausulas, incidencias.Fecha, clausulas.idClausulas, clausulas.Asunto, personal.idPersonal, personal.Nombre, personal.ApellidoP, personal.ApellidoM FROM incidencias, clausulas, personal WHERE incidencias.idEmpleado = personal.idPersonal and incidencias.idClausulas = clausulas.idClausulas; ";
+					$Consulta = "SELECT ingresos.Folio, ingresos.Fecha, ingresos.idAlumno, ingresos.idConceptodePago, alumno.Nombre, alumno.ApellidoP, alumno.ApellidoM, conceptodepago.NombreConcepto, ingresos.idIngresos FROM ingresos, alumno, conceptodepago WHERE ingresos.idConceptodePago = conceptodepago.idConceptoDePago AND ingresos.idAlumno = alumno.idAlumno  ";
 				}
 				$Resultado = $Mysql->Consulta($Consulta);
 				while($ver=mysqli_fetch_row($Resultado)){ 
@@ -57,17 +58,17 @@ $Mysql->Conectar();
 					$ver[5]."||".
 					$ver[6]."||".
 					$ver[7]."||".
-					$ver[8]."||".
-					$ver[9];
+					$ver[8];
 					?>
 
 					<tr>
+						<td><?php echo $ver[8]; ?></td>
+						<td><?php echo $ver[4].' '.$ver[5].' '.$ver[6]?></td>
 						<td><?php echo $ver[0];?></td>
-						<td><?php echo $ver[7].' '.$ver[8].' '.$ver[9]?></td>
-						<td><?php echo $ver[5]?></td>	
-						<td><?php echo $ver[3]?></td>	
+						<td><?php echo $ver[7]?></td>	
+						<td><?php echo $ver[1]?></td>	
 						
-						<?php echo"<td><a href=\"../../formularios/administrativo/CrearSessionDirectivoIncidencia.php?idIncidencia=".$ver[0]."\" ><button class=\"btn btn-success glyphicon glyphicon-pencil\">Modificar</button></a></td>"?>
+						<?php echo"<td><a href=\"../../formularios/administrativo/CrearSessionDirectivoIngreso.php?idIngreso=".$ver[8]."\" ><button class=\"btn btn-success glyphicon glyphicon-pencil\">Modificar</button></a></td>"?>
 						<?php echo"<td><a href=\"../../reportes/ArticuloInventario.php?idInventario=".$ver[0]."\" target=\"_blank\" ><button class=\"btn btn-success glyphicon glyphicon-pencil\">Mostrar</button></a></td>"?>		
 					</tr>
 					<?php 

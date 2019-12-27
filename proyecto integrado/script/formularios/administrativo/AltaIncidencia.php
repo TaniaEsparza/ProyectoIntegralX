@@ -60,7 +60,7 @@ session_start();
 
               return true;
             }
-  </script>
+          </script>
 
 
         </head>
@@ -267,6 +267,23 @@ session_start();
               }
             });
             }
+          </script>
 
+          <script type="text/javascript">
+            $(document).ready(function(){
+              $('#idPersonal').select2();
+              $('#idClausula').select2();
+
+              $('select').select2({ 
+                language: {
+                  noResults: function() {
+                    return "No hay resultado";        
+                  },
+                  searching: function() {
+                    return "Buscando..";
+                  }
+                }
+              });
+            });
           </script>
           <?php  ?>
