@@ -1570,7 +1570,7 @@ public function AltaDatosBasicosAlumno($alumno,$lugarnacimiento,$secundaria,$dat
 			$Mysql =  new MySQLConector();
 			$Mysql->Conectar();
 
-			$Consulta = "INSERT INTO `ingresos` (`idIngresos`, `idConceptodePago`, `idAlumno`, `Fecha`, `Observacion`, `Estatus`, `Monto`, `Folio`, `idGrupo`) VALUES (NULL, '".$Ingreso->getidConceptoDePago()."', '".$Ingreso->getidAlumno()."', '".$Ingreso->getFecha()."', '".$Ingreso->getObservacion()."', '1', '".$Ingreso->getMonto()."', '".$Ingreso->getFolio()."' , '".$Ingreso->getidGrupo()."');";
+			$Consulta = "INSERT INTO `ingresos` (`idIngresos`, `idConceptodePago`, `idAlumno`, `Fecha`, `Observacion`, `Estatus`, `Monto`, `Folio`, `idGrupo`, `MontoLetra`) VALUES (NULL, '".$Ingreso->getidConceptoDePago()."', '".$Ingreso->getidAlumno()."', '".$Ingreso->getFecha()."', '".$Ingreso->getObservacion()."', '1', '".$Ingreso->getMonto()."', '".$Ingreso->getFolio()."' , '".$Ingreso->getidGrupo()."', '".$Ingreso->getMontoLetra()."');";
 
 			if($Mysql->Consulta($Consulta) === true){
 				echo "<script language='javascript'>alert('¡¡Se añadio Correctamente!!')</script>";
@@ -1587,7 +1587,7 @@ public function AltaDatosBasicosAlumno($alumno,$lugarnacimiento,$secundaria,$dat
 			$Mysql =  new MySQLConector();
 			$Mysql->Conectar();
 
-			$Consulta = "UPDATE `ingresos` SET `idConceptodePago` = '".$Ingreso->getidConceptoDePago()."', `idAlumno` = '".$Ingreso->getidAlumno()."', `Fecha` = '".$Ingreso->getFecha()."', `Observacion` = '".$Ingreso->getObservacion()."', `Estatus` = '".$Ingreso->getEstatus()."', `Monto` = '".$Ingreso->getMonto()."', `Folio` = '".$Ingreso->getFolio()."', `idGrupo` = '".$Ingreso->getidGrupo()."'  WHERE `ingresos`.`idIngresos` = '".$Ingreso->getidIngresos()."'; ";
+			$Consulta = "UPDATE `ingresos` SET `idConceptodePago` = '".$Ingreso->getidConceptoDePago()."', `idAlumno` = '".$Ingreso->getidAlumno()."', `Fecha` = '".$Ingreso->getFecha()."', `Observacion` = '".$Ingreso->getObservacion()."', `Estatus` = '".$Ingreso->getEstatus()."', `Monto` = '".$Ingreso->getMonto()."', `Folio` = '".$Ingreso->getFolio()."', `idGrupo` = '".$Ingreso->getidGrupo()."', `MontoLetra` = '".$Ingreso->getMontoLetra()."'   WHERE `ingresos`.`idIngresos` = '".$Ingreso->getidIngresos()."'; ";
 
 			if($Mysql->Consulta($Consulta) === true){
 				echo "<script language='javascript'>alert('¡¡La modificación se realizó Correctamente!!')</script>";

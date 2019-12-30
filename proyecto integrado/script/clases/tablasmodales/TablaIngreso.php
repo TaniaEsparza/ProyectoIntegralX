@@ -70,7 +70,7 @@ $Mysql->Conectar();
 						<td><?php echo $ver[1]?></td>	
 						
 						<?php echo"<td><a href=\"../../formularios/administrativo/CrearSessionDirectivoIngreso.php?idIngreso=".$ver[8]."\" ><button class=\"btn btn-success glyphicon glyphicon-pencil\">Modificar</button></a></td>"?>
-						<?php echo"<td><a href=\"../../reportes/ArticuloInventario.php?idInventario=".$ver[0]."\" target=\"_blank\" ><button class=\"btn btn-success glyphicon glyphicon-pencil\">Mostrar</button></a></td>"?>		
+						<?php echo"<td><a href=\"../../reportes/ReciboIngreso.php?idIngreso=".$ver[8]."\" target=\"_blank\" ><button class=\"btn btn-success glyphicon glyphicon-pencil\">Mostrar</button></a></td>"?>		
 					</tr>
 					<?php 
 				}

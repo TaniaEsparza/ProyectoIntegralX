@@ -115,6 +115,8 @@
       										<br>
       										<b>Monto: </b>
      										<input type="text" hidden="" id="Monto" name="Monto">
+                                                            <input type="text" hidden="" id="MLetra" name="MLetra">
+
       										<input type="text" name="MontoLetra" id="MontoLetra" class="form-control" readonly>
       										<br>
       										<b>Concepto: </b>
@@ -150,6 +152,7 @@
       										$Fecha = $_GET['Fecha'];
       										$Observacion = $_GET['Observacion'];
       										$Monto = $_GET['Monto'];
+                                                                  $MLetra = $_GET['MLetra'];
       										$Folio = $_GET['Folio'];
 
       										$Ingresos->setidAlumno($idAlumno);
@@ -158,6 +161,7 @@
       										$Ingresos->setFecha($Fecha);
       										$Ingresos->setObservacion($Observacion);
       										$Ingresos->setMonto($Monto);
+                                                                  $Ingresos->setMontoLetra($MLetra);
       										$Ingresos->setFolio($Folio);
 
       										$SQLControlador = new SQLControlador();
@@ -191,7 +195,8 @@
       						success:function(c){
       							var obj = JSON.parse(c);
       							document.getElementById('MontoLetra').value = '$ '+ obj.Monto + ' ' + obj.MontoLetra;
-      							document.getElementById('Monto').value = obj.Monto;
+                                                document.getElementById('Monto').value = obj.Monto;
+      							document.getElementById('MLetra').value = obj.MontoLetra;
       						}
       					});
       				} 

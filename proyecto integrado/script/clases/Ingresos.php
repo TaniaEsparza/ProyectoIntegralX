@@ -10,6 +10,7 @@ class Ingresos{
 	private $Estatus;
 	private $Monto;
 	private $Folio;
+	private $MontoLetra;
 
 	function __construct(){
 		$this->idIngresos = 0;
@@ -20,6 +21,7 @@ class Ingresos{
 		$this->Observacion = null;
 		$this->Estatus = null;
 		$this->Monto = null;
+		$this->MontoLetra = null;
 	}
 
 	public function setidIngresos($idIngresos){
@@ -94,6 +96,13 @@ class Ingresos{
 		return $this->Folio;
 	}
 
+	public function setMontoLetra($MontoLetra){
+		$this->MontoLetra=$MontoLetra;
+	}
+
+	public function getMontoLetra(){
+		return $this->MontoLetra;
+	}
 }
 
 ?>
