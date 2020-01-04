@@ -1630,13 +1630,7 @@ public function AltaDatosBasicosAlumno($alumno,$lugarnacimiento,$secundaria,$dat
 
 			$Mysql->CerrarConexion();
 
-		}
-
-		
-
-
-
-		
+		}	
 		
 	}
 	?>

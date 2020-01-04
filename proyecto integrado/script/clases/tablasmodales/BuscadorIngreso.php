@@ -5,7 +5,7 @@
 	include_once "../SQLControlador.php";
     $Mysql = new MySQLConector();
     $Mysql->Conectar();
-    $Consulta = "SELECT alumno.Nombre, alumno.ApellidoP, alumno.ApellidoM, alumno.idAlumno, ingresos.idIngresos, ingresos.idAlumno FROM alumno, ingresos WHERE ingresos.idAlumno = alumno.idAlumno;";
+    $Consulta = "SELECT alumno.Nombre, alumno.ApellidoP, alumno.ApellidoM, alumno.idAlumno FROM alumno;";
     $Resultado = $Mysql->Consulta($Consulta);
 
  ?>
