@@ -72,7 +72,7 @@ unset($_SESSION['consulta']);
     <div class="col-sm-9">
      <!--Inicio de contenido de caja de texto-->
      <br>
-     <!--<div id="buscador"></div>-->
+     <div id="buscador"></div>
      <div class="col-md-12" id="tabla"></div>
      <br><br><br><br><br><br>
 
@@ -95,7 +95,7 @@ unset($_SESSION['consulta']);
 <script type="text/javascript">
   $(document).ready(function(){
     $('#tabla').load('../../clases/tablasmodales/TablaIncidencias.php');
-    //$('#buscador').load('../../clases/tablasmodales/BuscadorCanalizacionesTutor.php');
+    $('#buscador').load('../../clases/tablasmodales/BuscadorIncidencias.php');
       //ValidarTutorJustificantesRegistro();
          //ValidarTutorJustificantesModificacion();
        });

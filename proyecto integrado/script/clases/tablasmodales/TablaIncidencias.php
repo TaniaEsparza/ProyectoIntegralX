@@ -35,10 +35,10 @@ $Mysql->Conectar();
 				</thead>
 
 				<?php 
-				if(isset($_SESSION['ConsultaCla'])){
-					if($_SESSION['ConsultaCla'] > 0){
-						$IdClausulas=$_SESSION['ConsultaCla'];
-						$Consulta = "SELECT * FROM `clausulas` WHERE clausulas.idClausulas = '$IdClausulas' ";
+				if(isset($_SESSION['ConsultaInci'])){
+					if($_SESSION['ConsultaInci'] > 0){
+						$IdIncidencias=$_SESSION['ConsultaInci'];
+						$Consulta = "SELECT incidencias.idIncidencias, incidencias.idEmpleado, incidencias.idClausulas, incidencias.Fecha, clausulas.idClausulas, clausulas.Asunto, personal.idPersonal, personal.Nombre, personal.ApellidoP, personal.ApellidoM FROM incidencias, clausulas, personal WHERE incidencias.idEmpleado = '$IdIncidencias' and incidencias.idClausulas = clausulas.idClausulas AND incidencias.idEmpleado = personal.idPersonal  ;";
 
 					}else{
 						$Consulta = "SELECT incidencias.idIncidencias, incidencias.idEmpleado, incidencias.idClausulas, incidencias.Fecha, clausulas.idClausulas, clausulas.Asunto, personal.idPersonal, personal.Nombre, personal.ApellidoP, personal.ApellidoM FROM incidencias, clausulas, personal WHERE incidencias.idEmpleado = personal.idPersonal and incidencias.idClausulas = clausulas.idClausulas;";
@@ -68,7 +68,7 @@ $Mysql->Conectar();
 						<td><?php echo $ver[3]?></td>	
 						
 						<?php echo"<td><a href=\"../../formularios/administrativo/CrearSessionDirectivoIncidencia.php?idIncidencia=".$ver[0]."\" ><button class=\"btn btn-success glyphicon glyphicon-pencil\">Modificar</button></a></td>"?>
-						<?php echo"<td><a href=\"../../reportes/ArticuloInventario.php?idInventario=".$ver[0]."\" target=\"_blank\" ><button class=\"btn btn-success glyphicon glyphicon-pencil\">Mostrar</button></a></td>"?>		
+						<?php echo"<td><a href=\"../../reportes/ReciboIncidencias.php?idIncidencia=".$ver[0]."\" target=\"_blank\" ><button class=\"btn btn-success glyphicon glyphicon-pencil\">Mostrar</button></a></td>"?>		
 					</tr>
 					<?php 
 				}

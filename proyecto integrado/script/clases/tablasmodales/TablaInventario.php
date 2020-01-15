@@ -61,10 +61,10 @@ $Mysql->Conectar();
 						$Consulta = "SELECT * FROM `clausulas` WHERE clausulas.idClausulas = '$IdClausulas' ";
 
 					}else{
-						$Consulta = "SELECT * FROM inventario;";
+						$Consulta = "SELECT inventario.idInventario, inventario.Articulo, inventario.Descripcion, inventario.Precio, inventario.Cantidad, inventario.Proveedores, inventario.Origenes, inventario.NoSerie, inventario.FechaIngreso, inventario.Tipo, inventario.FechaRegistro, inventario.Estatus, inventario.Marca, inventario.Modelo, inventario.Mes, inventario.Anyo, inventario.Imagen, inventario.Categorias, inventario.Estado, inventario.Area, inventario.Ubicacion, inventario.Empleado, personal.idPersonal, personal.Nombre, personal.ApellidoP, personal.ApellidoM FROM personal, inventario WHERE inventario.Empleado = personal.idPersonal;";
 					}
 				}else{
-					$Consulta = "SELECT * FROM inventario; ";
+					$Consulta = "SELECT inventario.idInventario, inventario.Articulo, inventario.Descripcion, inventario.Precio, inventario.Cantidad, inventario.Proveedores, inventario.Origenes, inventario.NoSerie, inventario.FechaIngreso, inventario.Tipo, inventario.FechaRegistro, inventario.Estatus, inventario.Marca, inventario.Modelo, inventario.Mes, inventario.Anyo, inventario.Imagen, inventario.Categorias, inventario.Estado, inventario.Area, inventario.Ubicacion, inventario.Empleado, personal.idPersonal, personal.Nombre, personal.ApellidoP, personal.ApellidoM FROM personal, inventario WHERE inventario.Empleado = personal.idPersonal;";
 				}
 				$Resultado = $Mysql->Consulta($Consulta);
 				while($ver=mysqli_fetch_row($Resultado)){ 
@@ -115,7 +115,7 @@ $Mysql->Conectar();
 						<td><?php echo $ver[18]?></td>
 						<td><?php echo $ver[19]?></td>
 						<td><?php echo $ver[20]?></td>
-						<td><?php echo $ver[21]?></td>	
+						<td><?php echo $ver[23].' '.$ver[24].' '.$ver[25]?></td>	
 						
 						<?php echo"<td><a href=\"../../formularios/administrativo/CrearSessionDirectivoInventario.php?idInventario=".$ver[0]."\" ><button class=\"btn btn-success glyphicon glyphicon-pencil\">Modificar</button></a></td>"?>
 						<?php echo"<td><a href=\"../../reportes/ArticuloInventario.php?idInventario=".$ver[0]."\" target=\"_blank\" ><button class=\"btn btn-success glyphicon glyphicon-pencil\">Mostrar</button></a></td>"?>		

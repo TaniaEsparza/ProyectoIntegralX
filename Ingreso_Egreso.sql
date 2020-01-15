@@ -10,11 +10,13 @@ CREATE TABLE Egresos (
 
 CREATE TABLE Ingresos (
   idIngresos INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
-  idConeptodePago INTEGER UNSIGNED NULL,
+  idConceptodePago INTEGER UNSIGNED NULL,
+  idAlumno INTEGER UNSIGNED NULL,
   Fecha DATE NULL,
   Observacion TEXT NULL,
   Estatus VARCHAR(2) NULL,
   Monto FLOAT NULL,
+  Folio VARCHAR(10) NULL,
   PRIMARY KEY(idIngresos)
 );
 

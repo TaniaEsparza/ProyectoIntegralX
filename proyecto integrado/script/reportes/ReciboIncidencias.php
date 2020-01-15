@@ -1,6 +1,6 @@
 <?php
 session_start();
-$idIngreso = $_GET['idIngreso'];
+$idIncidencia = $_GET['idIncidencia'];
 
 // Include the main TCPDF library (search for installation path).
 require_once('../../TCPDF/TCPDF-master/tcpdf.php');
@@ -108,57 +108,83 @@ include_once "../Clases/mysqlconector.php";
 
 $Mysql = new mysqlconector();
 $Mysql->Conectar();
-$Consulta3 = "SELECT ingresos.idIngresos, ingresos.idConceptodePago, ingresos.idAlumno, ingresos.Fecha, ingresos.Observacion, ingresos.Monto, ingresos.MontoLetra,ingresos.Folio, ingresos.idGrupo, alumno.idAlumno, alumno.Nombre, alumno.ApellidoP, alumno.ApellidoM, conceptodepago.idConceptoDePago, conceptodepago.NombreConcepto, grupos.idGrupos, grupos.Grado, grupos.Grupo, grupos.Carreras_idCarreras, carreras.idCarreras, carreras.Nombre AS NombreCarrera FROM alumno, ingresos, conceptodepago, grupos, carreras WHERE ingresos.idIngresos = '$idIngreso' AND ingresos.idAlumno = alumno.idAlumno AND ingresos.idConceptodePago = conceptodepago.idConceptoDePago and ingresos.idGrupo = grupos.idGrupos AND grupos.Carreras_idCarreras = carreras.idCarreras;";
+$Consulta3 = "SELECT incidencias.idIncidencias, incidencias.idEmpleado, incidencias.idClausulas, incidencias.Fecha, incidencias.Observaciones, incidencias.HoraInicial, incidencias.HoraFinal, clausulas.idClausulas, clausulas.Asunto, personal.idPersonal, personal.Nombre, personal.ApellidoP, personal.ApellidoM, personal.Departamento, personal.Puesto, personal.NoEmpleado, clausulas.Numero, clausulas.Asunto, clausulas.Motivo, clausulas.Documentacion FROM incidencias, clausulas, personal WHERE incidencias.idEmpleado = personal.idPersonal and incidencias.idClausulas = clausulas.idClausulas and incidencias.idIncidencias = '$idIncidencia' AND incidencias.idClausulas = clausulas.idClausulas ";
 $Resultado3 = $Mysql->Consulta($Consulta3);
 while ($fila3 = $Resultado3->fetch_assoc()) {
 
 // create some HTML content
 	$html = '
+	<h3 align="center">CEDULA DE CONTROL INCIDENCIAS</h3>
+	<br>
 	<table style="border:2px dashed green;" FRAME="void" RULES="rows">
-	<tr><td colspan="4"><h2 align="center">RECIBO DE PAGO</h2>
+	<tr>
+	<td colspan="8">
+	<h3 align="center">DATOS DEL TRABAJADOR <br></h3>
 	</td>
 	</tr>
 	<tr>
-	<td align="right" colspan="3"><b>FOLIO: </b></td>
-	<td font color = "#ff0000">   '.strtoupper($fila3['Folio']).'<br></td>
+	<td colspan="3"><b>NOMBRE DEL EMPLEADO: </b></td>
+	<td colspan="5">'.strtoupper($fila3['Nombre'].' '.$fila3['ApellidoP'].' '.$fila3['ApellidoM']).'</td>
 	</tr>
 	<tr>
-	<td><b>RECIBÍ DE: </b></td>
-	<td colspan="3">'.strtoupper($fila3['Nombre'].' '.$fila3['ApellidoP'].' '.$fila3['ApellidoM']).'</td>
+	<td colspan="3"><b>PUESTO Y/O CATEGORIA: </b></td>
+	<td colspan="2">'.strtoupper($fila3['Puesto']).'</td>
+	<td colspan="2"><b>No. EMPLEADO: </b></td>
+	<td>'.$fila3['NoEmpleado'].'</td>
 	</tr>
 	<tr>
-	<td><b>DEL GRUPO DE: </b></td>
-	<td colspan="3">'.strtoupper($fila3['Grado'].'-'.$fila3['Grupo'].' '.$fila3['NombreCarrera']).'</td>
+	<td colspan="3"><b>SOLICITUD DE FECHA: </b></td>
+	<td colspan="6">'.$fila3['Fecha'].' <br></td>
+	</tr>
+	</table>
+	<br>
+	<br>
+
+	<table style="border:2px dashed green;" FRAME="void" RULES="rows">
+	<tr>
+	<td colspan="8">
+	<h3 align="center">SOLICITUD <br></h3>
+	</td>
 	</tr>
 	<tr>
-	<td><b>LA CANTIDAD DE: </b></td>
-	<td colspan="3">$ '.strtoupper($fila3['Monto'].' ('. $fila3['MontoLetra']).')</td>
+	<td colspan="2"><b>CLÁUSULA CCT: </b></td>
+	<td colspan="2">'.$fila3['Numero'].'</td>
+	<td><b>ASUNTO: </b></td>
+	<td colspan="3">'.strtoupper($fila3['Asunto']).'</td>
 	</tr>
 	<tr>
-	<td><b>POR CONCEPTO: </b></td>
-	<td colspan="3">'.strtoupper($fila3['NombreConcepto']).'</td>
+	<td colspan="4"><b>DOCUMENTACIÓN QUE SE ANEXA: </b></td>
+	<td colspan="4">'.strtoupper($fila3['Documentacion']).'<br></td>
 	</tr>
 	<tr>
-	<td colspan="4" align="center"></td>
+	<td colspan="8" align="center"><b>LO ANTERIOR POR LOS SIGUIENTES MOTIVOS:</b></td>
 	</tr>
 	<tr>
-	<td colspan="4" align="center"><h3>RECIBE</h3></td>
+	<td colspan="8" align="center">'.strtoupper($fila3['Observaciones']).'<br></td>
 	</tr>
+
 	<tr>
-	<td colspan="4" align="center"></td>
+	<td colspan="5"><b>EN CASO DE PASE DE SALIDA O ENTRADA DE: </b></td>
+	<td colspan="3">'.$fila3['HoraInicial'].' A '.$fila3['HoraFinal'].'</td>
 	</tr>
+
 	<tr>
-	<td colspan="4" align="center"></td>
+	<td colspan="8" align="center"><br><br><b>ATENTAMENTE</b></td>
 	</tr>
+
 	<tr>
-	<td colspan="4" align="center"></td>
+	<td colspan="8" align="center">
+	<br>
+	<br>
+	<br>
+	<br>
+	<b>___________________________________</b>
+	<br>
+	'.strtoupper($fila3['Nombre'].' '.$fila3['ApellidoP'].' '.$fila3['ApellidoM']).'
+	<br>
+	</td>
 	</tr>
-	<tr>
-	<td colspan="4" align="center">______________________________________<br>'.$NombreDirector.'</td>
-	</tr>
-	<tr>
-	<td colspan="4" align="center"><b>DIRECTORA</b></td>
-	</tr>
+
 	</table>
 	';
 }
@@ -166,11 +192,9 @@ while ($fila3 = $Resultado3->fetch_assoc()) {
 $pdf->SetFont('helvetica', '', 11);
 $pdf->writeHTML($html, true, false, true, false, '');
 
-
 // ---------------------------------------------------------
-
 //Close and output PDF document
-$pdf->Output('ReciboPago.pdf', 'I');
+$pdf->Output('ReciboIncidencias.pdf', 'I');
 
 //============================================================+
 // END OF FILE
