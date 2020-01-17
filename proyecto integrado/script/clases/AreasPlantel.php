@@ -1,12 +1,12 @@
 <?php
-class AreaPlantel{
+class AreasPlantel{
 	private $idAreaPlantel;
 	private $NombreArea
 	private $Edificio;
 	private $Estatus;
 
 	function __construct(){
-			$this-> idAreaPlantel=0;
+			$this-> idAreasPlantel=0;
 			$this-> NombreArea=0;
 			$this-> Edificio=null;
 			$this-> Motivo=null;
@@ -14,7 +14,7 @@ class AreaPlantel{
 			$this-> Estatus=null;
 		}
 
-		public function setidAreaPlantel($idAreaPlantel){
+		public function setidAreasPlantel($idAreaPlantel){
 			$this -> idAreaPlantel = $idAreaPlantel;
 		}
 		public function setNombreArea($NombreArea){
@@ -27,7 +27,7 @@ class AreaPlantel{
 			$this -> Estatus = $Estatus;
 		}
 
-		public function getidAreaPlantel(){
+		public function getidAreasPlantel(){
 			return $this -> idAreaPlantel;
         }
         public function getNombreArea(){

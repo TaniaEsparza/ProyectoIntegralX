@@ -647,3 +647,60 @@ function ModificacionConceptosPago(){
 		}
 	});
 }
+
+function agregarAreasPersonal(Nombre, Edificio){
+	cadena= "NombreArea=" + Nombre + 
+	"&Edificio=" + Edificio ;
+
+	$.ajax({
+		type:"GET",
+		url:"../../clases/tablasmodales/AgregarAreasPlantel.php",
+		data:cadena,
+		success:function(ad){
+			if(ad==1){
+				$('#tabla').load('./../../clases/tablasmodales/TablaAreasPlantel.php');
+				alert("Area agregada correctamente!");
+			}else if(ad==4){
+				alert("Area ya dads de alta");
+			}else{
+				alert("Error al ser Guardada");
+			}
+		}
+	});
+}
+
+function VerAreasPlantel(datos){
+	d=datos.split('||');
+	$('#idAreaPlantel').val(d[0]);
+	$('#nombreareau').val(d[1]);
+	$('#edificiou').val(d[2]);
+	$('#estatusu').val(d[3]);
+}
+
+function ModificacionAreaPlantel(){
+	id=$('#idAreaPlantel').val();
+	NombreArea=$('#nombreareau').val();
+	Edificio=$('#edificiou').val();
+	Estatus=$('#estatusu').val();
+
+	cadena= "id=" + id +
+	"&NombreArea=" + NombreArea+
+	"&Edificio=" + Edificio+
+	"&Estatus=" + Estatus;
+
+	$.ajax({
+		type:"GET",
+		url:"./../../clases/tablasmodales/ModificarAreasPlantel.php",
+		data:cadena,
+		success:function(r){
+			if(r==1){
+				$('#tabla').load('./../../clases/tablasmodales/TablaAreasPlantel.php');
+				//$('#buscador').load('./../../clases/tablasmodales/BuscadorMateriaGrupoDocente.php');
+				alert("Se actualizado la area del plantel con éxito!");
+			}else{
+				alert("Error al actualizar area de plantel");
+			}
+
+		}
+	});
+}

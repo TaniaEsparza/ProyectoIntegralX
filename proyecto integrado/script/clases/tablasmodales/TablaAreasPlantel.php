@@ -63,7 +63,7 @@ $Mysql->Conectar();
 						<td><?php echo $ver[2] ?></td>	
 						<td><?php if($ver[3] == 1){ echo "Activo"; } else { echo "Inactivo";} ?></td>	
 						<td>
-							<button class="btn btn-success glyphicon glyphicon-pencil" data-toggle="modal" data-target="#modalEdicion" onclick="VerClausulas('<?php echo $datosAP ?>')">
+							<button class="btn btn-success glyphicon glyphicon-pencil" data-toggle="modal" data-target="#modalEdicion" onclick="VerAreasPlantel('<?php echo $datosAP ?>')">
 								Modificar
 							</button>
 						</td>

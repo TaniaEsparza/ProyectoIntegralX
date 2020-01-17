@@ -1630,6 +1630,33 @@ public function AltaDatosBasicosAlumno($alumno,$lugarnacimiento,$secundaria,$dat
 
 			$Mysql->CerrarConexion();
 
+		}
+
+		public function AgregarAreaPlantel($AreaPlantel)
+		{
+			$Mysql = new MySQLConector();
+			$Mysql->Conectar();
+			$Consulta = "INSERT INTO `areasplantel` (`idAreasPlantel`, `NombreArea`, `Edificio`, `Estatus`) VALUES (NULL, '".$AreaPlantel->getNombreArea()."', '".$AreaPlantel->getEdificio()."', '1');";
+			if ($Mysql->Consulta($Consulta) === true) {
+				return 1;
+			}else{
+				return 0;
+			}
+			$Mysql->CerrarConexion();
+		}
+
+		public function ModificarAreaPlantel($AreaPlantel)
+		{
+			$Mysql = new MySQLConector();
+			$Mysql->Conectar();
+
+			$Consulta = "UPDATE `areasplantel` SET `NombreArea` = '".$AreaPlantel->getNombreArea()."', `Edificio` = '".$AreaPlantel->getEdificio()."', `Estatus` = '".$AreaPlantel->getEstatus()."'  WHERE `areasplantel`.`idAreasPlantel` = '".$AreaPlantel->getidAreasPlatel()."'; ";
+			if ($Mysql->Consulta($Consulta) === true) {
+				return 1;
+			}else{
+				return 0;
+			}
+			$Mysql->CerrarConexion();
 		}	
 		
 	}
