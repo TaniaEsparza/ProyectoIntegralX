@@ -1627,7 +1627,6 @@ public function AltaDatosBasicosAlumno($alumno,$lugarnacimiento,$secundaria,$dat
 			}else{
 
 			}
-
 			$Mysql->CerrarConexion();
 
 		}
@@ -1636,11 +1635,17 @@ public function AltaDatosBasicosAlumno($alumno,$lugarnacimiento,$secundaria,$dat
 		{
 			$Mysql = new MySQLConector();
 			$Mysql->Conectar();
-			$Consulta = "INSERT INTO `areasplantel` (`idAreasPlantel`, `NombreArea`, `Edificio`, `Estatus`) VALUES (NULL, '".$AreaPlantel->getNombreArea()."', '".$AreaPlantel->getEdificio()."', '1');";
-			if ($Mysql->Consulta($Consulta) === true) {
-				return 1;
+			$Consulta1 = "SELECT areasplantel.idAreasPlantel FROM areasplantel WHERE areasplantel.NombreArea = '".$AreaPlantel->getNombreArea()."' and areasplantel.Edificio = '".$AreaPlantel->getEdificio()."';";
+			$Resultado = $Mysql->Consulta($Consulta1);
+			if(mysqli_num_rows($Resultado) == 0){
+				$Consulta = "INSERT INTO `areasplantel` (`idAreasPlantel`, `NombreArea`, `Edificio`, `Estatus`) VALUES (NULL, '".$AreaPlantel->getNombreArea()."', '".$AreaPlantel->getEdificio()."', '1');";
+				if ($Mysql->Consulta($Consulta) === true) {
+					return 1;
+				}else{
+					return 0;
+				}
 			}else{
-				return 0;
+				return 4;
 			}
 			$Mysql->CerrarConexion();
 		}
@@ -1650,7 +1655,7 @@ public function AltaDatosBasicosAlumno($alumno,$lugarnacimiento,$secundaria,$dat
 			$Mysql = new MySQLConector();
 			$Mysql->Conectar();
 
-			$Consulta = "UPDATE `areasplantel` SET `NombreArea` = '".$AreaPlantel->getNombreArea()."', `Edificio` = '".$AreaPlantel->getEdificio()."', `Estatus` = '".$AreaPlantel->getEstatus()."'  WHERE `areasplantel`.`idAreasPlantel` = '".$AreaPlantel->getidAreasPlatel()."'; ";
+			$Consulta = "UPDATE `areasplantel` SET `NombreArea` = '".$AreaPlantel->getNombreArea()."', `Edificio` = '".$AreaPlantel->getEdificio()."', `Estatus` = '".$AreaPlantel->getEstatus()."'  WHERE `areasplantel`.`idAreasPlantel` = '".$AreaPlantel->getidAreasPlantel()."'; ";
 			if ($Mysql->Consulta($Consulta) === true) {
 				return 1;
 			}else{

@@ -1,16 +1,14 @@
 <?php
 class AreasPlantel{
 	private $idAreaPlantel;
-	private $NombreArea
+	private $NombreArea;
 	private $Edificio;
 	private $Estatus;
 
 	function __construct(){
 			$this-> idAreasPlantel=0;
-			$this-> NombreArea=0;
+			$this-> NombreArea=null;
 			$this-> Edificio=null;
-			$this-> Motivo=null;
-			$this-> Documentacion=null;
 			$this-> Estatus=null;
 		}
 

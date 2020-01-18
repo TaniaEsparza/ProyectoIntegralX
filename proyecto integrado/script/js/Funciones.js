@@ -648,7 +648,7 @@ function ModificacionConceptosPago(){
 	});
 }
 
-function agregarAreasPersonal(Nombre, Edificio){
+function agregarAreasPlantel(Nombre, Edificio){
 	cadena= "NombreArea=" + Nombre + 
 	"&Edificio=" + Edificio ;
 
@@ -677,7 +677,7 @@ function VerAreasPlantel(datos){
 	$('#estatusu').val(d[3]);
 }
 
-function ModificacionAreaPlantel(){
+function modificacionAreasPlantel(){
 	id=$('#idAreaPlantel').val();
 	NombreArea=$('#nombreareau').val();
 	Edificio=$('#edificiou').val();
@@ -695,7 +695,7 @@ function ModificacionAreaPlantel(){
 		success:function(r){
 			if(r==1){
 				$('#tabla').load('./../../clases/tablasmodales/TablaAreasPlantel.php');
-				//$('#buscador').load('./../../clases/tablasmodales/BuscadorMateriaGrupoDocente.php');
+				$('#buscador').load('./../../clases/tablasmodales/BuscadorAreasPlantel.php');
 				alert("Se actualizado la area del plantel con éxito!");
 			}else{
 				alert("Error al actualizar area de plantel");

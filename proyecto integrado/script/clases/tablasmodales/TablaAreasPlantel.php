@@ -18,7 +18,7 @@ $Mysql->Conectar();
 		<br>
 		<caption>
 			<button class="btn btn-success" data-toggle="modal" data-target="#modalNuevo">
-				Agregar nueva area
+				Agregar nueva área
 				<span class="glyphicon glyphicon-plus"></span>
 			</button>
 			
@@ -29,8 +29,8 @@ $Mysql->Conectar();
 			<table class="table table-hover table-bordered ">
 				<thead class="thead-light">
 					<tr>
-						<th>id Area plantel</th>
-						<th>Nombre</th>
+						<th>Id</th>
+						<th>Nombre/Área</th>
 						<th>Edificio</th>
 						<th>Estatus</th>
 						<th>Editar</th>
@@ -59,6 +59,7 @@ $Mysql->Conectar();
 					?>
 
 					<tr>
+						<td><?php echo $ver[0] ?></td>
 						<td><?php echo $ver[1] ?></td>
 						<td><?php echo $ver[2] ?></td>	
 						<td><?php if($ver[3] == 1){ echo "Activo"; } else { echo "Inactivo";} ?></td>	
