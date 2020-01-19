@@ -4,7 +4,7 @@ if (!isset($_SESSION)) { session_start(); }
 {
  echo "<script language='javascript'>window.location='Consu.php'</script>";
 }*/
-unset($_SESSION['ConsultaAI']);
+unset($_SESSION['ConsultaAIA']);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -94,8 +94,8 @@ unset($_SESSION['ConsultaAI']);
 </html>
 <script type="text/javascript">
   $(document).ready(function(){
-    $('#tabla').load('../../clases/tablasmodales/TablaInventario.php');
-    $('#buscador').load('../../clases/tablasmodales/BuscadorArticuloInventario.php');
+    $('#tabla').load('../../clases/tablasmodales/TablaInventarioArea.php');
+    $('#buscador').load('../../clases/tablasmodales/BuscadorArticuloInventarioArea.php');
       //ValidarTutorJustificantesRegistro();
          //ValidarTutorJustificantesModificacion();
        });

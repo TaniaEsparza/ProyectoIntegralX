@@ -5,7 +5,7 @@
 	include_once "../SQLControlador.php";
     $Mysql = new MySQLConector();
     $Mysql->Conectar();
-    $Consulta = "SELECT * FROM `areasplantel`";
+    $Consulta = "SELECT * FROM `inventario`";
     $Resultado = $Mysql->Consulta($Consulta);
 
  ?>
@@ -38,9 +38,9 @@
 				$.ajax({
 					type:"GET",
 					data:'Valor=' + $('#buscadorvivo').val(),
-					url:'./../../../script/clases/tablasmodales/CrearSessionArticuloInventarioArea.php',
+					url:'./../../../script/clases/tablasmodales/CrearSessionArticuloInventario.php',
 					success:function(r){
-						$('#tabla').load('./../../../script/clases/tablasmodales/TablaInventarioArea.php');
+						$('#tabla').load('./../../../script/clases/tablasmodales/TablaInventario.php');
 					}
 				});
 			});

@@ -55,14 +55,12 @@ $Mysql->Conectar();
 				</thead>
 
 				<?php 
-				if(isset($_SESSION['ConsultaAI'])){
-
-					if( $_SESSION['ConsultaAI'] > 0){
-						$IdArticulo=$_SESSION['ConsultaAI'];
-						$Consulta = "SELECT inventario.idInventario, inventario.Articulo, inventario.Descripcion, inventario.Precio, inventario.Cantidad, inventario.Proveedores, inventario.Origenes, inventario.NoSerie, inventario.FechaIngreso, inventario.Tipo, inventario.FechaRegistro, inventario.Estatus, inventario.Marca, inventario.Modelo, inventario.Mes, inventario.Anyo, inventario.Imagen, inventario.Categorias, inventario.Estado, inventario.Area, inventario.Ubicacion, inventario.Empleado, personal.idPersonal, personal.Nombre, personal.ApellidoP, personal.ApellidoM, areasplantel.idAreasPlantel, areasplantel.NombreArea, areasplantel.Edificio, areasplantel.Estatus FROM personal, inventario, areasplantel WHERE inventario.Empleado = personal.idPersonal  AND inventario.Area = areasplantel.idAreasPlantel AND inventario.idInventario = '$IdArticulo';";
+				if(isset($_SESSION['ConsultaAIA'])){
+					if($_SESSION['ConsultaAIA'] > 0){
+						$IdAreasPlantel=$_SESSION['ConsultaAIA'];
+						$Consulta = "SELECT inventario.idInventario, inventario.Articulo, inventario.Descripcion, inventario.Precio, inventario.Cantidad, inventario.Proveedores, inventario.Origenes, inventario.NoSerie, inventario.FechaIngreso, inventario.Tipo, inventario.FechaRegistro, inventario.Estatus, inventario.Marca, inventario.Modelo, inventario.Mes, inventario.Anyo, inventario.Imagen, inventario.Categorias, inventario.Estado, inventario.Area, inventario.Ubicacion, inventario.Empleado, personal.idPersonal, personal.Nombre, personal.ApellidoP, personal.ApellidoM, areasplantel.idAreasPlantel, areasplantel.NombreArea, areasplantel.Edificio, areasplantel.Estatus FROM personal, inventario, areasplantel WHERE inventario.Empleado = personal.idPersonal  AND inventario.Area = areasplantel.idAreasPlantel AND inventario.Area = '$IdAreasPlantel';";
 
 					}else{
-
 						$Consulta = "SELECT inventario.idInventario, inventario.Articulo, inventario.Descripcion, inventario.Precio, inventario.Cantidad, inventario.Proveedores, inventario.Origenes, inventario.NoSerie, inventario.FechaIngreso, inventario.Tipo, inventario.FechaRegistro, inventario.Estatus, inventario.Marca, inventario.Modelo, inventario.Mes, inventario.Anyo, inventario.Imagen, inventario.Categorias, inventario.Estado, inventario.Area, inventario.Ubicacion, inventario.Empleado, personal.idPersonal, personal.Nombre, personal.ApellidoP, personal.ApellidoM, areasplantel.idAreasPlantel, areasplantel.NombreArea, areasplantel.Edificio, areasplantel.Estatus FROM personal, inventario, areasplantel WHERE inventario.Empleado = personal.idPersonal AND inventario.Area = areasplantel.idAreasPlantel;";
 					}
 				}else{
