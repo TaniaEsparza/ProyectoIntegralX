@@ -101,7 +101,7 @@ include_once "../Clases/mysqlconector.php";
 
 $Mysql = new mysqlconector();
 $Mysql->Conectar();
-$Consulta3 = "SELECT * FROM inventario, personal WHERE inventario.Empleado = personal.idPersonal AND inventario.idInventario = ".$idArticulo.";";
+$Consulta3 = "SELECT * FROM inventario, personal, areasplantel WHERE inventario.Empleado = personal.idPersonal AND inventario.Area = areasplantel.idAreasPlantel AND inventario.idInventario = ".$idArticulo.";";
 $Resultado3 = $Mysql->Consulta($Consulta3);
 while ($fila3 = $Resultado3->fetch_assoc()) {
 
@@ -185,7 +185,7 @@ while ($fila3 = $Resultado3->fetch_assoc()) {
 	<td colspan="2"><b>Empleado</b></td>
 	</tr>
 	<tr align="center">
-	<td colspan="2">'.$fila3['Area'].'</td>
+	<td colspan="2">'.$fila3['NombreArea'].'</td>
 	<td colspan="2">'.$fila3['Ubicacion'].'</td>
 	<td colspan="2">'.$fila3['Nombre'].' '.$fila3['ApellidoP'].' '.$fila3['ApellidoM'].'</td>
 	</tr>

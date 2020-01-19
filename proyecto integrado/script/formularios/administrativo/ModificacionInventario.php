@@ -362,12 +362,24 @@ session_start();
                         <div class="row">
                           <div class="col-md-4">
                            <STRONG>Area: </STRONG><br>
-                           <input type="text" class="form-control uppercase" id="Area" name="Area" value="<?php echo $fila2['Area'] ?>">
-                         </div>
+                           <select name="idArea" id="idArea" class="m-1 custom-select">
+                             <?php
+                             include_once "../../clases/MySQLConector.php";
+                             $Mysql = new MySQLConector();
+                             $Mysql->Conectar();
+                             $Consulta3 = "SELECT * FROM `areasplantel`;";
+                             $Resultado3 = $Mysql->Consulta($Consulta3);
+                             if($Resultado3)
+                              while ($fila3 = mysqli_fetch_array($Resultado3)){ 
+                                echo " <option value=\"{$fila3['idAreasPlantel']}\" "; if($fila2['Area'] == $fila3['idAreasPlantel']) { echo "selected";}  echo " > {$fila3['NombreArea']}</option>";          
+                              }
+                              ?>
+                            </select>
+                          </div>
 
-                         <div class="col-md-4">
+                          <div class="col-md-4">
                            <STRONG>Ubicación:</STRONG><br>
-                           <input type="text" class="form-control uppercase" id="Ubicacion" name="Ubicacion" value="<?php echo $fila2['Ubicacion'] ?>">
+                           <input type="text" class="form-control uppercase" id="Ubicacion" name="Ubicacion" readonly>
                          </div>
 
                          <div class="col-md-4">
@@ -420,7 +432,7 @@ session_start();
                   //$imagen = '$newFileName',
                     $Categorias = $_POST['Categorias'];
                     $Estado = $_POST['Estado'];
-                    $Area = $_POST['Area'];
+                    $Area = $_POST['idArea'];
                     $Ubicacion = $_POST['Ubicacion'];
                     $Empleado = $_POST['Empleado'];
 
@@ -451,35 +463,41 @@ session_start();
                     $R = $SQLControlador->ModificarArticuloInventario($Inventario);
 
                     if($R == 1){
-                      $check = getimagesize($_FILES["image"]["tmp_name"]);
-                      if($check !== false){
-                        $image = $_FILES['image']['tmp_name'];
-                        $imgContent = addslashes(file_get_contents($image));
-                        $dbHost     = 'localhost';
-                        $dbUsername = 'root';
-                        $dbPassword = '';
-                        $dbName     = 'cecyte';
 
-                        $db = new mysqli($dbHost, $dbUsername, $dbPassword, $dbName);
+                      if(empty($_FILES["image"]["tmp_name"])){
+                            echo "<script language='javascript'>window.location = 'ConsultaInventario.php'</script>";
+                      }else{
+                        $check = getimagesize($_FILES["image"]["tmp_name"]);
+                        if($check !== false){
+                          $image = $_FILES['image']['tmp_name'];
+                          $imgContent = addslashes(file_get_contents($image));
+                          $dbHost     = 'localhost';
+                          $dbUsername = 'root';
+                          $dbPassword = '';
+                          $dbName     = 'cecyte';
 
-                        if($db->connect_error){
-                          die("Connection failed: " . $db->connect_error);
-                        }
+                          $db = new mysqli($dbHost, $dbUsername, $dbPassword, $dbName);
+
+                          if($db->connect_error){
+                            die("Connection failed: " . $db->connect_error);
+                          }
 
                         //Insert image content into database
-                        $insert = $db->query("UPDATE inventario SET imagen ='$imgContent' where idInventario = '".$_SESSION['idInventario']
-                          ."';");
-                        if($insert){
+                          $insert = $db->query("UPDATE inventario SET imagen ='$imgContent' where idInventario = '".$_SESSION['idInventario']
+                            ."';");
+                          if($insert){
                         //echo "File uploaded successfully.";
-                          echo "<script language='javascript'>alert('La imagen se subio exitosamente')</script>";
-                          echo "<script language='javascript'>window.location = 'ConsultaInventario.php'</script>";
-                        }else{
+                            echo "<script language='javascript'>alert('La imagen se subio exitosamente')</script>";
+                            echo "<script language='javascript'>window.location = 'ConsultaInventario.php'</script>";
+                          }else{
               // echo "File upload failed, please try again.";
-                          echo "<script language='javascript'>alert('Error al subir imagen')</script>";
-                        } 
-                      }else{
+                            echo "<script language='javascript'>alert('Error al subir imagen')</script>";
+                          } 
+                        }else{
           //echo "Please select an image file to upload.";
-                        echo "<script language='javascript'>alert('Selecciona una imagen con el formato correcto')</script>";
+                          echo "<script language='javascript'>alert('Selecciona una imagen con el formato correcto')</script>";
+                        }
+
                       }
                     }
 
@@ -493,6 +511,30 @@ $(".custom-file-input").on("change", function() {
 });
 </script>
 <br>
+
+<script type="text/javascript">
+ $(document).ready(function(){
+  getDatosArea();
+
+  $('#idArea').change(function(){
+   getDatosArea();
+ })
+})
+</script>
+
+<script type="text/javascript">
+ function getDatosArea(){
+  $.ajax({
+   type:"GET",
+   url:"../../clases/tablasmodales/ConsultaArea.php",
+   data:"idArea="+$('#idArea').val(),
+   success:function(r){
+    var obj = JSON.parse(r);
+    document.getElementById('Ubicacion').value = obj.edificio;
+  }
+});
+}
+</script>
 
 </div>
 </html>

@@ -55,16 +55,16 @@ $Mysql->Conectar();
 				</thead>
 
 				<?php 
-				if(isset($_SESSION['ConsultaCla'])){
-					if($_SESSION['ConsultaCla'] > 0){
-						$IdClausulas=$_SESSION['ConsultaCla'];
-						$Consulta = "SELECT * FROM `clausulas` WHERE clausulas.idClausulas = '$IdClausulas' ";
+				if(isset($_SESSION['ConsultaAIA'])){
+					if($_SESSION['ConsultaAIA'] > 0){
+						$IdAreasPlantel=$_SESSION['ConsultaAIA'];
+						$Consulta = "SELECT inventario.idInventario, inventario.Articulo, inventario.Descripcion, inventario.Precio, inventario.Cantidad, inventario.Proveedores, inventario.Origenes, inventario.NoSerie, inventario.FechaIngreso, inventario.Tipo, inventario.FechaRegistro, inventario.Estatus, inventario.Marca, inventario.Modelo, inventario.Mes, inventario.Anyo, inventario.Imagen, inventario.Categorias, inventario.Estado, inventario.Area, inventario.Ubicacion, inventario.Empleado, personal.idPersonal, personal.Nombre, personal.ApellidoP, personal.ApellidoM, areasplantel.idAreasPlantel, areasplantel.NombreArea, areasplantel.Edificio, areasplantel.Estatus FROM personal, inventario, areasplantel WHERE inventario.Empleado = personal.idPersonal  AND inventario.Area = areasplantel.idAreasPlantel AND inventario.Area = '$IdAreasPlantel';";
 
 					}else{
-						$Consulta = "SELECT inventario.idInventario, inventario.Articulo, inventario.Descripcion, inventario.Precio, inventario.Cantidad, inventario.Proveedores, inventario.Origenes, inventario.NoSerie, inventario.FechaIngreso, inventario.Tipo, inventario.FechaRegistro, inventario.Estatus, inventario.Marca, inventario.Modelo, inventario.Mes, inventario.Anyo, inventario.Imagen, inventario.Categorias, inventario.Estado, inventario.Area, inventario.Ubicacion, inventario.Empleado, personal.idPersonal, personal.Nombre, personal.ApellidoP, personal.ApellidoM FROM personal, inventario WHERE inventario.Empleado = personal.idPersonal;";
+						$Consulta = "SELECT inventario.idInventario, inventario.Articulo, inventario.Descripcion, inventario.Precio, inventario.Cantidad, inventario.Proveedores, inventario.Origenes, inventario.NoSerie, inventario.FechaIngreso, inventario.Tipo, inventario.FechaRegistro, inventario.Estatus, inventario.Marca, inventario.Modelo, inventario.Mes, inventario.Anyo, inventario.Imagen, inventario.Categorias, inventario.Estado, inventario.Area, inventario.Ubicacion, inventario.Empleado, personal.idPersonal, personal.Nombre, personal.ApellidoP, personal.ApellidoM, areasplantel.idAreasPlantel, areasplantel.NombreArea, areasplantel.Edificio, areasplantel.Estatus FROM personal, inventario, areasplantel WHERE inventario.Empleado = personal.idPersonal AND inventario.Area = areasplantel.idAreasPlantel;";
 					}
 				}else{
-					$Consulta = "SELECT inventario.idInventario, inventario.Articulo, inventario.Descripcion, inventario.Precio, inventario.Cantidad, inventario.Proveedores, inventario.Origenes, inventario.NoSerie, inventario.FechaIngreso, inventario.Tipo, inventario.FechaRegistro, inventario.Estatus, inventario.Marca, inventario.Modelo, inventario.Mes, inventario.Anyo, inventario.Imagen, inventario.Categorias, inventario.Estado, inventario.Area, inventario.Ubicacion, inventario.Empleado, personal.idPersonal, personal.Nombre, personal.ApellidoP, personal.ApellidoM FROM personal, inventario WHERE inventario.Empleado = personal.idPersonal;";
+					$Consulta = "SELECT inventario.idInventario, inventario.Articulo, inventario.Descripcion, inventario.Precio, inventario.Cantidad, inventario.Proveedores, inventario.Origenes, inventario.NoSerie, inventario.FechaIngreso, inventario.Tipo, inventario.FechaRegistro, inventario.Estatus, inventario.Marca, inventario.Modelo, inventario.Mes, inventario.Anyo, inventario.Imagen, inventario.Categorias, inventario.Estado, inventario.Area, inventario.Ubicacion, inventario.Empleado, personal.idPersonal, personal.Nombre, personal.ApellidoP, personal.ApellidoM, areasplantel.idAreasPlantel, areasplantel.NombreArea, areasplantel.Edificio, areasplantel.Estatus FROM personal, inventario, areasplantel WHERE inventario.Empleado = personal.idPersonal AND inventario.Area = areasplantel.idAreasPlantel;";
 				}
 				$Resultado = $Mysql->Consulta($Consulta);
 				while($ver=mysqli_fetch_row($Resultado)){ 
@@ -113,7 +113,7 @@ $Mysql->Conectar();
 						<td><?php echo $ver[15]?></td>
 						<td><?php echo $ver[17]?></td>
 						<td><?php echo $ver[18]?></td>
-						<td><?php echo $ver[19]?></td>
+						<td><?php echo $ver[27]?></td>
 						<td><?php echo $ver[20]?></td>
 						<td><?php echo $ver[23].' '.$ver[24].' '.$ver[25]?></td>	
 						
