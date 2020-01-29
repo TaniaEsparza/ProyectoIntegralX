@@ -61,7 +61,7 @@ $pdf = new MYPDF('L', PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
 
 // set document information
 $pdf->SetCreator(PDF_CREATOR);
-$pdf->SetAuthor('Nicola Asuni');
+$pdf->SetAuthor('ERTA');
 $pdf->SetTitle('Artículos Inventario Area');
 $pdf->SetSubject('TCPDF Tutorial');
 $pdf->SetKeywords('TCPDF, PDF, example, test, guide');
@@ -110,10 +110,18 @@ while ($fila3 = $Resultado3->fetch_assoc()) {
 
 $html.='<table border="1" cellpadding="4" cellspacing="4" nobr="true">
 <tr align="center" style="background-color:#E7E4E4;"> 
-<th>Articulo</th>
-<th>Descripcion</th>
-<th>Precio</th>
-<th>Cantidad</th>
+<th>No. </th>
+<th colspan="2">Descripción</th>
+<th>Clave Inventario</th>
+<th>No. Serie</th>
+<th>Marca</th>
+<th>Modelo</th>
+<th>Edificio</th>
+<th>Ubicación</th>
+<th>Costo Unitario</th>
+<th colspan="2" >Resguardado A:</th>
+<th></th>
+
 </tr>';
 
 
@@ -127,15 +135,19 @@ while ($fila4 = $Resultado4->fetch_assoc()) {
  
  $html.='
 	<tr align="center">
-	<td>'.$fila4['Articulo'].'</td>
+	<td>'.$fila4['idInventario'].'</td>
+	<td colspan="2">'.$fila4['Articulo'].' '.$fila4['Descripcion'].'</td>
 	<td>'.$fila4['Descripcion'].'</td>
+	<td>'.$fila4['NoSerie'].'</td>
+	<td>'.$fila4['Marca'].'</td>
+	<td>'.$fila4['Modelo'].'</td>
+	<td>'.$fila4['Edificio'].'</td>
+	<td>'.$fila4['NombreArea'].'</td>
 	<td> $'.$fila4['Precio'].'.00 </td>
-	<td>'.$fila4['Cantidad'].'</td>
+	<td colspan="2">'.$fila4['Nombre'].' '.$fila4['ApellidoP'].' '.$fila4['ApellidoM'].'</td>
+	<td></td>
 	</tr>
  ';
-	
-	
-	
 	
 }
 

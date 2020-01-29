@@ -1,13 +1,11 @@
 <?php
 session_start();
-$idArticulo = $_GET['idInventario'];
+//$FechaInicial = $_GET['FechaInicial'];
+//$FechaFinal = $_GET['FechaFinal'];
 
 // Include the main TCPDF library (search for installation path).
 require_once('../../TCPDF/TCPDF-master/tcpdf.php');
 include_once "../Clases/mysqlconector.php";
-
-
-
 
 
 // Extend the TCPDF class to create custom Header and Footer
@@ -33,14 +31,14 @@ class MYPDF extends TCPDF {
 		// Logo Seduzac
 		$this->Image('@'.$LogoCECyTERioGrandeZac, 20, 10, 50, 15, 'JPG', '', 'T', false, 300, '', false, false, 0, false, false, false);
 		// LogoCECyTE
-		$this->Image('@'.$LogoSeduzac, 140, 10, 50, 15, 'JPG', '', 'T', false, 300, '', false, false, 0, false, false, false);
+		$this->Image('@'.$LogoSeduzac, 230, 10, 50, 15, 'JPG', '', 'T', false, 300, '', false, false, 0, false, false, false);
 		$this->SetFont('helvetica', 'B', 11);
 		$this->Ln();
 		$this->Cell(0, 10, '', 0, false, 'C', 0, '', 0, false, 'T', 'M');
 		$this->Ln();
 		$this->Ln(5);
 		$this->Cell(0, 10, ''.$NombrePlantel.'', 0, false, 'C', 0, '', 0, false, 'T', 'M');
-		$this->Ln(8);
+		$this->Ln(7);
 		$this->Cell(0, 10, ' PLANTEL: '.$Plantel.' '.$Clave.'', 0, false, 'C', 0, '', 0, false, 'T', 'M');
 
 	}
@@ -57,12 +55,12 @@ class MYPDF extends TCPDF {
 }
 
 // create new PDF document
-$pdf = new MYPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
+$pdf = new MYPDF('L', PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
 
 // set document information
 $pdf->SetCreator(PDF_CREATOR);
-$pdf->SetAuthor('Nicola Asuni');
-$pdf->SetTitle('Artículo Inventario');
+$pdf->SetAuthor('ERTA');
+$pdf->SetTitle('Reporte de incidencias por fechas');
 $pdf->SetSubject('TCPDF Tutorial');
 $pdf->SetKeywords('TCPDF, PDF, example, test, guide');
 
@@ -77,7 +75,7 @@ $pdf->setFooterFont(Array(PDF_FONT_NAME_DATA, '', PDF_FONT_SIZE_DATA));
 $pdf->SetDefaultMonospacedFont(PDF_FONT_MONOSPACED);
 
 // set margins
-$pdf->SetMargins(20, 52, 20);
+$pdf->SetMargins(20, 47, 20);
 $pdf->SetHeaderMargin(PDF_MARGIN_HEADER);
 $pdf->SetFooterMargin(PDF_MARGIN_FOOTER);
 
@@ -97,102 +95,47 @@ if (@file_exists(dirname(__FILE__).'/lang/eng.php')) {
 // add a page
 $pdf->AddPage();
 
+$html = '<h2 align="center">REPORTE INCIDENICIAS --01/12/2019 al 31/12/2019--</h2>
+<table border="1" cellpadding="4" cellspacing="4" nobr="true">
+<tr align="center" style="background-color:#E7E4E4;"> 
+<th>No. Empleado</th>
+<th colspan="2" >Nombre</th>
+<th colspan="2" >Incidencia</th>
+<th>Fecha</th>
+<th colspan="2">Observaciones</th>
+</tr>';
+
 include_once "../Clases/mysqlconector.php";
 
 $Mysql = new mysqlconector();
 $Mysql->Conectar();
-$Consulta3 = "SELECT * FROM inventario, personal, areasplantel WHERE inventario.Empleado = personal.idPersonal AND inventario.Area = areasplantel.idAreasPlantel AND inventario.idInventario = ".$idArticulo.";";
-$Resultado3 = $Mysql->Consulta($Consulta3);
-while ($fila3 = $Resultado3->fetch_assoc()) {
-
-// create some HTML content
-	$html = '<h2 align="center">ARTÍCULO DE INVENTARIO</h2>
-	<table  border="1" cellpadding="4" cellspacing="4" nobr="true">
-	<tr style="background-color:#E7E4E4;"> 
+$Consulta4 = "SELECT incidencias.idIncidencias, incidencias.idClausulas,personal.NoEmpleado,personal.Nombre, personal.ApellidoP, personal.ApellidoM, incidencias.Fecha, incidencias.Observaciones, clausulas.Numero, clausulas.Motivo FROM personal, incidencias, clausulas WHERE ((incidencias.Fecha >= '2019-12-01' ) AND (incidencias.Fecha <= '2019-12-31')) AND incidencias.idEmpleado = personal.idPersonal AND incidencias.idClausulas = clausulas.idClausulas ORDER BY incidencias.Fecha ASC  ";
+$Resultado4 = $Mysql->Consulta($Consulta4);
+while ($fila4 = $Resultado4->fetch_assoc()) {
+ 
+ $html.='
+	<tr align="center">
+	<td>'.$fila4['NoEmpleado'].'</td>
+	<td colspan="2">'.$fila4['Nombre'].' '.$fila4['ApellidoP'].' '.$fila4['ApellidoM'].'</td>
+	<td colspan="2">'.$fila4['Numero'].'-'.$fila4['Motivo'].'</td>
+	<td>'.$fila4['Fecha'].'</td>
+	<td colspan="2">'.$fila4['Observaciones'].'</td>
+	</tr>
+ ';
 	
-	<th colspan="6" align="center"><b>Descripción General</b></th>
-	</tr>
-	<tr align="center">
-	<td colspan="2" rowspan="8" >';
-	$base64 = 'data:imagen/jpeg;base64,"'.base64_encode($fila3["Imagen"]).'"';
-	$imageContent = file_get_contents($base64);
-	$path = tempnam(sys_get_temp_dir(), 'prefix');
-	file_put_contents ($path, $imageContent);
-	$html.='<img width="170" height="220" src="'.$path.'"/></td>
-	<td><b>Articulo</b></td>
-	<td><b>Descripción</b></td>
-	<td><b>Precio Unitario</b></td>
-	<td><b>No. Serie</b></td>
-	</tr>
-	<tr align="center">
-	<td>'.$fila3['Articulo'].'</td>
-	<td>'.$fila3['Descripcion'].'</td>
-	<td> $'.$fila3['Precio'].'.00 </td>
-	<td>'.$fila3['NoSerie'].'</td>
-	</tr>
-	<tr>
-	<td colspan="4"></td>
-	</tr>
-	<tr align="center">
-	<td><b>Proveedores</b></td>
-	<td><b>Origenes</b></td>
-	<td><b>Tipo de Inventario</b></td>
-	<td><b>Clave Inventario</b></td>
-	</tr>
-	<tr align="center">
-	<td>'.$fila3['Proveedores'].'</td>
-	<td>'.$fila3['Origenes'].'</td>
-	<td>'.$fila3['Tipo'].'</td>
-	<td>'.$fila3['ClaveInventario'].'</td>
-	</tr>
-	<tr>
-	<td colspan="4"></td>
-	</tr>
-	<tr align="center">
-	<td><b>Marca</b></td>
-	<td><b>Modelo</b></td>
-	<td><b>Mes</b></td>
-	<td><b>Categoria</b></td>
-	</tr>
-	
-	<tr align="center">
-	<td>'.$fila3['Marca'].'</td>
-	<td>'.$fila3['Modelo'].'</td>
-	<td>'.$fila3['Mes'].'</td>
-	<td>'.$fila3['Anyo'].'</td>
-	</tr>
-
-	<tr>
-	<th colspan="6" align="center" style="background-color:#E7E4E4;"><b>Información Zacatecas</b></th>
-	</tr>
-	<tr align="center">
-	<td colspan="2"><b>Fecha de Ingreso CECyTE</b></td>
-	<td colspan="2"><b>Fecha de Registro Zacatecas</b></td>
-	<td colspan="2"><b>ID Estatus Zacatecas</b></td>
-	</tr>
-	<tr align="center">
-	<td colspan="2">'.$fila3['FechaIngreso'].'</td>
-	<td colspan="2">'.$fila3['FechaRegistro'].'</td>
-	<td colspan="2">'.$fila3['Estatus'].'</td>
-	</tr>
-
-	<tr>
-	<th colspan="6" align="center" style="background-color:#E7E4E4;"><b>Información de Ubicación</b></th>
-	</tr>
-	<tr align="center">
-	<td colspan="2"><b>Area</b></td>
-	<td colspan="2"><b>Ubicación</b></td>
-	<td colspan="2"><b>Empleado</b></td>
-	</tr>
-	<tr align="center">
-	<td colspan="2">'.$fila3['NombreArea'].'</td>
-	<td colspan="2">'.$fila3['Ubicacion'].'</td>
-	<td colspan="2">'.$fila3['Nombre'].' '.$fila3['ApellidoP'].' '.$fila3['ApellidoM'].'</td>
-	</tr>
-	
-	</table>
-	';
 }
+
+$html .='
+</table>
+<table align="center">
+<br><br><br><br>
+<tr>
+<td>__________________________ <br> </td>
+<td>__________________________ <br></td>
+<td>__________________________ <br></td>
+<td>__________________________ <br></td>
+</tr>
+</table>';
 
 $pdf->SetFont('helvetica', '', 11);
 $pdf->writeHTML($html, true, false, true, false, '');
@@ -201,7 +144,7 @@ $pdf->writeHTML($html, true, false, true, false, '');
 // ---------------------------------------------------------
 
 //Close and output PDF document
-$pdf->Output('ArticuloInventario.pdf', 'I');
+$pdf->Output('ReporteIncidenciasPorFechas.pdf', 'I');
 
 //============================================================+
 // END OF FILE

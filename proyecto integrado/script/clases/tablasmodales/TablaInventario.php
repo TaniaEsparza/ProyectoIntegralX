@@ -31,7 +31,6 @@ $Mysql->Conectar();
 						<th>Articulo</th>
 						<th>Descripcion</th>
 						<th>Precio Unitario</th>
-						<th>Cantidad</th>
 						<th>Proveedores</th>
 						<th>Origenes</th>
 						<th>No. Serie</th>
@@ -41,6 +40,7 @@ $Mysql->Conectar();
 						<th>Estatus</th>
 						<th>Marca</th>
 						<th>Modelo</th>
+						<th>Clave Inventario</th>
 						<th>Imagen</th>
 						<th>Mes</th>
 						<th>Anyo</th>
@@ -59,14 +59,14 @@ $Mysql->Conectar();
 
 					if( $_SESSION['ConsultaAI'] > 0){
 						$IdArticulo=$_SESSION['ConsultaAI'];
-						$Consulta = "SELECT inventario.idInventario, inventario.Articulo, inventario.Descripcion, inventario.Precio, inventario.Cantidad, inventario.Proveedores, inventario.Origenes, inventario.NoSerie, inventario.FechaIngreso, inventario.Tipo, inventario.FechaRegistro, inventario.Estatus, inventario.Marca, inventario.Modelo, inventario.Mes, inventario.Anyo, inventario.Imagen, inventario.Categorias, inventario.Estado, inventario.Area, inventario.Ubicacion, inventario.Empleado, personal.idPersonal, personal.Nombre, personal.ApellidoP, personal.ApellidoM, areasplantel.idAreasPlantel, areasplantel.NombreArea, areasplantel.Edificio, areasplantel.Estatus FROM personal, inventario, areasplantel WHERE inventario.Empleado = personal.idPersonal  AND inventario.Area = areasplantel.idAreasPlantel AND inventario.idInventario = '$IdArticulo';";
+						$Consulta = "SELECT inventario.idInventario, inventario.Articulo, inventario.Descripcion, inventario.Precio, inventario.Proveedores, inventario.Origenes, inventario.NoSerie, inventario.FechaIngreso, inventario.Tipo, inventario.FechaRegistro, inventario.Estatus, inventario.Marca, inventario.Modelo, inventario.ClaveInventario, inventario.Mes, inventario.Anyo, inventario.Imagen, inventario.Categorias, inventario.Estado, inventario.Area, inventario.Ubicacion, inventario.Empleado, personal.idPersonal, personal.Nombre, personal.ApellidoP, personal.ApellidoM, areasplantel.idAreasPlantel, areasplantel.NombreArea, areasplantel.Edificio, areasplantel.Estatus FROM personal, inventario, areasplantel WHERE inventario.Empleado = personal.idPersonal  AND inventario.Area = areasplantel.idAreasPlantel AND inventario.idInventario = '$IdArticulo';";
 
 					}else{
 
-						$Consulta = "SELECT inventario.idInventario, inventario.Articulo, inventario.Descripcion, inventario.Precio, inventario.Cantidad, inventario.Proveedores, inventario.Origenes, inventario.NoSerie, inventario.FechaIngreso, inventario.Tipo, inventario.FechaRegistro, inventario.Estatus, inventario.Marca, inventario.Modelo, inventario.Mes, inventario.Anyo, inventario.Imagen, inventario.Categorias, inventario.Estado, inventario.Area, inventario.Ubicacion, inventario.Empleado, personal.idPersonal, personal.Nombre, personal.ApellidoP, personal.ApellidoM, areasplantel.idAreasPlantel, areasplantel.NombreArea, areasplantel.Edificio, areasplantel.Estatus FROM personal, inventario, areasplantel WHERE inventario.Empleado = personal.idPersonal AND inventario.Area = areasplantel.idAreasPlantel;";
+						$Consulta = "SELECT inventario.idInventario, inventario.Articulo, inventario.Descripcion, inventario.Precio, inventario.Proveedores, inventario.Origenes, inventario.NoSerie, inventario.FechaIngreso, inventario.Tipo, inventario.FechaRegistro, inventario.Estatus, inventario.Marca, inventario.Modelo, inventario.ClaveInventario, inventario.Mes, inventario.Anyo, inventario.Imagen, inventario.Categorias, inventario.Estado, inventario.Area, inventario.Ubicacion, inventario.Empleado, personal.idPersonal, personal.Nombre, personal.ApellidoP, personal.ApellidoM, areasplantel.idAreasPlantel, areasplantel.NombreArea, areasplantel.Edificio, areasplantel.Estatus FROM personal, inventario, areasplantel WHERE inventario.Empleado = personal.idPersonal AND inventario.Area = areasplantel.idAreasPlantel;";
 					}
 				}else{
-					$Consulta = "SELECT inventario.idInventario, inventario.Articulo, inventario.Descripcion, inventario.Precio, inventario.Cantidad, inventario.Proveedores, inventario.Origenes, inventario.NoSerie, inventario.FechaIngreso, inventario.Tipo, inventario.FechaRegistro, inventario.Estatus, inventario.Marca, inventario.Modelo, inventario.Mes, inventario.Anyo, inventario.Imagen, inventario.Categorias, inventario.Estado, inventario.Area, inventario.Ubicacion, inventario.Empleado, personal.idPersonal, personal.Nombre, personal.ApellidoP, personal.ApellidoM, areasplantel.idAreasPlantel, areasplantel.NombreArea, areasplantel.Edificio, areasplantel.Estatus FROM personal, inventario, areasplantel WHERE inventario.Empleado = personal.idPersonal AND inventario.Area = areasplantel.idAreasPlantel;";
+					$Consulta = "SELECT inventario.idInventario, inventario.Articulo, inventario.Descripcion, inventario.Precio, inventario.Proveedores, inventario.Origenes, inventario.NoSerie, inventario.FechaIngreso, inventario.Tipo, inventario.FechaRegistro, inventario.Estatus, inventario.Marca, inventario.Modelo, inventario.ClaveInventario, inventario.Mes, inventario.Anyo, inventario.Imagen, inventario.Categorias, inventario.Estado, inventario.Area, inventario.Ubicacion, inventario.Empleado, personal.idPersonal, personal.Nombre, personal.ApellidoP, personal.ApellidoM, areasplantel.idAreasPlantel, areasplantel.NombreArea, areasplantel.Edificio, areasplantel.Estatus FROM personal, inventario, areasplantel WHERE inventario.Empleado = personal.idPersonal AND inventario.Area = areasplantel.idAreasPlantel;";
 				}
 				$Resultado = $Mysql->Consulta($Consulta);
 				while($ver=mysqli_fetch_row($Resultado)){ 
@@ -114,9 +114,9 @@ $Mysql->Conectar();
 						<td><?php echo $ver[14]?></td>
 						<td><?php echo $ver[15]?></td>
 						<td><?php echo $ver[17]?></td>
-						<td><?php echo $ver[18]?></td>
+						<td><?php echo $ver[26]?></td>
 						<td><?php echo $ver[27]?></td>
-						<td><?php echo $ver[20]?></td>
+						<td><?php echo $ver[28]?></td>
 						<td><?php echo $ver[23].' '.$ver[24].' '.$ver[25]?></td>	
 						
 						<?php echo"<td><a href=\"../../formularios/administrativo/CrearSessionDirectivoInventario.php?idInventario=".$ver[0]."\" ><button class=\"btn btn-success glyphicon glyphicon-pencil\">Modificar</button></a></td>"?>

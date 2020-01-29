@@ -7,7 +7,6 @@ class Inventario{
 	private $Articulo;
 	private $Descripcion;
 	private $Precio;
-	private $CantidadInventario;
 	private $Proveedores;
 	private $Origenes;
 	private $NoSerie;
@@ -17,6 +16,7 @@ class Inventario{
 	private $Estatus;
 	private $Marca;
 	private $Modelo;
+	private $ClaveInventario;
 	private $Mes;
 	private $Anyo;
 	private $Imagen;
@@ -31,7 +31,6 @@ class Inventario{
 		$this->Articulo = null;
 		$this->Descripcion = null;
 		$this->Precio = 0;
-		$this->CantidadInventario= 0;
 		$this->Proveedores = null;
 		$this->Origenes = null;
 		$this->NoSerie = null;
@@ -41,6 +40,7 @@ class Inventario{
 		$this->Estatus = 0;
 		$this->Marca = null;
 		$this->Modelo = null;
+		$this->ClaveInventario = null;
 		$this->Mes = null;
 		$this->Anyo = null;
 		$this->Imagen = null;
@@ -81,14 +81,6 @@ class Inventario{
 
 	public function getPrecio(){
 		return $this->Precio;
-	}
-
-	public function setCantidadInventario($CantidadInventario){
-		$this->CantidadInventario=$CantidadInventario;
-	}
-
-	public function getCantidadInventario(){
-		return $this->CantidadInventario;
 	}
 
 	public function setProveedores($Proveedores){
@@ -161,6 +153,14 @@ class Inventario{
 
 	public function getModelo(){
 		return $this->Modelo;
+	}
+
+	public function setClaveInventario($ClaveInventario){
+		$this->ClaveInventario=$ClaveInventario;
+	}
+
+	public function getClaveInventario(){
+		return $this->ClaveInventario;
 	}
 
 	public function setMes($Mes){

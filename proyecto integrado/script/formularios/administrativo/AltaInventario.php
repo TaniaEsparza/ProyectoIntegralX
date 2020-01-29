@@ -67,12 +67,6 @@ session_start();
                 return false;
               }
 
-              miCampoTexto = document.getElementById('Cantidad').value;  
-              if (miCampoTexto.length == 0 || /^\s+$/.test(miCampoTexto)) {
-                alert('Establezca la Cantidad, el campo se encuentra vacio!');
-                return false;
-              }
-
               miCampoTexto = document.getElementById('Proveedores').value;  
               if (miCampoTexto.length == 0 || /^\s+$/.test(miCampoTexto)) {
                 alert('Establezca el Proveedor, el campo se encuentra vacio!');
@@ -122,6 +116,12 @@ session_start();
               }
 
               miCampoTexto = document.getElementById('Modelo').value;  
+              if (miCampoTexto.length == 0 || /^\s+$/.test(miCampoTexto)) {
+                alert('Establezca el Modelo, el campo se encuentra vacio!');
+                return false;
+              }
+
+               miCampoTexto = document.getElementById('ClaveInventario').value;  
               if (miCampoTexto.length == 0 || /^\s+$/.test(miCampoTexto)) {
                 alert('Establezca el Modelo, el campo se encuentra vacio!');
                 return false;
@@ -223,23 +223,19 @@ session_start();
                           <STRONG>Artículo: </STRONG><br>
                           <input type="text" class="form-control uppercase" id="Articulo" name="Articulo">
                         </div>
-                        <div class="col-md-6">
-                          <STRONG>Descrpcion: </STRONG><br>
+                        <div class="col-md-9">
+                          <STRONG>Descripcion: </STRONG><br>
                           <input type="text" class="form-control uppercase" name="Descripcion" id="Descripcion">
-                        </div>
-                        <div class="col-md-3">
-                          <STRONG>Precio Unitario: </STRONG><br>
-                          <input type="text" class="form-control uppercase" placeholder="$" id="Preciou"  name="Preciou" onkeypress="return NumerosDecimales(event);" >
                         </div>
                       </div>
                       <br>
 
                       <div class="row">
-                        <div class="col-sm-2">
-                          <STRONG>Cantidad:</STRONG><br>
-                          <input class="form-control" type="text" name="Cantidad" id="Cantidad" onkeypress="return SoloNumeros(event);">
+                        <div class="col-md-3">
+                          <STRONG>Precio Unitario: </STRONG><br>
+                          <input type="text" class="form-control uppercase" placeholder="$" id="Preciou"  name="Preciou" onkeypress="return NumerosDecimales(event);" >
                         </div>
-                        <div class="col-sm-4">
+                        <div class="col-sm-3">
                           <STRONG>Proveedores:</STRONG><br>
                           <input class="form-control" type="text" name="Proveedores" id="Proveedores">
                         </div>
@@ -261,7 +257,7 @@ session_start();
                         </div>
                         <div class="col-sm-3">
                           <br>
-                          <STRONG>Tipo de invenatario:</STRONG><br>
+                          <STRONG>Tipo de inventario:</STRONG><br>
                           <input class="form-control" placeholder="Información zac" type="text" name="Tipo" id="Tipo">
                         </div> 
 
@@ -286,6 +282,10 @@ session_start();
                         <div class="col-sm-3">
                           <STRONG>Modelo:</STRONG><br>
                           <input class="form-control" type="text" name="Modelo" id="Modelo">
+                        </div>
+                        <div class="col-sm-3">
+                          <STRONG>Clave Inventario:</STRONG><br>
+                          <input class="form-control" type="text" name="ClaveInventario" id="ClaveInventario">
                         </div>
                         <div class="col-sm-3">
                           <STRONG>Imagen:</STRONG><br>
@@ -401,7 +401,6 @@ session_start();
                 $Articulo = $_POST['Articulo'];
                 $Descripcion = $_POST['Descripcion']; 
                 $Precio = $_POST['Preciou']; 
-                $Cantidad = $_POST['Cantidad'];
                 $Proveedores = $_POST['Proveedores'];
                 $Origenes = $_POST['Origenes'];
                 $Serie = $_POST['Serie'];
@@ -411,6 +410,7 @@ session_start();
                 $Estatus = $_POST['idEstatus'];
                 $Marca = $_POST['Marca'];
                 $Modelo = $_POST['Modelo'];
+                $ClaveInventario = $_POST['ClaveInventario'];
                 $Mes = $_POST['Mes'];
                 $Anyo = $_POST['Anyo'];
                   //$imagen = '$newFileName',
@@ -424,7 +424,6 @@ session_start();
                 $Inventario->setArticulo($Articulo);
                 $Inventario->setDescripcion($Descripcion);
                 $Inventario->setPrecio($Precio);
-                $Inventario->setCantidadInventario($Cantidad);
                 $Inventario->setProveedores($Proveedores);
                 $Inventario->setOrigenes($Origenes);
                 $Inventario->setNoSerie($Serie);
@@ -434,6 +433,7 @@ session_start();
                 $Inventario->setEstatus($Estatus);
                 $Inventario->setMarca($Marca);
                 $Inventario->setModelo($Modelo);
+                $Inventario->setClaveInventario($ClaveInventario);
                 $Inventario->setMes($Mes);
                 $Inventario->setAnyo($Anyo);
                 //$Inventario->setImagen($imgContent);
