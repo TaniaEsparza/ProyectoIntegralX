@@ -41,6 +41,34 @@ unset($_SESSION['consulta']);
 
 	<!--Iconos-->
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+  <script language="javascript" type="text/javascript">
+    function validar() {
+              //obteniendo el valor que se puso en el campo text del formulario
+
+              txtFecha = document.getElementById('FechaInicial').value;
+              if(!isNaN(txtFecha)){
+                alert('Seleccione o introduzca la Fecha de Inicio!');
+                return false;
+              }
+
+              txtFecha = document.getElementById('FechaFinal').value;
+              if(!isNaN(txtFecha)){
+                alert('Seleccione o introduzca la Fecha de Fin!');
+                return false;
+              }
+
+              txtFechaI = document.getElementById('FechaInicial').value;
+              txtFechaF = document.getElementById('FechaFinal').value;
+
+              if(txtFechaI>txtFechaF){
+                alert('Selecione fechas validas! No puede seleccionar la Fecha de Inicio Mayor a la de Fin');
+                return false;
+              }
+
+              return true;
+            }
+  </script>
+
 </head>
 
 <body>
@@ -77,7 +105,7 @@ unset($_SESSION['consulta']);
   		<?php
   		 if(!isset($_POST['FechaInicial'])){ 
   		?>
-  		<form>
+  		<form action="./ConsultaGeneralIncidencia.php" method="POST" onsubmit="return validar()">
   		<div class="row">
   			<div class="col-md-6" id="buscadorD">
   				<b>Fecha inicial: </b>
@@ -91,11 +119,8 @@ unset($_SESSION['consulta']);
   		</div>
   		<br>
   		
-  		<a class="btn btn-success" href='#'>
-  			Generar Reporte
-  			<span class="glyphicon glyphicon-plus"></span>
-  		</a>
-  		<br><br><br>
+  		<button type="submit" name="agregar" class="btn btn-success"><span class="glyphicon glyphicon-floppy-disk"></span> Generar Reporte</button>
+      <br><br><br>
   		
   		<!--<div class="row">
   			<div class="col-md-12" id="tabla"></div>
@@ -106,6 +131,14 @@ unset($_SESSION['consulta']);
   			}else{
   				$FechaInicial = $_POST['FechaInicial'];
   				$FechaFinal = $_POST['FechaFinal'];
+
+          include_once "../../clases/tablasmodales/CrearReporteIncidenciasGeneral.php";
+
+          $IncidenciasGeneral = new CrearReporteIncidenciasGeneral();
+
+          $IncidenciasGeneral->CrearReporte($FechaInicial, $FechaFinal);            
+          
+
   			} 
   		?>
   	</div>
