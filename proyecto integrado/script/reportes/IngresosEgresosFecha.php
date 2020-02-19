@@ -30,12 +30,11 @@ class MYPDF extends TCPDF {
 		// Logo Seduzac
 		$this->Image('@'.$LogoCECyTERioGrandeZac, 20, 10, 50, 15, 'JPG', '', 'T', false, 300, '', false, false, 0, false, false, false);
 		// LogoCECyTE
-		$this->Image('@'.$LogoSeduzac, 230, 10, 50, 15, 'JPG', '', 'T', false, 300, '', false, false, 0, false, false, false);
+		$this->Image('@'.$LogoSeduzac, 140, 10, 50, 15, 'JPG', '', 'T', false, 300, '', false, false, 0, false, false, false);
 		$this->SetFont('helvetica', 'B', 11);
 		$this->Ln();
 		$this->Cell(0, 10, '', 0, false, 'C', 0, '', 0, false, 'T', 'M');
-		$this->Ln();
-		$this->Ln(5);
+		$this->Ln(13);
 		$this->Cell(0, 10, ''.$NombrePlantel.'', 0, false, 'C', 0, '', 0, false, 'T', 'M');
 		$this->Ln(7);
 		$this->Cell(0, 10, ' PLANTEL: '.$Plantel.' '.$Clave.'', 0, false, 'C', 0, '', 0, false, 'T', 'M');
@@ -49,17 +48,17 @@ class MYPDF extends TCPDF {
 		// Set font
 		$this->SetFont('helvetica', 'I', 8);
 		// Page number
-		$this->Cell(0, 10, 'Page '.$this->getAliasNumPage().'/'.$this->getAliasNbPages(), 0, false, 'C', 0, '', 0, false, 'T', 'M');
+		$this->Cell(0, 9, 'Page '.$this->getAliasNumPage().'/'.$this->getAliasNbPages(), 0, false, 'C', 0, '', 0, false, 'T', 'M');
 	}
 }
 
 // create new PDF document
-$pdf = new MYPDF('L', PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
+$pdf = new MYPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
 
 // set document information
 $pdf->SetCreator(PDF_CREATOR);
 $pdf->SetAuthor('ERTA');
-$pdf->SetTitle('Reporte General de Incidencias por Fechas');
+$pdf->SetTitle('Reporte General de Ingreso y Egresos por Fechas');
 $pdf->SetSubject('TCPDF Tutorial');
 $pdf->SetKeywords('TCPDF, PDF, example, test, guide');
 
@@ -74,7 +73,7 @@ $pdf->setFooterFont(Array(PDF_FONT_NAME_DATA, '', PDF_FONT_SIZE_DATA));
 $pdf->SetDefaultMonospacedFont(PDF_FONT_MONOSPACED);
 
 // set margins
-$pdf->SetMargins(20, 47, 20);
+$pdf->SetMargins(20, 45, 20);
 $pdf->SetHeaderMargin(PDF_MARGIN_HEADER);
 $pdf->SetFooterMargin(PDF_MARGIN_FOOTER);
 
@@ -97,46 +96,76 @@ $pdf->AddPage();
 $NewFechaInicial = date("d/m/Y", strtotime($FechaInicial));
 $NewFechaFinal = date("d/m/Y", strtotime($FechaFinal));
 
-$html = '<h2 align="center">REPORTE DE INCIDENICIAS --'.$NewFechaInicial.' al '.$NewFechaFinal.'--</h2>
-<table border="1" cellpadding="4" cellspacing="4" nobr="true">
-<tr align="center" style="background-color:#E7E4E4;"> 
-<th>No. Empleado</th>
-<th colspan="2" >Nombre</th>
-<th colspan="2" >Incidencia</th>
-<th>Fecha</th>
-<th colspan="2">Observaciones</th>
+$html = '<h2 align="center">REPORTE DE INGRESOS Y EGRESOS <br> --'.$NewFechaInicial.' al '.$NewFechaFinal.'--</h2>
+<table border="1" nobr="true">
+<tr align="center" style="background-color:#E7E4E4;">
+<td>Ingresos</td> 
+<td>Egresos</td> 
+</tr>';
+
+$html.='<tr align="center">
+		<td>';
+
+include_once "../Clases/mysqlconector.php";
+
+$Mysql = new mysqlconector();
+$Mysql->Conectar();
+$Consulta4 = " SELECT SUM(ingresos.Monto) AS SumIngresos, conceptodepago.NombreConcepto from ingresos, conceptodepago WHERE ((ingresos.Fecha >= '$FechaInicial' ) AND (ingresos.Fecha <= '$FechaFinal'))AND conceptodepago.idConceptoDePago = ingresos.idConceptodePago GROUP BY ingresos.idConceptodePago  ";
+$Resultado4 = $Mysql->Consulta($Consulta4);
+while ($fila4 = $Resultado4->fetch_assoc()) {
+	
+	$html .=''. $fila4['NombreConcepto'] .' $ '.$fila4['SumIngresos'].' <br>';
+}
+
+$html .='</td>
+<td>';
+
+include_once "../Clases/mysqlconector.php";
+
+$Mysql = new mysqlconector();
+$Mysql->Conectar();
+$Consulta5 = " SELECT SUM(egresos.Monto) AS SumEgresos, egresos.NombreEgreso from egresos WHERE ((egresos.Fecha >= '$FechaInicial' ) AND (egresos.Fecha <= '$FechaFinal')) ";
+$Resultado5 = $Mysql->Consulta($Consulta5);
+while ($fila5 = $Resultado5->fetch_assoc()) {
+	
+	$html .=''. $fila5['NombreEgreso'] .' $ '.$fila5['SumEgresos'].' <br>';
+}
+
+$html .='</td>
 </tr>';
 
 include_once "../Clases/mysqlconector.php";
 
 $Mysql = new mysqlconector();
 $Mysql->Conectar();
-$Consulta4 = "SELECT incidencias.idIncidencias, incidencias.idClausulas,personal.NoEmpleado,personal.Nombre, personal.ApellidoP, personal.ApellidoM, incidencias.Fecha, incidencias.Observaciones, clausulas.Numero, clausulas.Motivo FROM personal, incidencias, clausulas WHERE ((incidencias.Fecha >= '$FechaInicial' ) AND (incidencias.Fecha <= '$FechaFinal')) AND incidencias.idEmpleado = personal.idPersonal AND incidencias.idClausulas = clausulas.idClausulas ORDER BY incidencias.Fecha ASC  ";
-$Resultado4 = $Mysql->Consulta($Consulta4);
-while ($fila4 = $Resultado4->fetch_assoc()) {
+$Consulta5 = "SELECT SUM(ingresos.Monto) AS SumIngresos from ingresos WHERE ((ingresos.Fecha >= '$FechaInicial' ) AND (ingresos.Fecha <= '$FechaFinal'))";
+$Resultado5 = $Mysql->Consulta($Consulta5);
+while ($fila5 = $Resultado5->fetch_assoc()) {
 	
 	$html.='
 	<tr align="center">
-	<td>'.$fila4['NoEmpleado'].'</td>
-	<td colspan="2">'.$fila4['Nombre'].' '.$fila4['ApellidoP'].' '.$fila4['ApellidoM'].'</td>
-	<td colspan="2">'.$fila4['Numero'].'-'.$fila4['Motivo'].'</td>
-	<td>'.$NewFechaFinal = date("d/m/Y", strtotime($fila4['Fecha'])).'</td>
-	<td colspan="2">'.$fila4['Observaciones'].'</td>
-	</tr>
-	';	
+	<td> <b>TOTAL:</b> $ '.$fila5['SumIngresos'].'</td>';
+		
 }
 
-$html .='
-</table>
-<table align="center">
-<br><br><br><br>
-<tr>
-<td>__________________________ <br> </td>
-<td>__________________________ <br></td>
-<td>__________________________ <br></td>
-<td>__________________________ <br></td>
-</tr>
-</table>';
+include_once "../Clases/mysqlconector.php";
+
+$Mysql = new mysqlconector();
+$Mysql->Conectar();
+$Consulta6 = "SELECT SUM(egresos.Monto) AS SumEgresos from egresos WHERE ((egresos.Fecha >= '$FechaInicial' ) AND (egresos.Fecha <= '$FechaFinal'))";
+$Resultado6 = $Mysql->Consulta($Consulta6);
+while ($fila6 = $Resultado6->fetch_assoc()) {
+	
+	$html.='
+	<td> <b>TOTAL:</b> $ '.$fila6['SumEgresos'].'</td>
+	</tr>';
+		
+}
+
+
+$html .='</table>
+
+';
 
 $pdf->SetFont('helvetica', '', 11);
 $pdf->writeHTML($html, true, false, true, false, '');
@@ -145,7 +174,7 @@ $pdf->writeHTML($html, true, false, true, false, '');
 // ---------------------------------------------------------
 
 //Close and output PDF document
-$pdf->Output('ReporteIncidenciasPorFechas.pdf', 'I');
+$pdf->Output('ReporteIngresosEgresosPorFecha.pdf', 'I');
 
 //============================================================+
 // END OF FILE

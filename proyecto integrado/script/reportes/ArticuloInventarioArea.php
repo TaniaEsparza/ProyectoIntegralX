@@ -37,8 +37,7 @@ class MYPDF extends TCPDF {
 		$this->SetFont('helvetica', 'B', 11);
 		$this->Ln();
 		$this->Cell(0, 10, '', 0, false, 'C', 0, '', 0, false, 'T', 'M');
-		$this->Ln();
-		$this->Ln(5);
+		$this->Ln(11);
 		$this->Cell(0, 10, ''.$NombrePlantel.'', 0, false, 'C', 0, '', 0, false, 'T', 'M');
 		$this->Ln(7);
 		$this->Cell(0, 10, ' PLANTEL: '.$Plantel.' '.$Clave.'', 0, false, 'C', 0, '', 0, false, 'T', 'M');
@@ -62,7 +61,7 @@ $pdf = new MYPDF('L', PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
 // set document information
 $pdf->SetCreator(PDF_CREATOR);
 $pdf->SetAuthor('ERTA');
-$pdf->SetTitle('Artículos Inventario Area');
+$pdf->SetTitle('Artículos de Inventario por Area');
 $pdf->SetSubject('TCPDF Tutorial');
 $pdf->SetKeywords('TCPDF, PDF, example, test, guide');
 
@@ -77,7 +76,7 @@ $pdf->setFooterFont(Array(PDF_FONT_NAME_DATA, '', PDF_FONT_SIZE_DATA));
 $pdf->SetDefaultMonospacedFont(PDF_FONT_MONOSPACED);
 
 // set margins
-$pdf->SetMargins(20, 48, 20);
+$pdf->SetMargins(19, 41, 19);
 $pdf->SetHeaderMargin(PDF_MARGIN_HEADER);
 $pdf->SetFooterMargin(PDF_MARGIN_FOOTER);
 
@@ -120,7 +119,7 @@ $html.='<table border="1" cellpadding="4" cellspacing="4" nobr="true">
 <th>Ubicación</th>
 <th>Costo Unitario</th>
 <th colspan="2" >Resguardado A:</th>
-<th></th>
+<th colspan="2"></th>
 
 </tr>';
 
@@ -137,15 +136,15 @@ while ($fila4 = $Resultado4->fetch_assoc()) {
 	<tr align="center">
 	<td>'.$fila4['idInventario'].'</td>
 	<td colspan="2">'.$fila4['Articulo'].' '.$fila4['Descripcion'].'</td>
-	<td>'.$fila4['Descripcion'].'</td>
+	<td>'.$fila4['ClaveInventario'].'</td>
 	<td>'.$fila4['NoSerie'].'</td>
 	<td>'.$fila4['Marca'].'</td>
 	<td>'.$fila4['Modelo'].'</td>
 	<td>'.$fila4['Edificio'].'</td>
 	<td>'.$fila4['NombreArea'].'</td>
-	<td> $'.$fila4['Precio'].'.00 </td>
+	<td> $'.$fila4['Precio'].'</td>
 	<td colspan="2">'.$fila4['Nombre'].' '.$fila4['ApellidoP'].' '.$fila4['ApellidoM'].'</td>
-	<td></td>
+	<td colspan="2"></td>
 	</tr>
  ';
 	
@@ -153,7 +152,7 @@ while ($fila4 = $Resultado4->fetch_assoc()) {
 
 $html.='</table>
 ';
-$pdf->SetFont('helvetica', '', 11);
+$pdf->SetFont('helvetica', '', 10);
 $pdf->writeHTML($html, true, false, true, false, '');
 
 

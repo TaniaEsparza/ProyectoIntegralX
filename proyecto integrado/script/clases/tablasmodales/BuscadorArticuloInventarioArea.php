@@ -13,7 +13,7 @@
 <div class="row">
 	<div class="col-sm-8"></div>
 	<div class="col-sm-4">
-		<label style="font-weight: bold;">Buscador</label>
+		<label style="font-weight: bold;">Buscador por area: </label>
 		<select id="buscadorvivo" class="form-control input-sm">
 			<option value="0">Seleciona uno</option>
 			<?php

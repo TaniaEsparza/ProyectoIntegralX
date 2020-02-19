@@ -118,7 +118,7 @@ unset($_SESSION['consulta']);
         <!--Inicio Contenedor medio-->
         <div class="container">
           <!--Poner titulo o nombre -->
-          <br><center><h2> Reporte de incidencias por fecha
+          <br><center><h2> Reporte de Ingresos y Egresos por Fecha
           </h2></center>
           <!--Poner titulo o nombre -->
 
@@ -140,7 +140,7 @@ unset($_SESSION['consulta']);
       <?php
       if(!isset($_POST['FechaInicial'])){ 
         ?>
-        <form action="./ConsultaGeneralIncidencia.php" method="POST" onsubmit="return validar()">
+        <form action="./ConsultaGeneralIngresosEgresosFecha.php" method="POST" onsubmit="return validar()">
           <div class="row">
            <div class="col-md-6" id="buscadorD">
             <b>Fecha inicial: </b>
@@ -167,11 +167,11 @@ unset($_SESSION['consulta']);
     $FechaInicial = $_POST['FechaInicial'];
     $FechaFinal = $_POST['FechaFinal'];
 
-    include_once "../../clases/tablasmodales/CrearReporteIncidenciasGeneral.php";
+    include_once "../../clases/tablasmodales/CrearReporteIngresosEgresosXFecha.php";
 
-    $IncidenciasGeneral = new CrearReporteIncidenciasGeneral();
+    $IngresosEgresosGeneral = new CrearReporteIngresosEgresosXFecha();
 
-    $IncidenciasGeneral->CrearReporte($FechaInicial, $FechaFinal);            
+    $IngresosEgresosGeneral->CrearReporte($FechaInicial, $FechaFinal);            
 
 
   } 
@@ -194,7 +194,7 @@ unset($_SESSION['consulta']);
 </html>
 <script type="text/javascript">
 	$(document).ready(function(){
-		$('#tabla').load('../../clases/tablasmodales/TablaIncidenciasGeneral.php');
+		$('#tabla').load('../../clases/tablasmodales/TablaIngresosEgresosGeneral.php');
       //ValidarTutorJustificantesRegistro();
          //ValidarTutorJustificantesModificacion();
        });
