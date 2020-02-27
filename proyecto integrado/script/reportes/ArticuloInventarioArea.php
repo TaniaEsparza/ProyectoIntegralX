@@ -118,9 +118,8 @@ $html.='<table border="1" cellpadding="4" cellspacing="4" nobr="true">
 <th>Edificio</th>
 <th>Ubicación</th>
 <th>Costo Unitario</th>
-<th colspan="2" >Resguardado A:</th>
-<th colspan="2"></th>
-
+<th colspan="2" > Resguardado A:</th>
+<th colspan="2"> Observaciones</th>
 </tr>';
 
 

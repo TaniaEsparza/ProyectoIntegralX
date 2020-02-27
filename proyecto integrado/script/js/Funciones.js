@@ -704,3 +704,58 @@ function modificacionAreasPlantel(){
 		}
 	});
 }
+
+function agregarAsignacionPrivilegio(idPersonal,Privilegio){
+	cadena= "idPersonal=" + idPersonal + 
+	"&Privilegio=" + Privilegio;
+
+	$.ajax({
+		type:"GET",
+		url:"../../clases/tablasmodales/AgregarAsignacionPrivilegio.php",
+		data:cadena,
+		success:function(ad){
+			if(ad==1){
+				$('#tabla').load('./../../clases/tablasmodales/TablaAsignacionPrivilegios.php');
+				alert("Asignacion agregada correctamente!");
+			}else if(ad==4){
+				alert("Asignacion ya dada de alta");
+			}else{
+				alert("Error al ser Guardada");
+			}
+		}
+	});
+
+}
+
+function VerAsignacionPrivilegio(datos){
+	d=datos.split('||');
+	$('#idPrivilegiou').val(d[7]);
+	$('#Personalu').val(d[0]);
+	$('#Privilegiou').val(d[6]);
+}
+
+function ModificacionAsignacionPrivilegio(){
+	idPersonal=$('#Personalu').val();
+	idPrivilegio=$('#idPrivilegiou').val();
+	Privilegio=$('#Privilegiou').val();
+
+	cadena= "idPersonal=" + idPersonal +
+	"&idPrivilegio=" + idPrivilegio +
+	"&Privilegio=" + Privilegio;
+
+	$.ajax({
+		type:"GET",
+		url:"./../../clases/tablasmodales/ModificarAsignacionPrivilegio.php",
+		data:cadena,
+		success:function(r){
+			if(r==1){
+				$('#tabla').load('./../../clases/tablasmodales/TablaAsignacionPrivilegios.php');
+				//$('#buscador').load('./../../clases/tablasmodales/BuscadorMateriaGrupoDocente.php');
+				alert("Se actualizado la asignacion con éxito!");
+			}else{
+				alert("Error al actualizar la asignacion");
+			}
+
+		}
+	});
+}
