@@ -20,8 +20,6 @@
 			}
 			$this->Conexion->query("SET NAME UTF8");
 			$this->Conexion->query("SET CHARACTER SET utf8");
-
-
 		}
 
 		public function Consulta($sqlConsulta){

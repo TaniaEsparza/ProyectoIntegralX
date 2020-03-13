@@ -114,7 +114,7 @@ while ($fila3 = $Resultado3->fetch_assoc()) {
 
 // create some HTML content
 	$html = '
-	<table style="border:2px dashed green;" FRAME="void" RULES="rows">
+	<table style="border:2px dashed green;" FRAME="void" RULES="rows" cellpadding="2">
 	<tr><td colspan="4"><h2 align="center">RECIBO DE PAGO</h2>
 	</td>
 	</tr>

@@ -4,7 +4,7 @@ if (!isset($_SESSION)) { session_start(); }
     $Mysql = new MySQLConector();
     $Mysql->Conectar();
 
-	$Consulta ="SELECT alumno.Nombre AS NombreAlumno, alumno.ApellidoP AS ApellidoPAlumno, alumno.ApellidoM AS ApellidoMAlumno, cartacompromiso.idCartaCompromiso ,cartacompromiso.Fecha, cartacompromiso.AcuerdosRealizados, cartacompromiso.Motivo FROM alumno, cartacompromiso WHERE alumno.idAlumno = '".$_SESSION['IdAlumnoDocenteTutor'] ."' AND cartacompromiso.Alumno_idAlumno = alumno.idAlumno;";
+	$Consulta ="SELECT alumno.Nombre AS NombreAlumno, alumno.ApellidoP AS ApellidoPAlumno, alumno.ApellidoM AS ApellidoMAlumno, cartacompromiso.idCartaCompromiso ,cartacompromiso.Fecha, cartacompromiso.AcuerdosRealizados, cartacompromiso.Motivo FROM alumno, cartacompromiso WHERE alumno.idAlumno = '".$_SESSION['IdAlumnoDirectivo'] ."' AND cartacompromiso.Alumno_idAlumno = alumno.idAlumno;";
 	
 	$Resultado = $Mysql->Consulta($Consulta);
 

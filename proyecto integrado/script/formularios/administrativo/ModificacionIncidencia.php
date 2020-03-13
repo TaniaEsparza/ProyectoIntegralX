@@ -1,5 +1,9 @@
 <?php
-session_start();
+if (!isset($_SESSION)) { session_start(); }
+if (!isset ($_SESSION['LoggedinAdmin']))
+{
+   echo "<script language='javascript'>window.location='LoginAdmin.php'</script>";
+}
 ?>
 <!doctype html>
 <html lang="en">

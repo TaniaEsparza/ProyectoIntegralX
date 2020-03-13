@@ -4,7 +4,7 @@ session_start();
     $Mysql = new MySQLConector();
     $Mysql->Conectar();
 
-	$Consulta ="SELECT * FROM solicitudbaja WHERE solicitudbaja.Alumno_idAlumno = '".$_SESSION['IdAlumnoDocenteTutor']."';";
+	$Consulta ="SELECT * FROM solicitudbaja WHERE solicitudbaja.Alumno_idAlumno = '".$_SESSION['IdAlumnoDirectivo']."';";
 	
 	$Resultado = $Mysql->Consulta($Consulta);
 

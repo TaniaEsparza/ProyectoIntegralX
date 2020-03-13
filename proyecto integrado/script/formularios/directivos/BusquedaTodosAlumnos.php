@@ -1,8 +1,8 @@
 <?php
 if (!isset($_SESSION)) { session_start(); }
-if (!isset ($_SESSION['LoggedinDocenteTutor']) && !isset ($_SESSION['IdDocenteTutor']))
+if (!isset ($_SESSION['LoggedinDirectivo']) && !isset ($_SESSION['IdDirectivo']))
 {
-   echo "<script language='javascript'>window.location='LoginDocenteTutor.php'</script>";
+   echo "<script language='javascript'>window.location='LoginDirectivo.php'</script>";
 }
  ?>
  <!doctype html>
@@ -33,7 +33,7 @@ if (!isset ($_SESSION['LoggedinDocenteTutor']) && !isset ($_SESSION['IdDocenteTu
   <script src="./../../../js/bootstrap.min.js"></script>
   <script src="./../../../js/bootstrap.min.js"></script>
   <script src="./../../../js/jquery.min.js"></script>
-  <script src="./../../js/Main2.js"></script>
+  <script src="./../../js/Main6.js"></script>
 
 
 
@@ -44,10 +44,8 @@ if (!isset ($_SESSION['LoggedinDocenteTutor']) && !isset ($_SESSION['IdDocenteTu
   <!--Inicio contenedor Cabecera-->
   <div class="container">
    <br>
-   <?php include "../menus/MenuDocenteTutor.php";
-   MenuDocenteTutorAlumnoInicio();?>
-
-
+   <?php include "../menus/MenuDirectivo.php";
+   MenuDirectivoAlumnoInicio();?>
  </div>
 </div>
 
@@ -76,10 +74,11 @@ if (!isset ($_SESSION['LoggedinDocenteTutor']) && !isset ($_SESSION['IdDocenteTu
           <br>
           <!--Inicio de contenido de caja de texto--> 
           
-          <div class="formulario" align="left">
+          <div class="formulario" align="right">
            <b> <label for="caja_busqueda">Buscar por nombre..... </label><br></b>
             <input size="30"  type="text" name="caja_busqueda" id="caja_busqueda" ></input>
           </div>
+
           <center>
             <br>
           <div id="datos"></div>

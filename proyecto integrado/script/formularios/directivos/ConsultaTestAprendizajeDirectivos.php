@@ -1,8 +1,8 @@
 <?php 
 if (!isset($_SESSION)) { session_start(); }
-if (!isset ($_SESSION['LoggedinDocenteTutor']) && !isset ($_SESSION['IdDocenteTutor']) && !isset ($_SESSION['IdAlumnoDocenteTutor']))
+if (!isset ($_SESSION['LoggedinDirectivo']) && !isset ($_SESSION['IdDirectivo']) && !isset ($_SESSION['IdAlumnoDirectivo']))
 {
-   echo "<script language='javascript'>window.location='LoginDocenteTutor.php'</script>";
+   echo "<script language='javascript'>window.location='LoginDirectivo.php'</script>";
 }
 
 ?>
@@ -72,12 +72,12 @@ if (!isset ($_SESSION['LoggedinDocenteTutor']) && !isset ($_SESSION['IdDocenteTu
         include_once "../../clases/SQLControlador.php";
         $Mysql = new MySQLConector();
         $Mysql->Conectar();
-        $Consulta="SELECT Visual,Auditivo,Kinestesico FROM testaprendizaje WHERE Alumno_idAlumno='".$_SESSION['IdAlumnoDocenteTutor']."'";
+        $Consulta="SELECT Visual,Auditivo,Kinestesico FROM testaprendizaje WHERE Alumno_idAlumno='".$_SESSION['IdAlumnoDirectivo']."'";
         $Resultado = $Mysql->Consulta($Consulta);
         if ($Resultado->num_rows > 0) {
         ?>
         <div align="right"><a href="../../reportes/TestAprendizaje.php" target="_blank"><button  class="btn btn-success" >Generar PDF</button></a></div>
-         <img src="CreargraficaTutor.php" width="600" height="300">
+         <img src="CreargraficaDirectivo.php" width="600" height="300">
           
         <?php
         }else{

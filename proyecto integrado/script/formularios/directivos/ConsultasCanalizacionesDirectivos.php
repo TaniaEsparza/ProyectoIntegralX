@@ -1,6 +1,6 @@
 <?php
 if (!isset($_SESSION)) { session_start(); }
-if (!isset ($_SESSION['LoggedinDocenteTutor']) && !isset ($_SESSION['IdDocenteTutor']) && !isset ($_SESSION['IdAlumnoDocenteTutor']))
+if (!isset ($_SESSION['LoggedinDirectivo']) && !isset ($_SESSION['IdDirectivo']) && !isset ($_SESSION['IdAlumnoDirectivo']))
 {
  echo "<script language='javascript'>window.location='LoginDocenteTutor.php'</script>";
 }
@@ -47,8 +47,8 @@ unset($_SESSION['consulta']);
   <!--Inicio contenedor Cabecera-->
   <div class="container">
    <br>
-   <?php include "../menus/MenuDocenteTutor.php";
-   MenuAlumnoDocenteTutor();?>
+   <?php include "../menus/MenuDirectivo.php";
+   MenuAlumnoDirectivo();?>
  </div>
  <!--Fin contenedor Cabecera-->
 

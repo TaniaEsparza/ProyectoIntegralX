@@ -26,13 +26,13 @@ $Mysql->Conectar();
 					if($_SESSION['consulta'] > 0){
 						//echo "<script type=\"text/javascript\">2(\"Fotos guardadas\");</script>";  
 						$idp=$_SESSION['consulta'];
-						$Consulta="SELECT * FROM `tutoriaindividual` WHERE tutoriaindividual.Alumno_idAlumno = '".$_SESSION['IdAlumnoDocenteTutor']."' AND tutoriaindividual.idTutoriaIndividual = '".$idp."';";
+						$Consulta="SELECT * FROM `tutoriaindividual` WHERE tutoriaindividual.Alumno_idAlumno = '".$_SESSION['IdAlumnoDirectivo']."' AND tutoriaindividual.idTutoriaIndividual = '".$idp."';";
 					}else{
 						//echo "<script type=\"text/javascript\">3(\"Fotos guardadas\");</script>";  
-						$Consulta="SELECT * FROM `tutoriaindividual` WHERE tutoriaindividual.Alumno_idAlumno = '".$_SESSION['IdAlumnoDocenteTutor']."';";
+						$Consulta="SELECT * FROM `tutoriaindividual` WHERE tutoriaindividual.Alumno_idAlumno = '".$_SESSION['IdAlumnoDirectivo']."';";
 					}
 				}else{
-					$Consulta="SELECT * FROM `tutoriaindividual` WHERE tutoriaindividual.Alumno_idAlumno = '".$_SESSION['IdAlumnoDocenteTutor']."';";
+					$Consulta="SELECT * FROM `tutoriaindividual` WHERE tutoriaindividual.Alumno_idAlumno = '".$_SESSION['IdAlumnoDirectivo']."';";
 					//echo "<script type=\"text/javascript\">alert(\"Fotos guardadas\");</script>";  
 				}
 

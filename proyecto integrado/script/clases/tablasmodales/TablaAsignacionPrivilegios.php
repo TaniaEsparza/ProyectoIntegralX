@@ -41,7 +41,7 @@ $Mysql->Conectar();
 				if(isset($_SESSION['ConsultaAsiPriv'])){
 					if($_SESSION['ConsultaAsiPriv'] > 0){
 						$AsiPriv=$_SESSION['ConsultaAsiPriv'];
-						$Consulta = "SELECT * FROM `clausulas` WHERE clausulas.idClausulas = '$IdClausulas' ";
+						$Consulta = "SELECT personal.idPersonal, personal.Nombre, personal.ApellidoP, personal.ApellidoM, personal.NoEmpleado, privilegios.Usuarios_idUsuarios, privilegios.TipoPrivilegio, privilegios.idPrivilegios FROM personal, privilegios WHERE personal.idPersonal = privilegios.Usuarios_idUsuarios and privilegios.Usuarios_idUsuarios = $AsiPriv";
 
 					}else{
 						$Consulta = "SELECT personal.idPersonal, personal.Nombre, personal.ApellidoP, personal.ApellidoM, personal.NoEmpleado, privilegios.Usuarios_idUsuarios, privilegios.TipoPrivilegio, privilegios.idPrivilegios FROM personal, privilegios WHERE personal.idPersonal = privilegios.Usuarios_idUsuarios ;";
@@ -67,7 +67,7 @@ $Mysql->Conectar();
 						<td><?php echo $ver[0] ?></td>
 						<td><?php echo $ver[4] ?></td>	
 						<td><?php echo $ver[1]. ' ' . $ver[2]. ' ' .$ver[3] ?></td>	
-						<td><?php if($ver[6] == 1){echo "Directivo";}elseif($ver[6] == 2){echo "Capturista";}elseif ($ver[6] == 3) { echo "Docente Tutor";}elseif ($ver[6] == 4) {echo "Docente";}elseif ($ver[6]==5) { echo "Alumno";}elseif ($ver[6] == 6) {echo "Administrativo";} ?></td>	
+						<td><?php if($ver[6] == 1){echo "Directivo";}elseif($ver[6] == 2){echo "Capturista";}elseif ($ver[6] == 3) { echo "Docente Tutor";}elseif ($ver[6] == 4) {echo "Docente";}elseif ($ver[6]==5) { echo "Alumno";}elseif ($ver[6] == 6) {echo "Administrativo";}elseif ($ver[6] == 7) {echo "Super Usuario";} ?></td>	
 						<!--<td><?php //if($ver[5] == 1){ echo "Activo"; } else { echo "Inactivo";} ?></td>-->	
 						<td>
 							<button class="btn btn-success glyphicon glyphicon-pencil" data-toggle="modal" data-target="#modalEdicion" onclick="VerAsignacionPrivilegio('<?php echo $datosC ?>')">

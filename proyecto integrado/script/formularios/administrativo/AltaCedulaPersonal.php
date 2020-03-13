@@ -300,35 +300,35 @@ function soloLetras(e) {
 								<br>
 								<div class="row">
 									<div class="col-sm-4">
-										<b><i>Nombre(s):</i></b>
+										<b>Nombre(s):</b>
 										<input type="text" name="NombrePersonal"  class="form-control" id="NombreAlumno" placeholder="<?php echo $Nombre?>" onkeypress="return soloLetras(event);" maxlength="25" readonly="readonly">		
 									</div>
 									<div class="col-sm-4">
-										<b><i>Apellido Paterno:</i></b>
+										<b>Apellido Paterno:</b>
 										<input type="text" name="ApellidoP" class="form-control" id="ApellidoP" placeholder="<?php echo $ApellidoP?>" onkeypress="return soloLetras(event);" maxlength="20" readonly="readonly">
 									</div>
 									<div class="col-md-4">
-										<b><i>Apellido Materno:</i></b>
+										<b>Apellido Materno:</b>
 										<input type="text" name="ApellidoM" class="form-control" id="ApellidoM" placeholder="<?php echo $ApellidoM?>" onkeypress="return soloLetras(event);" maxlength="20" readonly="readonly">
 									</div>
 								</div>
 								<div class="row">
 									<div class="col-md-4">
-										<b><i>RFC:</i></b>
+										<b>RFC:</b>
 										<input type="text" name="RFC" class="form-control" id="RFC"  placeholder="<?php echo $RFC?>" maxlength="13" onKeyUp="this.value = this.value.toUpperCase();" onkeypress="return NumerosLetrasSinCaracteres(event);" readonly="readonly">
 									</div>
 									<div class="col-md-4">
-										<b><i>CURP:</i></b>
+										<b>CURP:</b>
 										<input type="text" name="CURP" class="form-control" id="CURP" placeholder="<?php echo $CURP?>" maxlength="18" onKeyUp="this.value = this.value.toUpperCase();" onkeypress="return NumerosLetrasSinCaracteres(event);" readonly="readonly">
 									</div>
 									<div class="col-md-4">
-										<b><i>No. IMSS:</i></b>
+										<b>No. IMSS:</b>
 										<input type="text" name="IMSS" class="form-control" id="IMSS" placeholder="<?php echo $IMSS?>" maxlength="11" onKeyUp="this.value = this.value.toUpperCase();" onkeypress="return soloNumeros(event);" readonly="readonly">
 									</div>
 								</div>
 								<div class="row">
 									<div class="col-md-4">
-										<b><i>Tipo de Sangre:</i></b>
+										<b>Tipo de Sangre:</b>
 										<select name="TipoSangre" class="m-1 custom-select">
 											<option value="AB+">AB+</option>
 											<option value="AB-">AB-</option>
@@ -341,7 +341,7 @@ function soloLetras(e) {
 										</select>
 									</div>
 									<div class="col-md-4">
-										<b><i>Estado Civil:</i></b>
+										<b>Estado Civil:</b>
 										<input type="text" name="EstadoCivil" class="form-control" id="EstadoCivil" placeholder="Estado Civil" onkeypress="return soloLetras(event);" maxlength="20">
 									</div>
 									<div class="col-md-4">
@@ -352,11 +352,11 @@ function soloLetras(e) {
 								
 								<div class="row">
 									<div class="col-md-4">
-										<b><i>Correo:</i></b>
+										<b>Correo:</b>
 										<input type="email" name="Correo" class="form-control" id="Correo" placeholder="Correo" onkeypress="return NumerosLetrasCorreo(event);" maxlength="50">
 									</div>
 									<div class="col-md-4">
-										<b><i>Sexo:</i></b>
+										<b>Sexo:</b>
 										<select name="Sexo" class="m-1 custom-select ">
 											<!--select2-hidden-accesible-->
 											<option value="F">F</option>
@@ -364,7 +364,7 @@ function soloLetras(e) {
 										</select>
 									</div>
 									<div class="col-md-4">
-										<b><i>Telefono Celular:</i></b>
+										<b>Telefono Celular:</b>
 										<input type="text" name="TelefonoCelular" class="form-control" id="TelefonoEmergencia" placeholder="Telefono de Emergencia" onKeyPress="return soloNumeros(event)" maxlength="10">
 									</div>
 								</div>
@@ -495,6 +495,16 @@ function soloLetras(e) {
 										<b>Horas: </b>
 										<input type="text" name="Horas" placeholder="<?php echo $Horas; ?>" class="form-control input-sm" readonly="readonly">
 									</div>
+									<div class="col-md-4">
+										<b>Bruto: </b>
+										<input type="text" name="Bruto" placeholder="<?php //echo $Horas; ?>" class="form-control input-sm" readonly="readonly">
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-4">
+										<b>Neto: </b>
+										<input type="text" name="Neto" placeholder="<?php //echo $Puesto; ?>" class="form-control input-sm" readonly="readonly">
+									</div>
 								</div>
 							</div>
 						</div>
@@ -514,6 +524,34 @@ function soloLetras(e) {
 									<div class="col-md-6">
 										<b>Carrera o Especialidad:</b>
 										<input type="text" name="CarreraEspecialidad" class="form-control input-sm" onkeypress="return soloLetras(event);">
+									</div>
+									<div class="col-md-6">
+										<b>Área de conocimientos:</b>
+										<input type="text" name="AreaConocimientos" class="form-control input-sm" onkeypress="return soloLetras(event);">
+									</div>
+									<div class="col-md-6">
+										<b>Entidad Federativa dónde estudió:</b>
+										<input type="text" name="EntidadFedEstudio" class="form-control input-sm" onkeypress="return soloLetras(event);">
+									</div>
+									<div class="col-md-6">
+										<b>Nombre de la Institución:</b>
+										<input type="text" name="NombreInstitucion" class="form-control input-sm" onkeypress="return soloLetras(event);">
+									</div>
+									<div class="col-md-6">
+										<b>Estatus:</b>
+										<input type="text" name="Estatus" class="form-control input-sm" onkeypress="return soloLetras(event);">
+									</div>
+									<div class="col-md-6">
+										<b>Nombre del documento académico:</b>
+										<input type="text" name="DocAcademico" class="form-control input-sm" onkeypress="return soloLetras(event);">
+									</div>
+									<div class="col-md-6">
+										<b>Fecha de Expedición del documento:</b>
+										<input type="text" name="ExpDocAcademico" class="form-control input-sm" onkeypress="return soloLetras(event);">
+									</div>
+									<div class="col-md-6">
+										<b>No. De folio del documento académico:</b>
+										<input type="text" name="FolioDocAcademico" class="form-control input-sm" onkeypress="return soloLetras(event);">
 									</div>
 								</div>
 								<button type="submit" class="btn btn-success glyphicon glyphicon-plus" > Guardar registro</button><br>
@@ -601,15 +639,32 @@ function soloLetras(e) {
             $SQLControlador-> AgregarDomicilioAlumno($Domicilio,$Alumno);*/
 //--------------------------------------------------------------------------------------------------
             
+            
             include_once "../../clases/EstudiosPersonal.php";
             $EstudiosPersonal = new EstudiosPersonal();
 			
 			$UltimoGrado = $_POST['UltimoGradoEstudios'];
             $CarreraEspecialidad = $_POST['CarreraEspecialidad'];
-            
+            $AreaConocimientos = $_POST['AreaConocimientos'];
+            $EntidadFederativa = $_POST['EntidadFedEstudio'];
+            $Institucion = $_POST['Institucion'];
+            $Estatus = $_POST['Estatus'];
+            $DocAcademico = $_POST['DocAcademico'];
+            $FechaExpedicion = $_POST['ExpDocAcademico'];
+            $NoFolioDoc = $_POST['FolioDocAcademico'];
+             
             $EstudiosPersonal->setPersonal_idPersonal($_SESSION['NombreUsuarioCAP']);
-            $EstudiosPersonal->setNivelEstudio($UltimoGrado);
-            $EstudiosPersonal->setNombreEstudio($CarreraEspecialidad);
+            $EstudiosPersonal->setUltimoGrado($UltimoGrado);
+            $EstudiosPersonal->setCarrera($CarreraEspecialidad);
+            $EstudiosPersonal->setAreaConocimiento($AreaConocimientos);
+            $EstudiosPersonal->setEntidadFederativa($EntidadFederativa);
+            $EstudiosPersonal->setInstitucion($Institucion);
+            $EstudiosPersonal->setEstatus($Estatus);
+            $EstudiosPersonal->setDocAcademico($DocAcademico);
+            $EstudiosPersonal->setFechaExpedicion($FechaExpedicion);
+            $EstudiosPersonal->setNoFolioDoc($NoFolioDoc);
+
+
 
 			include_once "../../clases/SQLControlador.php";
 

@@ -23,14 +23,14 @@ $Mysql->Conectar();
 				if(isset($_SESSION['ConsultaCRes'])){
 					if($_SESSION['ConsultaCRes'] > 0){
 						$idp=$_SESSION['ConsultaCRes'];
-						$Consulta="SELECT cartaresponsiva.idCartaResponsiva,cartaresponsiva.Fecha,cartaresponsiva.Asunto FROM cartaresponsiva WHERE cartaresponsiva.Alumno_idAlumno = '".$_SESSION['IdAlumnoDocenteTutor']."' and cartaresponsiva.idCartaResponsiva = '".$idp."';";
+						$Consulta="SELECT cartaresponsiva.idCartaResponsiva,cartaresponsiva.Fecha,cartaresponsiva.Asunto FROM cartaresponsiva WHERE cartaresponsiva.Alumno_idAlumno = '".$_SESSION['IdAlumnoDirectivo']."' and cartaresponsiva.idCartaResponsiva = '".$idp."';";
 
 
 					}else{
-						$Consulta="SELECT cartaresponsiva.idCartaResponsiva,cartaresponsiva.Fecha,cartaresponsiva.Asunto FROM cartaresponsiva WHERE cartaresponsiva.Alumno_idAlumno = '".$_SESSION['IdAlumnoDocenteTutor']."';";
+						$Consulta="SELECT cartaresponsiva.idCartaResponsiva,cartaresponsiva.Fecha,cartaresponsiva.Asunto FROM cartaresponsiva WHERE cartaresponsiva.Alumno_idAlumno = '".$_SESSION['IdAlumnoDirectivo']."';";
 					}
 				}else{
-					$Consulta="SELECT cartaresponsiva.idCartaResponsiva,cartaresponsiva.Fecha,cartaresponsiva.Asunto  FROM cartaresponsiva WHERE cartaresponsiva.Alumno_idAlumno='".$_SESSION['IdAlumnoDocenteTutor']."';";
+					$Consulta="SELECT cartaresponsiva.idCartaResponsiva,cartaresponsiva.Fecha,cartaresponsiva.Asunto  FROM cartaresponsiva WHERE cartaresponsiva.Alumno_idAlumno='".$_SESSION['IdAlumnoDirectivo']."';";
 					//echo "<script type=\"text/javascript\">alert(\"Fotos guardadas\");</script>";  
 				}
 

@@ -1,9 +1,9 @@
 <?php
 if (!isset($_SESSION)) { session_start(); }
-/*if (!isset ($_SESSION['LoggedinDocenteTutor']) && !isset ($_SESSION['IdDocenteTutor']) && !isset ($_SESSION['IdAlumnoDocenteTutor']))
+if (!isset ($_SESSION['LoggedinAdmin']))
 {
- echo "<script language='javascript'>window.location='Consu.php'</script>";
-}*/
+   echo "<script language='javascript'>window.location='LoginAdmin.php'</script>";
+}
 unset($_SESSION['ConsultaAI']);
 ?>
 <!DOCTYPE html>

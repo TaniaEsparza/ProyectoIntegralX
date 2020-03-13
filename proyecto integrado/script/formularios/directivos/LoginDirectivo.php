@@ -34,7 +34,7 @@ if (!isset($_SESSION)) { session_start(); }
     <!--Inicio contenedor Cabecera-->
     <div class="container">
     	<br>
-    	<?php include "../menus/MenuDirectivos.php";
+    	<?php include "../menus/MenuDirectivo.php";
      MenuLoginDocenteTutor();?>
 
 
@@ -92,14 +92,14 @@ if (!isset($_SESSION)) { session_start(); }
         $Usuarios -> setContrasena($Contrasena);
 
         $SQLControlador = new SQLControlador();
-        if ($SQLControlador -> IniciarSesionDocenteTutor($Usuarios)){
-          $_SESSION['LoggedinDocenteTutor'] = true;
-          $_SESSION['IdDocenteTutor'] = $SQLControlador -> GetIdPersonal($Usuarios);
-          $_SESSION['NombreDocenteTutor'] = $SQLControlador -> GetNombrePersonal($Usuarios);
+        if ($SQLControlador -> IniciarSesionDirectivos($Usuarios)){
+          $_SESSION['LoggedinDirectivo'] = true;
+          $_SESSION['IdDirectivo'] = $SQLControlador -> GetIdPersonal($Usuarios);
+          $_SESSION['NombreDirectivo'] = $SQLControlador -> GetNombrePersonal($Usuarios);
           echo "<script language='javascript'>window.location = 'BusquedaTodosAlumnos.php'</script>";
         }else{
           echo "<script language='javascript'>alert('Usuario y/o Contraseña incorrectos')</script>";   
-          echo "<script language='javascript'>window.location = './LoginDocenteTutor.php'</script>";
+          echo "<script language='javascript'>window.location = './LoginDirectivo.php'</script>";
         }
       }
       ?>

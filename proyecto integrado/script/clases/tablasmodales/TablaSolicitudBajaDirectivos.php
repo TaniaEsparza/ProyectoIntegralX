@@ -22,12 +22,12 @@ $Mysql->Conectar();
 				if(isset($_SESSION['consulta'])){
 					if($_SESSION['consulta'] > 0){
 						$idp=$_SESSION['consulta'];
-						$Consulta="SELECT * FROM solicitudbaja WHERE solicitudbaja.Alumno_idAlumno = '".$_SESSION['IdAlumnoDocenteTutor']."' AND solicitudbaja.idSolicitudBaja = '".$idp."';";
+						$Consulta="SELECT * FROM solicitudbaja WHERE solicitudbaja.Alumno_idAlumno = '".$_SESSION['IdAlumnoDirectivo']."' AND solicitudbaja.idSolicitudBaja = '".$idp."';";
 					}else{
-						$Consulta="SELECT * FROM solicitudbaja WHERE solicitudbaja.Alumno_idAlumno = '".$_SESSION['IdAlumnoDocenteTutor']."';";
+						$Consulta="SELECT * FROM solicitudbaja WHERE solicitudbaja.Alumno_idAlumno = '".$_SESSION['IdAlumnoDirectivo']."';";
 					}
 				}else{
-					$Consulta="SELECT * FROM solicitudbaja WHERE solicitudbaja.Alumno_idAlumno = '".$_SESSION['IdAlumnoDocenteTutor']."';";
+					$Consulta="SELECT * FROM solicitudbaja WHERE solicitudbaja.Alumno_idAlumno = '".$_SESSION['IdAlumnoDirectivo']."';";
 					//echo "<script type=\"text/javascript\">alert(\"Fotos guardadas\");</script>";  
 				}
 

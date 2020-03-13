@@ -1,3 +1,10 @@
+<?php
+if (!isset($_SESSION)) { session_start(); }
+if (!isset ($_SESSION['LoggedinAdmin']))
+{
+   echo "<script language='javascript'>window.location='LoginAdmin.php'</script>";
+}
+?>
 <!DOCTYPE html>
 <html lang="es">
 
@@ -36,13 +43,13 @@
 	function validar() {
               //obteniendo el valor que se puso en el campo text del formulario
 
-              miCampoTexto = document.getElementById('Folio').value;
+              miCampoTexto = document.POSTElementById('Folio').value;
               if(miCampoTexto.length == 0 || /^\s+$/.test(miCampoTexto)){
               	alert('Intoduzca el Folio!');
               	return false;
               }
 
-              txtFecha = document.getElementById('Fecha').value;
+              txtFecha = document.POSTElementById('Fecha').value;
               if(!isNaN(txtFecha)){
               	alert('Seleccione o introduzca la Fecha!');
               	return false;
@@ -75,13 +82,24 @@
                    </center>
                    <div class="card border-success">
                          <div class="card-body">
-                              <?php if(!isset($_GET['Fecha'])){?>
-                                   <form action="./AltaIngreso.php" method="GET"  onsubmit="return validar()">
-                                        <b>Folio: </b>
-                                        <input type="text" id="Folio" name="Folio" class="form-control">
-                                        <br>
-                                        <b>Nombre de Alumno: </b>
-                                        <select name="idAlumno" id="idAlumno"  class="m-1 custom-select">
+                              <?php if(!isset($_POST['Fecha'])){?>
+                                   <form action="./AltaIngreso.php" method="POST"  onsubmit="return validar()">
+                                        <div class="row">
+                                          
+                                          <div class="col-md-8">
+                                            <b>Folio: </b>
+                                            <input type="text" style="color:red" id="Folio" name="Folio" class="form-control">
+                                          </div>
+                                          <div class="col-md-4">
+                                             <b>Fecha: </b>
+                                            <input type="date" name="Fecha" id="Fecha"class="form-control" value="<?php print_r($Fecha)?>">
+                                          </div>
+                                        </div>
+                                        
+                                        <div class="row">
+                                          <div class="col-md-6">
+                                            <b>Nombre de Alumno: </b>
+                                            <select name="idAlumno" id="idAlumno"  class="m-1 custom-select">
                                              <?php
                                              include_once "../../clases/MySQLConector.php";
                                              $Mysql = new MySQLConector();
@@ -93,10 +111,11 @@
                                                        echo " <option value=\"{$fila2['idAlumno']}\">{$fila2['Nombre']} {$fila2['ApellidoP']} {$fila2['ApellidoM']}</option>";
                                                  }
                                                  ?>
-                                           </select>
-                                           <br>
-                                           <b>Grado y Grupo: </b>
-                                           <select name="idGrupo" id="idGrupo"  class="m-1 custom-select">
+                                            </select>
+                                          </div>
+                                          <div class="col-md-6">
+                                            <b>Grado y Grupo: </b>
+                                            <select name="idGrupo" id="idGrupo"  class="m-1 custom-select">
                                             <?php
                                             include_once "../../clases/MySQLConector.php";
                                             $Mysql = new MySQLConector();
@@ -108,32 +127,35 @@
                                                       echo " <option value=\"{$fila2['idGrupos']}\">{$fila2['Grado']}-{$fila2['Grupo']} {$fila2['Nombre']}</option>";
                                                 }
                                                 ?>
-                                          </select>
-                                          <br>
-                                          <b>Fecha: </b>
-                                          <input type="date" name="Fecha" id="Fecha"class="form-control" value="<?php print_r($Fecha)?>"> 
-                                          <br>
-                                          <b>Monto: </b>
-                                          <input type="text" hidden="" id="Monto" name="Monto">
-                                          <input type="text" hidden="" id="MLetra" name="MLetra">
-
-                                          <input type="text" name="MontoLetra" id="MontoLetra" class="form-control" readonly>
-                                          <br>
-                                          <b>Concepto: </b>
-                                          <select name="idConceptodePago" id="idConceptodePago"  class="m-1 custom-select">
-                                           <?php
-                                           include_once "../../clases/MySQLConector.php";
-                                           $Mysql = new MySQLConector();
-                                           $Mysql->Conectar();
-                                           $Consulta2 = "SELECT * FROM `conceptodepago` WHERE conceptodepago.Estatus = 1;";
-                                           $Resultado2 = $Mysql->Consulta($Consulta2);
-                                           if($Resultado2)
+                                              </select>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="row">
+                                          <div class="col-md-12">
+                                            <b>Concepto: </b>
+                                            <select name="idConceptodePago" id="idConceptodePago"  class="m-1 custom-select">
+                                              <?php
+                                              include_once "../../clases/MySQLConector.php";
+                                              $Mysql = new MySQLConector();
+                                              $Mysql->Conectar();
+                                              $Consulta2 = "SELECT * FROM `conceptodepago` WHERE conceptodepago.Estatus = 1;";
+                                              $Resultado2 = $Mysql->Consulta($Consulta2);
+                                              if($Resultado2)
                                                 while ($fila2 = mysqli_fetch_array($Resultado2)){           
                                                      echo " <option value=\"{$fila2['idConceptoDePago']}\">{$fila2['NombreConcepto']}</option>";
                                                }
                                                ?>
-                                         </select>
-                                         <br>
+                                            </select>
+                                          </div>
+                                          <div class="col-md-12">
+                                            <b>Monto: </b>
+                                            <input type="text" hidden="" id="Monto" name="Monto">
+                                            <input type="text" hidden="" id="MLetra" name="MLetra">
+                                            <input type="text" name="MontoLetra" id="MontoLetra" class="form-control" readonly>
+                                          </div>
+                                        </div>
+                                          
                                          <b>Observación: </b>
                                          <textarea class="form-control" rows="2" id="Observacion" name="Observacion"></textarea>
                                          <br>
@@ -146,14 +168,14 @@
 
                                 $Ingresos = new Ingresos();
 
-                                $idAlumno = $_GET['idAlumno'];
-                                $idGrupo = $_GET['idGrupo']; 
-                                $idConceptodePago = $_GET['idConceptodePago']; 
-                                $Fecha = $_GET['Fecha'];
-                                $Observacion = $_GET['Observacion'];
-                                $Monto = $_GET['Monto'];
-                                $MLetra = $_GET['MLetra'];
-                                $Folio = $_GET['Folio'];
+                                $idAlumno = $_POST['idAlumno'];
+                                $idGrupo = $_POST['idGrupo']; 
+                                $idConceptodePago = $_POST['idConceptodePago']; 
+                                $Fecha = $_POST['Fecha'];
+                                $Observacion = $_POST['Observacion'];
+                                $Monto = $_POST['Monto'];
+                                $MLetra = $_POST['MLetra'];
+                                $Folio = $_POST['Folio'];
 
                                 $Ingresos->setidAlumno($idAlumno);
                                 $Ingresos->setidGrupo($idGrupo);
@@ -194,7 +216,7 @@
 <script type="text/javascript">
   function getDatosConceptosdePago(){
        $.ajax({
-            type:"GET",
+            type:"POST",
             url:"../../clases/tablasmodales/ConsultaConceptosdePago.php",
             data:"idConceptodePago="+$('#idConceptodePago').val(),
             success:function(c){
@@ -205,9 +227,10 @@
            }
      });
  }
+ 
  function getDatosGrupoAlumno(){
       $.ajax({
-            type:"GET",
+            type:"POST",
             url:"../../clases/tablasmodales/ConsultaGrupoAlumno.php",
             data:"idAlumno="+$('#idAlumno').val(),
             success:function(c){

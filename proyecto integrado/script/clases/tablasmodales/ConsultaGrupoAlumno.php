@@ -1,5 +1,5 @@
 <?php
-$idAlumno = $_GET['idAlumno'];
+$idAlumno = $_POST['idAlumno'];
 
 include_once "../../clases/MySQLConector.php";
 $Mysql = new MySQLConector();

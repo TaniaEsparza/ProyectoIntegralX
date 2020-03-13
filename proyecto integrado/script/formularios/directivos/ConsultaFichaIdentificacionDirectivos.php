@@ -1,8 +1,8 @@
 <?php 
 if (!isset($_SESSION)) { session_start(); }
-if (!isset ($_SESSION['LoggedinDocenteTutor']) && !isset ($_SESSION['IdDocenteTutor']) && !isset ($_SESSION['IdAlumnoDocenteTutor']))
+if (!isset ($_SESSION['LoggedinDirectivo']) && !isset ($_SESSION['IdDirectivo']) && !isset ($_SESSION['IdAlumnoDirectivo']))
 {
-   echo "<script language='javascript'>window.location='LoginDocenteTutor.php'</script>";
+   echo "<script language='javascript'>window.location='LoginDirectivo.php'</script>";
 }
 ?>
 <!doctype html>
@@ -60,8 +60,8 @@ if (!isset ($_SESSION['LoggedinDocenteTutor']) && !isset ($_SESSION['IdDocenteTu
   <!--Inicio contenedor Cabecera-->
   <div class="container">
    <br>
-    <?php include "../menus/MenuDocenteTutor.php";
-      MenuAlumnoDocenteTutor();?>
+    <?php include "../menus/MenuDirectivo.php";
+      MenuAlumnoDirectivo();?>
  <!--Fin contenedor Cabecera-->
 
  <!--Inicio Contenedor medio-->
@@ -120,7 +120,7 @@ if (!isset ($_SESSION['LoggedinDocenteTutor']) && !isset ($_SESSION['IdDocenteTu
                   $Mysql = new MySQLConector();
                   $Mysql->Conectar();
 
-                  $Consulta = "SELECT alumno.Nombre, alumno.ApellidoP, alumno.ApellidoM, alumno.FechaNac, alumno.TelefonoEmergencia ,lugarnacimiento.Municipio, lugarnacimiento.Estado, domicilio.Calle, domicilio.Numero, domicilio.Colonia, domicilio.CP, domicilio.Municipio AS MunicipioDomicilio, domicilio.Localidad, domicilio.Estado AS EstadoDomicilio, alumno.Telefono AS TelefonoParticular from alumno, lugarnacimiento, domicilio WHERE alumno.idAlumno = '".$_SESSION['IdAlumnoDocenteTutor']."' AND lugarnacimiento.idLugarNacimiento = alumno.LugarNacimiento_idLugarNacimiento AND domicilio.idDomicilio = alumno.Domicilio_idDomicilio;";
+                  $Consulta = "SELECT alumno.Nombre, alumno.ApellidoP, alumno.ApellidoM, alumno.FechaNac, alumno.TelefonoEmergencia ,lugarnacimiento.Municipio, lugarnacimiento.Estado, domicilio.Calle, domicilio.Numero, domicilio.Colonia, domicilio.CP, domicilio.Municipio AS MunicipioDomicilio, domicilio.Localidad, domicilio.Estado AS EstadoDomicilio, alumno.Telefono AS TelefonoParticular from alumno, lugarnacimiento, domicilio WHERE alumno.idAlumno = '".$_SESSION['IdAlumnoDirectivo']."' AND lugarnacimiento.idLugarNacimiento = alumno.LugarNacimiento_idLugarNacimiento AND domicilio.idDomicilio = alumno.Domicilio_idDomicilio;";
                   $Resultado = $Mysql->Consulta($Consulta);
                   while ($fila = $Resultado->fetch_assoc()) {
                     ?>

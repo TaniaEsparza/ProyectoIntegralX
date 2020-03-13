@@ -5,7 +5,7 @@
 	include_once "../SQLControlador.php";
     $Mysql = new MySQLConector();
     $Mysql->Conectar();
-    $Consulta = "SELECT * FROM cartaresponsiva WHERE cartaresponsiva.Alumno_idAlumno = '".$_SESSION['IdAlumnoDocenteTutor']."';";
+    $Consulta = "SELECT * FROM cartaresponsiva WHERE cartaresponsiva.Alumno_idAlumno = '".$_SESSION['IdAlumnoDirectivo']."';";
     $Resultado = $Mysql->Consulta($Consulta);
 
  ?>

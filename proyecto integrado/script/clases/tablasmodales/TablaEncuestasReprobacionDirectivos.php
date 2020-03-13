@@ -24,14 +24,14 @@ $Mysql->Conectar();
 				if(isset($_SESSION['ConsultaEncR'])){
 					if($_SESSION['ConsultaEncR'] > 0){
 						$idp=$_SESSION['ConsultaEncR'];
-						$Consulta="SELECT encuestareprobacion.idEncuestaReprobacion,CONCAT(grupos.Grado,'-',grupos.Grupo,' ',carreras.Nombre) AS GrupoCursado, encuestareprobacion.Fecha,encuestareprobacion.Parcial FROM encuestareprobacion INNER JOIN grupos ON encuestareprobacion.idGrupo=grupos.idGrupos INNER JOIN carreras ON grupos.Carreras_idCarreras=carreras.idCarreras WHERE encuestareprobacion.Alumno_idAlumno = '".$_SESSION['IdAlumnoDocenteTutor']."' and encuestareprobacion.idEncuestaReprobacion = '".$idp."';";
+						$Consulta="SELECT encuestareprobacion.idEncuestaReprobacion,CONCAT(grupos.Grado,'-',grupos.Grupo,' ',carreras.Nombre) AS GrupoCursado, encuestareprobacion.Fecha,encuestareprobacion.Parcial FROM encuestareprobacion INNER JOIN grupos ON encuestareprobacion.idGrupo=grupos.idGrupos INNER JOIN carreras ON grupos.Carreras_idCarreras=carreras.idCarreras WHERE encuestareprobacion.Alumno_idAlumno = '".$_SESSION['IdAlumnoDirectivo']."' and encuestareprobacion.idEncuestaReprobacion = '".$idp."';";
 
 
 					}else{
-						$Consulta="SELECT encuestareprobacion.idEncuestaReprobacion,CONCAT(grupos.Grado,'-',grupos.Grupo,' ',carreras.Nombre) AS GrupoCursado, encuestareprobacion.Fecha,encuestareprobacion.Parcial FROM encuestareprobacion INNER JOIN grupos ON encuestareprobacion.idGrupo=grupos.idGrupos INNER JOIN carreras ON grupos.Carreras_idCarreras=carreras.idCarreras WHERE encuestareprobacion.Alumno_idAlumno= '".$_SESSION['IdAlumnoDocenteTutor']."';";
+						$Consulta="SELECT encuestareprobacion.idEncuestaReprobacion,CONCAT(grupos.Grado,'-',grupos.Grupo,' ',carreras.Nombre) AS GrupoCursado, encuestareprobacion.Fecha,encuestareprobacion.Parcial FROM encuestareprobacion INNER JOIN grupos ON encuestareprobacion.idGrupo=grupos.idGrupos INNER JOIN carreras ON grupos.Carreras_idCarreras=carreras.idCarreras WHERE encuestareprobacion.Alumno_idAlumno= '".$_SESSION['IdAlumnoDirectivo']."';";
 					}
 				}else{
-					$Consulta="SELECT encuestareprobacion.idEncuestaReprobacion,CONCAT(grupos.Grado,'-',grupos.Grupo,' ',carreras.Nombre) AS GrupoCursado, encuestareprobacion.Fecha,encuestareprobacion.Parcial FROM encuestareprobacion INNER JOIN grupos ON encuestareprobacion.idGrupo=grupos.idGrupos INNER JOIN carreras ON grupos.Carreras_idCarreras=carreras.idCarreras WHERE encuestareprobacion.Alumno_idAlumno='".$_SESSION['IdAlumnoDocenteTutor']."';";
+					$Consulta="SELECT encuestareprobacion.idEncuestaReprobacion,CONCAT(grupos.Grado,'-',grupos.Grupo,' ',carreras.Nombre) AS GrupoCursado, encuestareprobacion.Fecha,encuestareprobacion.Parcial FROM encuestareprobacion INNER JOIN grupos ON encuestareprobacion.idGrupo=grupos.idGrupos INNER JOIN carreras ON grupos.Carreras_idCarreras=carreras.idCarreras WHERE encuestareprobacion.Alumno_idAlumno='".$_SESSION['IdAlumnoDirectivo']."';";
 					//echo "<script type=\"text/javascript\">alert(\"Fotos guardadas\");</script>";  
 				}
 

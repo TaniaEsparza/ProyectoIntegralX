@@ -22,7 +22,6 @@ function AgregarNuevaCarrera(clave,nombre,area){
 }
 
 function VerDatosCarreraModificacion(datos){
-
 	d=datos.split('||');
 	var numero=d[4];
 	$('#idu').val(d[0]);

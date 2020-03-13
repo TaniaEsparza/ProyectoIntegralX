@@ -48,8 +48,8 @@ unset($_SESSION['consulta']);
   <!--Inicio contenedor Cabecera-->
   <div class="container">
    <br>
-   <?php include "../menus/MenuDocenteTutor.php";
-   MenuAlumnoDocenteTutor();?>
+   <?php include "../menus/MenuARoot.php";
+   MenuGeneralDentro();?>
  </div>
  <!--Fin contenedor Cabecera-->
 
@@ -73,7 +73,7 @@ unset($_SESSION['consulta']);
     <div class="col-sm-9">
      <!--Inicio de contenido de caja de texto-->
      <div class="formulario" align="right">
-           <b> <label for="caja_busqueda">Buscar por nombre..... </label><br></b>
+           <b> <label for="caja_busqueda">Buscador por nombre...</label><br></b>
             <input size="30"  type="text" name="caja_busqueda" id="caja_busqueda" ></input>
           </div>
           <center>
@@ -84,7 +84,7 @@ unset($_SESSION['consulta']);
      <!--Fin de contenido de caja de texto--> 
    </div>
    <!--Fin Contenido central-->
-   <!--Inicio de pie de pagina-->
+   <!--Inicio de pie de pagina--,k
 
 
    <?php include '../menus/PiePagina.php';?>

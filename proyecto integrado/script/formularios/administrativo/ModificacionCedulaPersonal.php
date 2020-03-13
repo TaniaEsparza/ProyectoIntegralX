@@ -299,9 +299,15 @@ function soloLetras(e) {
 					$TipoSangre = $row['TipoSangre'];
 					$Sexo = $row['Sexo'];
 					$EstadoCivil = $row['EstadoCivil'];
-					$NombreEstudio = $row['NombreEstudio'];
-					$NivelEstudio = $row['NivelEstudio'];
-
+					$UltimoGrado = $row['UltimoGrado'];
+	            	$Carrera = $row['Carrera'];
+	            	$AreaConocimiento = $row['AreaConocimiento'];
+	            	$EntidadFederativa = $row['EntidadFederativa'];
+	            	$Institucion = $row['Institucion'];
+	            	$Estatus = $row['Estatus'];
+	            	$DocAcademico = $row['DocAcademico'];
+	            	$FechaExpedicion = $row['FechaExpedicion'];
+	            	$NoFolioDoc = $row['NoFolioDoc'];
 					
 					$Consulta2 = "SELECT * FROM `domicilio` WHERE idDomicilio = '".$idD."'; ";
 					$Resultado2 = $Mysql->Consulta($Consulta2);
@@ -320,7 +326,7 @@ function soloLetras(e) {
 
 
 					?>
-					<form action="AltaCedulaPersonal.php" method="POST" onsubmit="return validar()">
+					<form action="ModificacionCedulaPersonal.php" method="POST" onsubmit="return validar()">
 						<br>
 						<div class="card border-success">
 							<div class="card-body">
@@ -513,7 +519,6 @@ function soloLetras(e) {
 										<input type="text" name="Departamento"  placeholder="<?php echo $Departamento; ?>"  class="form-control input-sm" readonly="readonly">
 									</div>
 								</div>
-								
 								<div class="row">
 									<div class="col-md-4">
 										<b>Puesto: </b>
@@ -522,6 +527,17 @@ function soloLetras(e) {
 									<div class="col-md-4">
 										<b>Horas: </b>
 										<input type="text" name="Horas" placeholder="<?php echo $Horas; ?>" class="form-control input-sm" readonly="readonly">
+									</div>
+									<div class="col-md-4">
+										<b>Bruto: </b>
+										<input type="text" name="Bruto"  placeholder="<?php //echo $Bruto; ?>" class="form-control input-sm" readonly="readonly">
+									</div>
+								</div>
+								<div class="row">
+									
+									<div class="col-md-4">
+										<b>Neto: </b>
+										<input type="text" name="Neto" placeholder="<?php //echo $Neto; ?>" class="form-control input-sm" readonly="readonly">
 									</div>
 								</div>
 							</div>
@@ -534,16 +550,45 @@ function soloLetras(e) {
 									<div class="col-md-6">
 										<b>Último Grado de estudios:</b>
 										<select name="UltimoGradoEstudios" class="m-1 custom-select">
-											<option value="Maestria"<?php if($NivelEstudio == 'Maestría'){ echo "selected"; }?>>Maestría</option>
-											<option value="Licenciatura"<?php if($NivelEstudio == 'Licenciatura'){ echo "selected"; }?>>Licenciatura</option>
-											<option value="Barchillerato"<?php if($NivelEstudio == 'Barchillerato'){ echo "selected"; }?>>Barchillerato</option>
+											<option value="Maestria"<?php if($UltimoGrado == 'Maestría'){ echo "selected"; }?>>Maestría</option>
+											<option value="Licenciatura"<?php if($UltimoGrado == 'Licenciatura'){ echo "selected"; }?>>Licenciatura</option>
+											<option value="Barchillerato"<?php if($UltimoGrado == 'Barchillerato'){ echo "selected"; }?>>Barchillerato</option>
 										</select>
 									</div>
 									<div class="col-md-6">
-										<b>Carrera o Especialidad:</b>
-										<input type="text" name="CarreraEspecialidad" class="form-control input-sm" value="<?php echo $NombreEstudio; ?>" onkeypress="return soloLetras(event);">
-									</div>
+											<b>Carrera o Especialidad:</b>
+											<input type="text" name="CarreraEspecialidad" class="form-control input-sm"  value="<?php echo $Carrera?>" onkeypress="return soloLetras(event);">
+										</div>
+										<div class="col-md-6">
+											<b>Área de conocimientos:</b>
+											<input type="text" name="AreaConocimientos" class="form-control input-sm"  value="<?php echo $AreaConocimiento?>" onkeypress="return soloLetras(event);">
+										</div>
+										<div class="col-md-6">
+											<b>Entidad Federativa dónde estudió:</b>
+											<input type="text" name="EntidadFedEstudio" class="form-control input-sm"  value="<?php echo $EntidadFederativa?>" onkeypress="return soloLetras(event);">
+										</div>
+										<div class="col-md-6">
+											<b>Nombre de la Institución:</b>
+											<input type="text" name="NombreInstitucion" class="form-control input-sm"  value="<?php echo $Institucion?>" onkeypress="return soloLetras(event);">
+										</div>
+										<div class="col-md-6">
+											<b>Estatus:</b>
+											<input type="text" name="Estatus" class="form-control input-sm"  value="<?php echo $Estatus?>" onkeypress="return soloLetras(event);">
+										</div>
+										<div class="col-md-6">
+											<b>Nombre del documento académico:</b>
+											<input type="text" name="DocAcademico" class="form-control input-sm" value="<?php echo $DocAcademico?>" onkeypress="return soloLetras(event);">
+										</div>
+										<div class="col-md-6">
+											<b>Fecha de Expedición del documento:</b>
+											<input type="date" name="ExpDocAcademico" class="form-control input-sm" value="<?php echo $FechaExpedicion?>" onkeypress="return soloLetras(event);">
+										</div>
+										<div class="col-md-6">
+											<b>No. De folio del documento académico:</b>
+											<input type="text" name="FolioDocAcademico" class="form-control input-sm" value="<?php echo $NoFolioDoc?>" onkeypress="return soloLetras(event);">
+										</div>
 								</div>
+								<br>	
 								<button type="submit" class="btn btn-success glyphicon glyphicon-plus" > Guardar registro</button><br>
 							</div>
 						</div>
@@ -625,13 +670,39 @@ function soloLetras(e) {
             $Domicilio->setEstado($Estado);
             $Domicilio->setTelefonoCasa($TelefonoCasa);
 
+            //--------------------------------------------------------------------------------------------------            
+	            include_once "../../clases/EstudiosPersonal.php";
+	            $EstudiosPersonal = new EstudiosPersonal();
+				
+				$UltimoGrado = $_POST['UltimoGradoEstudios'];
+	            $CarreraEspecialidad = $_POST['CarreraEspecialidad'];
+	            $AreaConocimientos = $_POST['AreaConocimientos'];
+	            $EntidadFederativa = $_POST['EntidadFedEstudio'];
+	            $Institucion = $_POST['NombreInstitucion'];
+	            $Estatus = $_POST['Estatus'];
+	            $DocAcademico = $_POST['DocAcademico'];
+	            $FechaExpedicion = $_POST['ExpDocAcademico'];
+	            $NoFolioDoc = $_POST['FolioDocAcademico'];
+
+
+	            $EstudiosPersonal->setPersonal_idPersonal($_SESSION['NombreUsuarioCAP']);
+	            $EstudiosPersonal->setUltimoGrado($UltimoGrado);
+	            $EstudiosPersonal->setCarrera($CarreraEspecialidad);
+	            $EstudiosPersonal->setAreaConocimiento($AreaConocimientos);
+	            $EstudiosPersonal->setEntidadFederativa($EntidadFederativa);
+	            $EstudiosPersonal->setInstitucion($Institucion);
+	            $EstudiosPersonal->setEstatus($Estatus);
+	            $EstudiosPersonal->setDocAcademico($DocAcademico);
+	            $EstudiosPersonal->setFechaExpedicion($FechaExpedicion);
+	            $EstudiosPersonal->setNoFolioDoc($NoFolioDoc);
+
             /*$SQLControlador = new SQLControlador();
             $SQLControlador-> AgregarDomicilioAlumno($Domicilio,$Alumno);*/
             include_once "../../clases/SQLControlador.php";
 
 
             $SQLControlador = new SQLControlador();
-            $SQLControlador->AltaCedulaPersonal($Personal,$LugarNacimiento,$Domicilio);
+            $SQLControlador->AltaCedulaPersonal($Personal,$LugarNacimiento,$Domicilio, $EstudiosPersonal);
 //--------------------------------------------------------------------------------------------------
         }
         ?>

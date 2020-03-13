@@ -98,8 +98,8 @@
      <!--Inicio contenedor Cabecera-->
      <div class="container">
       <br>
-      <?php include "../menus/MenuCapturista.php";
-      MenuAlumnoCapturista();?>
+      <?php include "../menus/MenuARoot.php";
+      MenuGeneralDentro();?>
     </div>
     <!--Fin contenedor Cabecera-->
 
@@ -122,7 +122,7 @@
           <div class="col-sm-9">
            <!--Inicio de contenido de caja de texto-->
            <br>
-           <div id="buscador"></div>
+           <div class="col-md-12" id="buscador"></div>
            <div class="col-md-12" id="tabla"></div>
            
 
@@ -157,6 +157,7 @@
                  <option value="4">Docente</option>
                  <option value="5">Alumno</option>
                  <option value="6">Administrativo</option>
+                 <option value="7">Super Usuario</option>
                </select>
                <div class="modal-footer">
                 <button type="button" class="btn btn-success"  id="GuardarRegistro" >
@@ -176,11 +177,11 @@
       <div class="modal-dialog modal-md" role="document">
        <div class="modal-content">
         <div class="modal-header">
-         <h4 class="modal-title" id="myModalLabel">Modificar cláusula</h4>
+         <h4 class="modal-title" id="myModalLabel">Modificar Asignacion de privilegios</h4>
          <button type="button" class="close" data-dismiss="modal" id="CerrarRegistroU" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         </div>
        <div class="modal-body">
-        <input type="text" hidden="" id="idPrivilegiou" name="">
+        <input type="text" hidden="" id="idPrivilegiou" name="idPrivilegiou">
         <label>Personal:</label>
                <select name="Personalu" id="Personalu" class="m-1 custom-select">
                   <?php
@@ -203,10 +204,11 @@
                  <option value="4">Docente</option>
                  <option value="5">Alumno</option>
                  <option value="6">Administrativo</option>
+                 <option value="7">Super Usuario</option>
                </select>
         <div class="modal-footer">
           <button type="button" class="btn btn-success"  id="actualizadatos"  >
-           Agregar
+           Actualizar
          </button>
          <button type="button" class="btn btn-danger"  id="CerrarRegistroAU"  data-dismiss="modal"  >
            Cerrar
@@ -230,7 +232,7 @@
   <script type="text/javascript">
    $(document).ready(function(){
     $('#tabla').load('../../clases/tablasmodales/TablaAsignacionPrivilegios.php');
-    //$('#buscador').load('./../../clases/tablasmodales/BuscadorClausulas.php');
+    $('#buscador').load('./../../clases/tablasmodales/BuscadorAsignacionPrivilegios.php');
 
     		//ValidarTutorJustificantesRegistro();
            //ValidarTutorJustificantesModificacion();

@@ -1,8 +1,8 @@
 <?php 
 if (!isset($_SESSION)) { session_start(); }
-if (!isset ($_SESSION['LoggedinDocenteTutor']) && !isset ($_SESSION['IdDocenteTutor']) && !isset ($_SESSION['IdAlumnoDocenteTutor']))
+if (!isset ($_SESSION['LoggedinDirectivo']) && !isset ($_SESSION['IdDirectivo']) && !isset ($_SESSION['IdAlumnoDirectivo']))
 {
-   echo "<script language='javascript'>window.location='LoginDocenteTutor.php'</script>";
+   echo "<script language='javascript'>window.location='LoginDirectivo.php'</script>";
 }
 unset($_SESSION['ConsultaCRes']);
 
@@ -47,8 +47,8 @@ unset($_SESSION['ConsultaCRes']);
   <!--Inicio contenedor Cabecera-->
   <div class="container">
    <br>
-   <?php include "../menus/MenuDocenteTutor.php";
-      MenuAlumnoDocenteTutor();?>
+   <?php include "../menus/MenuDirectivo.php";
+      MenuAlumnoDirectivo();?>
  <!--Fin contenedor Cabecera-->
 
  <!--Inicio Contenedor medio-->
