@@ -39,8 +39,8 @@ if (!isset ($_SESSION['LoggedinAdmin']))
     <!--Inicio contenedor Cabecera-->
     <div class="container">
     	<br>
-    	<?php include "../menus/MenuARoot.php";
-      MenuAdministrador_root();?>
+    	<?php include "../menus/MenuAdmin.php";
+      MenuAdministrador();?>
 
 
        </div>

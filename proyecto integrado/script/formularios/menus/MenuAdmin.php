@@ -32,7 +32,7 @@ function MenuAdministrador(){
               <div class="mynav"> 
               <nav class="navbar navbar-expand-lg navbar-light bg-light">
                 <img src="./../../../imagenes/Rio Grande2.jpg" width="110" height="60" style="margin-right:10px" >
-                  <a class="nav-link mr-3 " href="InicioARoot.php"><h1> Hola '.$_SESSION['NombreUsuarioARoot'].'</h1></a>
+                  <a class="nav-link mr-3 " href="InicioARoot.php"><h1> Hola '.$_SESSION['NombreUsuarioAdmin'].'</h1></a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                   <span class="navbar-toggler-icon"></span>
                 </button>

@@ -41,13 +41,13 @@ $Mysql->Conectar();
 				if(isset($_SESSION['ConsultaPer'])){
 					if($_SESSION['ConsultaPer'] > 0){
 						$idPer=$_SESSION['ConsultaPer'];
-						$Consulta = "SELECT personal.idPersonal, personal.Nombre, personal.ApellidoP, personal.ApellidoM, personal.NoEmpleado FROM personal WHERE personal.idPersonal = $idPer";
+						$Consulta = "SELECT personal.idPersonal, personal.Nombre, personal.ApellidoP, personal.ApellidoM, informacionlaboral.NoEmpleado from personal, informacionlaboral where informacionlaboral.idInformacionLaboral = personal.InformacionLaboral_idInformacionLaboral and personal.idPersonal = $idPer";
 
 					}else{
-						$Consulta = "SELECT personal.idPersonal, personal.Nombre, personal.ApellidoP, personal.ApellidoM, personal.NoEmpleado FROM personal;";
+						$Consulta = "SELECT personal.idPersonal, personal.Nombre, personal.ApellidoP, personal.ApellidoM, informacionlaboral.NoEmpleado from personal, informacionlaboral where informacionlaboral.idInformacionLaboral = personal.InformacionLaboral_idInformacionLaboral;";
 					}
 				}else{
-					$Consulta = "SELECT personal.idPersonal, personal.Nombre, personal.ApellidoP, personal.ApellidoM, personal.NoEmpleado FROM personal; ";
+					$Consulta = "SELECT personal.idPersonal, personal.Nombre, personal.ApellidoP, personal.ApellidoM, informacionlaboral.NoEmpleado from personal, informacionlaboral where informacionlaboral.idInformacionLaboral = personal.InformacionLaboral_idInformacionLaboral; ";
 				}
 				$Resultado = $Mysql->Consulta($Consulta);
 				while($ver=mysqli_fetch_row($Resultado)){ 

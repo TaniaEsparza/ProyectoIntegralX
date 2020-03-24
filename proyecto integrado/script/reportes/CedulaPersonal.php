@@ -1,6 +1,7 @@
 <?php
 session_start();
 
+$idPersonal = $_GET['idPersonal'];
 // Include the main TCPDF library (search for installation path).
 require_once('../../TCPDF/TCPDF-master/tcpdf.php');
 include_once "../Clases/mysqlconector.php";
@@ -109,7 +110,7 @@ $pdf->AddPage();
 					$Mysql = new MySQLConector();
 					$Mysql->Conectar();
 
-					$Consulta = "SELECT * FROM `personal`, `esudiospersonal` WHERE idPersonal ='".$_SESSION['NombreUsuarioCAP']."' AND esudiospersonal.Personal_idPersonal = personal.idPersonal;";
+					$Consulta = "SELECT * FROM `personal`, `esudiospersonal`, `informacionlaboral` WHERE idPersonal = '".$idPersonal."' AND esudiospersonal.Personal_idPersonal = personal.idPersonal AND Personal.InformacionLaboral_idInformacionLaboral = informacionlaboral.idInformacionLaboral;";
 					$Resultado = $Mysql->Consulta($Consulta);
 					$row = mysqli_fetch_array($Resultado);
 
@@ -141,6 +142,8 @@ $pdf->AddPage();
 	            	$DocAcademico = $row['DocAcademico'];
 	            	$FechaExpedicion = $row['FechaExpedicion'];
 	            	$NoFolioDoc = $row['NoFolioDoc'];
+	            	$Neto = $row['Neto'];
+					$Bruto = $row['Bruto'];
 					
 					$Consulta2 = "SELECT * FROM `lugarnacimiento` WHERE idLugarNacimiento = '".$idLN."'; ";
 					$Resultado2 = $Mysql->Consulta($Consulta2);
@@ -166,8 +169,13 @@ $pdf->AddPage();
 					$Estado = $row3['Estado'];
 					$TelCasa = $row3['TelefonoCasa'];
 
-	$html = "<h2> -- Cédula Básica -- </h2>
-	<h3>= Información Personal =</h3>
+	$html = "<h2 align=\"center\"> -- Cédula Básica -- </h2>
+	<br>
+	<table>
+		
+		<tbody>
+			<tr>
+				<td><h3>= Información Personal =</h3>
 	<b>No. Empleado: </b> ".$NoEmpleado." <br>
 	<b>Nombre: </b> ".$Nombre."<br>
 	<b>RFC: </b> ".$RFC."<br>
@@ -178,15 +186,16 @@ $pdf->AddPage();
 	<b>Sexo: </b> ".$Sexo."<br>
 	<b>Estado Civil: </b> ".$EstadoCivil."<br>
 	<b>Telefono: </b> ".$TelefonoCelular."<br>
-	<b>Correo: </b> ".$Correo."
-
-	<h3>= Lugar de Nacimiento =</h3>
+	<b>Correo: </b> ".$Correo."<br></td>
+				<td><h3>= Lugar de Nacimiento =</h3>
 	<b>Localidad: </b> ".$LocalidadN." <br>
 	<b>Municipio: </b> ".$MunicipioN."<br>
 	<b>Estado: </b> ".$EstadoN."<br>
 	<b>Pais: </b> ".$PaisN."<br>
-
-	<h3>= Domicilo =</h3>
+				</td>
+			</tr>
+			<tr>
+				<td><h3>= Domicilo =</h3>
 	<b>CP: </b> ".$CP." <br>
 	<b>Calle: </b> ".$Calle."<br>
 	<b>Número: </b> ".$Numero."<br>
@@ -195,13 +204,19 @@ $pdf->AddPage();
 	<b>Localidad: </b> ".$Localidad."<br>
 	<b>Estado: </b> ".$Estado."<br>
 	<b>Tel. Casa: </b> ".$TelCasa."<br>
-	
+				</td>
+				<td>
 	<h3>= Información Laboral =</h3>
 	<b>Fecha de Ingreso: </b> ".$FechaIngreso." <br>
 	<b>Departamento: </b> ".$Departamento."<br>
 	<b>Puesto: </b> ".$Puesto."<br>
 	<b>Horas: </b> ".$Horas."<br>
-
+	<b>Bruto: $</b> ".$Bruto."<br>
+	<b>Neto: $</b> ".$Neto."<br>
+				</td>
+			</tr>
+			<tr>
+				<td colspan=\"2\">
 	<h3>= Información Academica =</h3>
 	<b>Último Grado de estudios: </b> ".$UltimoGrado." <br>
 	<b>Carrera o Especialidad: </b> ".$Carrera."<br>
@@ -211,7 +226,12 @@ $pdf->AddPage();
 	<b>Estatus: </b> ".$Estatus."<br>
 	<b>Nombre del documento académico: </b> ".$DocAcademico."<br>
 	<b>Fecha de Expedición del documento: </b> ".$FechaExpedicion."<br>
-	<b>No. De folio del documento académico: </b> ".$NoFolioDoc."<br>
+	<b>No. De folio del documento académico: </b> ".$NoFolioDoc."<br></td>
+				
+			</tr>
+		</tbody>
+	</table>
+
 	";
 
 	$pdf->SetFont('helvetica', '', 11);

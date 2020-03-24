@@ -56,7 +56,7 @@ function NumeroDecimal(e, field) {
   // 0-9
 if (key > 47 && key < 58) {
 	if (field.value == "") return true
-		regexp = /.[0-9]{2}$/
+		regexp = /.[0-9]{5}$/
 	return !(regexp.test(field.value))
 }
   // .
@@ -199,6 +199,18 @@ miCampoTexto = document.getElementById("NoEmpleado").value;
   	alert('Verifica el campo Horas esta vacio!');
   	return false;
   }
+
+  miCampoTexto = document.getElementById("Bruto").value;
+  if (miCampoTexto.length == 0 || /^\s+$/.test(miCampoTexto)) {
+  	alert('Verifica el campo Bruto esta vacio!');
+  	return false;
+  }
+
+  miCampoTexto = document.getElementById("Neto").value;
+  if (miCampoTexto.length == 0 || /^\s+$/.test(miCampoTexto)) {
+  	alert('Verifica el campo Neto esta vacio!');
+  	return false;
+  }
  
   return true;
 }
@@ -235,10 +247,13 @@ miCampoTexto = document.getElementById("NoEmpleado").value;
 
 					$Mysql = new MySQLConector();
 					$Mysql->Conectar();
-					$Consulta = "SELECT * FROM `personal` WHERE idPersonal = '".$_SESSION['idPersonal']."';";
+					$Consulta = "SELECT * FROM `personal`, `esudiospersonal`, `informacionlaboral` WHERE idPersonal = '".$_SESSION['idPersonal']."' AND esudiospersonal.Personal_idPersonal = personal.idPersonal AND Personal.InformacionLaboral_idInformacionLaboral = informacionlaboral.idInformacionLaboral;";
+
 					$Resultado = $Mysql->Consulta($Consulta);
 					$row = mysqli_fetch_array($Resultado);
-
+					$idIL = $row['idInformacionLaboral'];
+					$idLN = $row['LugarNacimiento_idLugarNacimiento'];
+					$idD=$row['Domicilio_idDomicilio'];
 					$Nombre=$row["Nombre"];
 					$ApellidoP=$row["ApellidoP"];
 					$ApellidoM = $row['ApellidoM']; 
@@ -250,6 +265,23 @@ miCampoTexto = document.getElementById("NoEmpleado").value;
 					$Departamento = $row['Departamento'];
 					$Puesto = $row['Puesto'];
 					$Horas = $row['Horas'];
+					$TelefonoCelular = $row['TelefonoCel'];
+					$Correo = $row['Correo'];
+					$FechaNacimiento = $row['FechaNacimiento'];
+					$TipoSangre = $row['TipoSangre'];
+					$Sexo = $row['Sexo'];
+					$EstadoCivil = $row['EstadoCivil'];
+					$UltimoGrado = $row['UltimoGrado'];
+	            	$Carrera = $row['Carrera'];
+	            	$AreaConocimiento = $row['AreaConocimiento'];
+	            	$EntidadFederativa = $row['EntidadFederativa'];
+	            	$Institucion = $row['Institucion'];
+	            	$Estatus = $row['Estatus'];
+	            	$DocAcademico = $row['DocAcademico'];
+	            	$FechaExpedicion = $row['FechaExpedicion'];
+	            	$NoFolioDoc = $row['NoFolioDoc'];
+	            	$Neto = $row['Neto'];
+					$Bruto = $row['Bruto'];
 
 					?>
 
@@ -263,29 +295,29 @@ miCampoTexto = document.getElementById("NoEmpleado").value;
 								<div class="row">
 									<div class="col-sm-4">
 										<b>Nombre(s):</b>
-										<input type="text" name="Nombre"  class="form-control" id="Nombre" placeholder="<?php echo $Nombre?>" on keypress="return soloLetras(event);" maxlength="25">		
+										<input type="text" name="Nombre"  class="form-control" id="Nombre" value="<?php echo $Nombre?>" on keypress="return soloLetras(event);" maxlength="25">		
 									</div>
 									<div class="col-sm-4">
 										<b>Apellido Paterno:</b>
-										<input type="text" name="ApellidoP" class="form-control" id="ApellidoP" placeholder="<?php echo $ApellidoP?>" onkeypress="return soloLetras(event);" maxlength="20">
+										<input type="text" name="ApellidoP" class="form-control" id="ApellidoP" value="<?php echo $ApellidoP?>" onkeypress="return soloLetras(event);" maxlength="20">
 									</div>
 									<div class="col-md-4">
 										<b>Apellido Materno:</b>
-										<input type="text" name="ApellidoM" class="form-control" id="ApellidoM" placeholder="<?php echo $ApellidoM?>" onkeypress="return soloLetras(event);" maxlength="20">
+										<input type="text" name="ApellidoM" class="form-control" id="ApellidoM" value="<?php echo $ApellidoM?>" onkeypress="return soloLetras(event);" maxlength="20">
 									</div>
 								</div>
 								<div class="row">
 									<div class="col-md-4">
 										<b>RFC:</b>
-										<input type="text" name="RFC" class="form-control" id="RFC"  placeholder="<?php echo $RFC?>" maxlength="13" onKeyUp="this.value = this.value.toUpperCase();" onkeypress="return NumerosLetrasSinCaracteres(event);" >
+										<input type="text" name="RFC" class="form-control" id="RFC" value="<?php echo $RFC?>" maxlength="13" onKeyUp="this.value = this.value.toUpperCase();" onkeypress="return NumerosLetrasSinCaracteres(event);" >
 									</div>
 									<div class="col-md-4">
 										<b>CURP:</b>
-										<input type="text" name="CURP" class="form-control" id="CURP" placeholder="<?php echo $CURP?>" maxlength="18" onKeyUp="this.value = this.value.toUpperCase();" onkeypress="return NumerosLetrasSinCaracteres(event);" >
+										<input type="text" name="CURP" class="form-control" id="CURP" value="<?php echo $CURP?>" maxlength="18" onKeyUp="this.value = this.value.toUpperCase();" onkeypress="return NumerosLetrasSinCaracteres(event);" >
 									</div>
 									<div class="col-md-4">
 										<b>No. IMSS:</b>
-										<input type="text" name="IMSS" class="form-control" id="IMSS" placeholder="<?php echo $IMSS?>" maxlength="11" onKeyUp="this.value = this.value.toUpperCase();" onkeypress="return soloNumeros(event);" >
+										<input type="text" name="IMSS" class="form-control" id="IMSS" value="<?php echo $IMSS?>" maxlength="11" onKeyUp="this.value = this.value.toUpperCase();" onkeypress="return soloNumeros(event);" >
 									</div>
 								</div>
 								
@@ -293,10 +325,11 @@ miCampoTexto = document.getElementById("NoEmpleado").value;
 								<br>
 
 								<h4 align="center">Información Laboral</h4><br>
+								<input type="hidden" name="idIL" placeholder="<?php echo $idIL;?>">
 								<div class="row">
 									<div class="col-md-4">
 										<b>Número Empleado:</b>
-										<input type="text" name="NoEmpleado" id="NoEmpleado" placeholder="<?php echo $NoEmpleado; ?>" class="form-control input-sm" " onkeypress="return soloNumeros(event);">
+										<input type="text" name="NoEmpleado" id="NoEmpleado" value="<?php echo $NoEmpleado; ?>" class="form-control input-sm" " onkeypress="return soloNumeros(event);">
 									</div>
 									<div class="col-md-4">
 										<b>Fecha de Ingreso:</b>
@@ -318,17 +351,30 @@ miCampoTexto = document.getElementById("NoEmpleado").value;
 								<div class="row">
 									<div class="col-md-4">
 										<b>Puesto:</b>
-										<input type="text" name="Puesto" id="Puesto"  placeholder="<?php echo $Puesto; ?>" class="form-control input-sm">
+										<input type="text" name="Puesto" id="Puesto"  value="<?php echo $Puesto; ?>" class="form-control input-sm" rendoly>
 										<br>
-										<button type="submit" class="btn btn-success glyphicon glyphicon-plus" > Guardar registro</button><br>
+										
 									</div>
 
 									<div class="col-md-4">
 										<b>Horas:</b>
-										<input type="text" name="Horas" id="Horas" placeholder="<?php echo $Horas; ?>" class="form-control input-sm"onkeypress="return soloNumeros(event);">
+										<input type="text" name="Horas" id="Horas" value="<?php echo $Horas; ?>" class="form-control input-sm"onkeypress="return soloNumeros(event);">
 										<br>
 									</div>
+
+									<div class="col-md-4">
+										<b>Bruto:</b>
+										<input type="text" name="Bruto" id="Bruto" value="" class="form-control input-sm"onkeypress="return NumeroDecimal(event, this);">
+										<br>
+									</div>
+									<div class="col-md-4">
+										<b>Neto:</b>
+										<input type="text" name="Neto" id="Neto" value="" class="form-control input-sm"onkeypress="return NumeroDecimal(event, this);">
+										<br>
+									</div>
+
 								</div>
+								<button type="submit" class="btn btn-success glyphicon glyphicon-plus" > Guardar registro</button><br>
 							</div>
 					
 						</div>
@@ -340,6 +386,8 @@ miCampoTexto = document.getElementById("NoEmpleado").value;
 					<?php 
 				}else{
 //---------------------------------------------------------------------------------------------------------------------------------------------------------
+					 
+
 					include_once "../../clases/Personal.php";
 					$Personal = new Personal();
 
@@ -353,7 +401,10 @@ miCampoTexto = document.getElementById("NoEmpleado").value;
 					$FechaIngreso = $_POST['FechaIngreso'];
 					$Departamento = $_POST['Departamento'];
 					$Puesto = $_POST['Puesto'];
-					$Horas = $_POST['Horas']; 
+					$Horas = $_POST['Horas'];
+					$Bruto = $_POST['Bruto'];
+					$Neto = $_POST['Neto'];
+					$idIL = $_POST['idIL']; 
 
 					$Personal->setidPersonal($_SESSION['idPersonal']);
 					$Personal->setNombre($Nombre);
@@ -362,16 +413,24 @@ miCampoTexto = document.getElementById("NoEmpleado").value;
 					$Personal->setRFC($RFC);
 					$Personal->setCURP($CURP);
 					$Personal->setSS($IMSS);
-					$Personal->setNumeroEmpleado($NoEmpleado);
-					$Personal->setFechaIngreso($FechaIngreso);
-					$Personal->setDepartamento($Departamento);
-					$Personal->setPuesto($Puesto);
-					$Personal->setHoras($Horas);
+					
 
-			include_once "../../clases/SQLControlador.php";
+					include_once "../../clases/InformacionLaboral.php";
+					$InformacionLaboral = new InformacionLaboral();
 
-          	$SQLControlador = new SQLControlador();
-            $SQLControlador->ModificacionPersonal($Personal);
+					$InformacionLaboral->setidInformacionLaboral($idIL);
+					$InformacionLaboral->setNoEmpleado($NoEmpleado);
+					$InformacionLaboral->setFechaIngreso($FechaIngreso);
+					$InformacionLaboral->setDepartamento($Departamento);
+					$InformacionLaboral->setPuesto($Puesto);
+					$InformacionLaboral->setHoras($Horas);
+					$InformacionLaboral->setBruto($Bruto);
+					$InformacionLaboral->setNeto($Neto);
+
+					include_once "../../clases/SQLControlador.php";
+
+    		      	$SQLControlador = new SQLControlador();
+		            $SQLControlador->ModificacionPersonal($Personal, $InformacionLaboral);
 
 
 

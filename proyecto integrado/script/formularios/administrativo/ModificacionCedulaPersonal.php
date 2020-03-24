@@ -276,7 +276,7 @@ function soloLetras(e) {
 					$Mysql = new MySQLConector();
 					$Mysql->Conectar();
 
-					$Consulta = "SELECT * FROM `personal`, `esudiospersonal` WHERE idPersonal ='".$_SESSION['NombreUsuarioCAP']."' AND esudiospersonal.Personal_idPersonal = personal.idPersonal;";
+					$Consulta = "SELECT * FROM `personal`, `esudiospersonal`, `informacionlaboral` WHERE idPersonal ='".$_SESSION['NombreUsuarioCAP']."' AND esudiospersonal.Personal_idPersonal = personal.idPersonal AND personal.InformacionLaboral_idInformacionLaboral = informacionlaboral.idInformacionLaboral;";
 					$Resultado = $Mysql->Consulta($Consulta);
 					$row = mysqli_fetch_array($Resultado);
 
@@ -293,6 +293,8 @@ function soloLetras(e) {
 					$Departamento = $row['Departamento'];
 					$Puesto = $row['Puesto'];
 					$Horas = $row['Horas'];
+					$Bruto = $row['Bruto'];
+					$Neto = $row['Neto'];
 					$TelefonoCelular = $row['TelefonoCel'];
 					$Correo = $row['Correo'];
 					$FechaNacimiento = $row['FechaNacimiento'];
@@ -334,35 +336,35 @@ function soloLetras(e) {
 								<br>
 								<div class="row">
 									<div class="col-sm-4">
-										<b><i>Nombre(s):</i></b>
+										<b>Nombre(s):</b>
 										<input type="text" name="NombrePersonal"  class="form-control" id="NombreAlumno" placeholder="<?php echo $Nombre?>" onkeypress="return soloLetras(event);" maxlength="25" readonly="readonly">		
 									</div>
 									<div class="col-sm-4">
-										<b><i>Apellido Paterno:</i></b>
+										<b>Apellido Paterno:</b>
 										<input type="text" name="ApellidoP" class="form-control" id="ApellidoP" placeholder="<?php echo $ApellidoP?>" onkeypress="return soloLetras(event);" maxlength="20" readonly="readonly">
 									</div>
 									<div class="col-md-4">
-										<b><i>Apellido Materno:</i></b>
+										<b>Apellido Materno:</b>
 										<input type="text" name="ApellidoM" class="form-control" id="ApellidoM" placeholder="<?php echo $ApellidoM?>" onkeypress="return soloLetras(event);" maxlength="20" readonly="readonly">
 									</div>
 								</div>
 								<div class="row">
 									<div class="col-md-4">
-										<b><i>RFC:</i></b>
+										<b>RFC:</b>
 										<input type="text" name="RFC" class="form-control" id="RFC"  placeholder="<?php echo $RFC?>" maxlength="13" onKeyUp="this.value = this.value.toUpperCase();" onkeypress="return NumerosLetrasSinCaracteres(event);" readonly="readonly">
 									</div>
 									<div class="col-md-4">
-										<b><i>CURP:</i></b>
+										<b>CURP:</b>
 										<input type="text" name="CURP" class="form-control" id="CURP" placeholder="<?php echo $CURP?>" maxlength="18" onKeyUp="this.value = this.value.toUpperCase();" onkeypress="return NumerosLetrasSinCaracteres(event);" readonly="readonly">
 									</div>
 									<div class="col-md-4">
-										<b><i>No. IMSS:</i></b>
+										<b>No. IMSS:</b>
 										<input type="text" name="IMSS" class="form-control" id="IMSS" placeholder="<?php echo $IMSS?>" maxlength="11" onKeyUp="this.value = this.value.toUpperCase();" onkeypress="return soloNumeros(event);" readonly="readonly">
 									</div>
 								</div>
 								<div class="row">
 									<div class="col-md-4">
-										<b><i>Tipo de Sangre:</i></b>
+										<b>Tipo de Sangre:</b>
 										<select name="TipoSangre" class="m-1 custom-select">
 											<option value="AB+" <?php if($TipoSangre == 'AB+'){ echo "selected"; }?>>AB+</option>
 											<option value="AB-"<?php if($TipoSangre == 'AB-'){ echo "selected"; }?>>AB-</option>
@@ -375,22 +377,22 @@ function soloLetras(e) {
 										</select>
 									</div>
 									<div class="col-md-4">
-										<b><i>Estado Civil:</i></b>
+										<b>Estado Civil:</b>
 										<input type="text" name="EstadoCivil" class="form-control" id="EstadoCivil" value="<?php echo $EstadoCivil?>" onkeypress="return soloLetras(event);" maxlength="20">
 									</div>
 									<div class="col-md-4">
-										<b><i>Fecha Nacimiento:</i></b>
+										<b>Fecha Nacimiento:</b>
 										<input type="date" name="FechaNacimiento" class="form-control" id="FechaNacimiento" value="<?php echo $FechaNacimiento?>" >
 									</div>
 								</div>
 								
 								<div class="row">
 									<div class="col-md-4">
-										<b><i>Correo:</i></b>
+										<b>Correo:</b>
 										<input type="email" name="Correo" class="form-control" id="Correo" value="<?php echo $Correo ?>" onkeypress="return NumerosLetrasCorreo(event);" maxlength="50">
 									</div>
 									<div class="col-md-4">
-										<b><i>Sexo:</i></b>
+										<b>Sexo:</b>
 										<select name="Sexo" class="m-1 custom-select ">
 											<!--select2-hidden-accesible-->
 											<option value="F"<?php if($Sexo == 'F'){ echo "selected"; }?>>F</option>
@@ -398,7 +400,7 @@ function soloLetras(e) {
 										</select>
 									</div>
 									<div class="col-md-4">
-										<b><i>Telefono Celular:</i></b>
+										<b>Telefono Celular:</b>
 										<input type="text" name="TelefonoCelular" class="form-control" id="TelefonoEmergencia" value="<?php echo $TelefonoCelular ?>" onKeyPress="return soloNumeros(event)" maxlength="10">
 									</div>
 								</div>
@@ -433,21 +435,21 @@ function soloLetras(e) {
 									<input type="checkbox" name="OtroLugar" onclick="Paisl.disabled = Estadol.disabled = Localidadl.disabled = Municipiol.disabled = !this.checked"/> <br>
 									<div class="row">
 										<div class="col-md-6">
-											<b>País</b>
+											<b>País:</b>
 											<input type="text" name="Paisl" id="Paisl" class="form-control input-sm" placeholder="Pais" onkeypress="return NumerosLetras(event);" disabled maxlength="30">
 										</div>
 										<div class="col-md-6">
-											<b>Estado</b>
+											<b>Estado:</b>
 											<input type="text" name="Estadol" id="Estadol" class="form-control input-sm" placeholder="Estado" onkeypress="return NumerosLetras(event);" disabled maxlength="30">
 										</div>
 									</div>
 									<div class="row">
 										<div class="col-md-6">
-											<b>Municipio</b>
+											<b>Municipio:</b>
 											<input type="text" name="Municipiol" id="Municipiol" class="form-control input-sm" placeholder="Municipio" onkeypress="return NumerosLetras(event);" disabled maxlength="30">
 										</div>
 										<div class="col-md-6">
-											<b>Localidad</b>
+											<b>Localidad:</b>
 											<input type="text" name="Localidadl" id="Localidadl" class="form-control input-sm" placeholder="Localidad" onkeypress="return NumerosLetras(event);" disabled maxlength="30">
 										</div>
 									</div>				
@@ -460,41 +462,41 @@ function soloLetras(e) {
 								<h4 align="center">Domicilio</h4><br>
 								<div class="row">
 									<div class="col-md-4">
-										<b>CP</b>
+										<b>CP:</b>
 										<input type="text" name="CPd" id="CPd" class="form-control input-sm" value="<?php echo $CP?>" onKeyPress="return soloNumeros(event)" maxlength="5" >
 									</div>
 									<div class="col-md-4">
-										<b>Calle</b>
+										<b>Calle:</b>
 										<input type="text" name="Called" id="Called" class="form-control input-sm" value="<?php echo $Calle ?>" onkeypress="return NumerosLetras(event);" maxlength="30" >
 									</div>
 									<div class="col-md-4">
-										<b>Número</b>
+										<b>Número:</b>
 										<input type="text" name="Numerod" id="Numerod" class="form-control input-sm" value="<?php echo $Numero ?>" onkeypress="return NumerosLetras(event);" maxlength="20">
 									</div>
 								</div>
 								
 								<div class="row">
 									<div class="col-md-4">
-										<b>Colonia</b>
+										<b>Colonia:</b>
 										<input type="text" name="Coloniad" id="Coloniad" class="form-control input-sm" value="<?php echo $Colonia ?>" onkeypress="return NumerosLetras(event);" maxlength="50" >
 									</div>
 									<div class="col-md-4">
-										<b>Municipio</b>
+										<b>Municipio:</b>
 										<input type="text" name="Municipiod" id="Municipiod" class="form-control input-sm" value="<?php echo $Municipio ?>" onkeypress="return NumerosLetras(event);" maxlength="50" >
 									</div>
 									<div class="col-md-4">
-										<b>Localidad</b>
+										<b>Localidad:</b>
 										<input type="text" name="Localidadd" id="Localidadd" class="form-control input-sm" value="<?php  echo $Localidad ?>" onkeypress="return NumerosLetras(event);" maxlength="50" >
 									</div>
 								</div>
 								
 								<div class="row">
 									<div class="col-md-4">
-										<b>Estado</b>
+										<b>Estado:</b>
 										<input type="text" name="Estadod" id="Estadod" class="form-control input-sm" value="<?php echo $Estado ?>" onkeypress="return soloLetras(event);" maxlength="50">
 									</div>
 									<div class="col-md-4">
-										<b>Tel. Casa</b>
+										<b>Tel. Casa:</b>
 										<input type="text" name="TelCasad" id="TelCasad" class="form-control input-sm" value="<?php echo $TelCasa?>" onKeyPress="return soloNumeros(event)" maxlength="10"> 
 									</div>
 								</div>								
@@ -530,14 +532,13 @@ function soloLetras(e) {
 									</div>
 									<div class="col-md-4">
 										<b>Bruto: </b>
-										<input type="text" name="Bruto"  placeholder="<?php //echo $Bruto; ?>" class="form-control input-sm" readonly="readonly">
+										<input type="text" name="Bruto"  placeholder="<?php echo $Bruto; ?>" class="form-control input-sm" readonly="readonly">
 									</div>
 								</div>
 								<div class="row">
-									
 									<div class="col-md-4">
 										<b>Neto: </b>
-										<input type="text" name="Neto" placeholder="<?php //echo $Neto; ?>" class="form-control input-sm" readonly="readonly">
+										<input type="text" name="Neto" placeholder="<?php echo $Neto; ?>" class="form-control input-sm" readonly="readonly">
 									</div>
 								</div>
 							</div>
@@ -581,11 +582,11 @@ function soloLetras(e) {
 										</div>
 										<div class="col-md-6">
 											<b>Fecha de Expedición del documento:</b>
-											<input type="date" name="ExpDocAcademico" class="form-control input-sm" value="<?php echo $FechaExpedicion?>" onkeypress="return soloLetras(event);">
+											<input type="date" name="ExpDocAcademico" class="form-control input-sm" value="<?php echo $FechaExpedicion?>" onkeypress="return soloNumeros(event);">
 										</div>
 										<div class="col-md-6">
 											<b>No. De folio del documento académico:</b>
-											<input type="text" name="FolioDocAcademico" class="form-control input-sm" value="<?php echo $NoFolioDoc?>" onkeypress="return soloLetras(event);">
+											<input type="text" name="FolioDocAcademico" class="form-control input-sm" value="<?php echo $NoFolioDoc?>" onkeypress="return soloNumeros(event);">
 										</div>
 								</div>
 								<br>	

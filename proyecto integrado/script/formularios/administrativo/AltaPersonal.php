@@ -56,7 +56,7 @@ function NumeroDecimal(e, field) {
   // 0-9
 if (key > 47 && key < 58) {
 	if (field.value == "") return true
-		regexp = /.[0-9]{2}$/
+		regexp = /.[0-9]{5}$/
 	return !(regexp.test(field.value))
 }
   // .
@@ -199,6 +199,18 @@ miCampoTexto = document.getElementById("NoEmpleado").value;
   	alert('Verifica el campo Horas esta vacio!');
   	return false;
   }
+
+  miCampoTexto = document.getElementById("Bruto").value;
+  if (miCampoTexto.length == 0 || /^\s+$/.test(miCampoTexto)) {
+  	alert('Verifica el campo Bruto esta vacio!');
+  	return false;
+  }
+
+  miCampoTexto = document.getElementById("Neto").value;
+  if (miCampoTexto.length == 0 || /^\s+$/.test(miCampoTexto)) {
+  	alert('Verifica el campo Neto esta vacio!');
+  	return false;
+  }
  
   return true;
 }
@@ -282,7 +294,7 @@ miCampoTexto = document.getElementById("NoEmpleado").value;
 										<select name="Departamento" class="m-1 custom-select">
 
 											<option value="Docente">Docente</option>
-											<option value="Adminitrativo">Adminitrativo</option>
+											<option value="Administrativo">Administrativo</option>
 											<option value="Directivo">Directivo</option>
 											
 										</select>
@@ -294,7 +306,7 @@ miCampoTexto = document.getElementById("NoEmpleado").value;
 										<b>Puesto:</b>
 										<input type="text" name="Puesto" id="Puesto"  placeholder="" class="form-control input-sm">
 										<br>
-										<button type="submit" class="btn btn-success glyphicon glyphicon-plus" > Guardar registro</button><br>
+										
 									</div>
 
 									<div class="col-md-4">
@@ -302,10 +314,22 @@ miCampoTexto = document.getElementById("NoEmpleado").value;
 										<input type="text" name="Horas" id="Horas" placeholder="" class="form-control input-sm"onkeypress="return soloNumeros(event);">
 										<br>
 									</div>
+									<div class="col-md-4">
+										<b>Bruto:</b>
+										<input type="text" name="Bruto" id="Bruto" placeholder="" class="form-control input-sm"onkeypress="return NumeroDecimal(event, this);">
+										<br>
+									</div>
+								<div class="col-md-4">
+										<b>Neto:</b>
+										<input type="text" name="Neto" id="Neto" placeholder="" class="form-control input-sm"onkeypress="return NumeroDecimal(event, this);">
+										<br>
+									</div>
+
 								</div>
+								<button type="submit" class="btn btn-success glyphicon glyphicon-plus" > Guardar registro</button><br>
 							</div>
-					
-						</div>
+
+					</div>
 						<br>
 						<!--Button-->
 						<br>
@@ -327,7 +351,9 @@ miCampoTexto = document.getElementById("NoEmpleado").value;
 					$FechaIngreso = $_POST['FechaIngreso'];
 					$Departamento = $_POST['Departamento'];
 					$Puesto = $_POST['Puesto'];
-					$Horas = $_POST['Horas']; 
+					$Horas = $_POST['Horas'];
+					$Bruto = $_POST['Bruto'];
+					$Neto = $_POST['Neto']; 
 
 					$Personal->setNombre($Nombre);
 					$Personal->setApellidoP($ApellidoP);
@@ -335,16 +361,23 @@ miCampoTexto = document.getElementById("NoEmpleado").value;
 					$Personal->setRFC($RFC);
 					$Personal->setCURP($CURP);
 					$Personal->setSS($IMSS);
-					$Personal->setNumeroEmpleado($NoEmpleado);
-					$Personal->setFechaIngreso($FechaIngreso);
-					$Personal->setDepartamento($Departamento);
-					$Personal->setPuesto($Puesto);
-					$Personal->setHoras($Horas);
+					
 
-			include_once "../../clases/SQLControlador.php";
+					include_once "../../clases/InformacionLaboral.php";
+					$InformacionLaboral = new InformacionLaboral();
 
-          	$SQLControlador = new SQLControlador();
-            $SQLControlador->AltaPersonalAdmin($Personal);
+					$InformacionLaboral->setNoEmpleado($NoEmpleado);
+					$InformacionLaboral->setFechaIngreso($FechaIngreso);
+					$InformacionLaboral->setDepartamento($Departamento);
+					$InformacionLaboral->setPuesto($Puesto);
+					$InformacionLaboral->setHoras($Horas);
+					$InformacionLaboral->setBruto($Bruto);
+					$InformacionLaboral->setNeto($Neto);
+
+					include_once "../../clases/SQLControlador.php";
+
+    		      	$SQLControlador = new SQLControlador();
+            		$SQLControlador->AltaPersonalAdmin($Personal, $InformacionLaboral);
 
 //--------------------------------------------------------------------------------------------------
         }
