@@ -110,40 +110,27 @@ $pdf->AddPage();
 					$Mysql = new MySQLConector();
 					$Mysql->Conectar();
 
-					$Consulta = "SELECT * FROM `personal`, `esudiospersonal`, `informacionlaboral` WHERE idPersonal = '".$idPersonal."' AND esudiospersonal.Personal_idPersonal = personal.idPersonal AND Personal.InformacionLaboral_idInformacionLaboral = informacionlaboral.idInformacionLaboral;";
+					$Consulta = "SELECT * FROM `personal` WHERE idPersonal = '".$idPersonal."' ;";
 					$Resultado = $Mysql->Consulta($Consulta);
 					$row = mysqli_fetch_array($Resultado);
 
 					$idLN = $row['LugarNacimiento_idLugarNacimiento'];
 					$idD=$row['Domicilio_idDomicilio'];
+					$idIL = $row['InformacionLaboral_idInformacionLaboral'];
 					$Nombre=$row["Nombre"];
 					$ApellidoP=$row["ApellidoP"];
 					$ApellidoM = $row['ApellidoM']; 
 					$RFC = $row['RFC'];
 					$CURP = $row['CURP'];
 					$IMSS = $row['SS'];
-					$NoEmpleado = $row['NoEmpleado']; 
-					$FechaIngreso = $row['FechaIngreso'];
-					$Departamento = $row['Departamento'];
-					$Puesto = $row['Puesto'];
-					$Horas = $row['Horas'];
+					
 					$TelefonoCelular = $row['TelefonoCel'];
 					$Correo = $row['Correo'];
 					$FechaNacimiento = $row['FechaNacimiento'];
 					$TipoSangre = $row['TipoSangre'];
 					$Sexo = $row['Sexo'];
 					$EstadoCivil = $row['EstadoCivil'];
-					$UltimoGrado = $row['UltimoGrado'];
-	            	$Carrera = $row['Carrera'];
-	            	$AreaConocimiento = $row['AreaConocimiento'];
-	            	$EntidadFederativa = $row['EntidadFederativa'];
-	            	$Institucion = $row['Institucion'];
-	            	$Estatus = $row['Estatus'];
-	            	$DocAcademico = $row['DocAcademico'];
-	            	$FechaExpedicion = $row['FechaExpedicion'];
-	            	$NoFolioDoc = $row['NoFolioDoc'];
-	            	$Neto = $row['Neto'];
-					$Bruto = $row['Bruto'];
+					
 					
 					$Consulta2 = "SELECT * FROM `lugarnacimiento` WHERE idLugarNacimiento = '".$idLN."'; ";
 					$Resultado2 = $Mysql->Consulta($Consulta2);
@@ -169,6 +156,34 @@ $pdf->AddPage();
 					$Estado = $row3['Estado'];
 					$TelCasa = $row3['TelefonoCasa'];
 
+					$Consulta4 = "SELECT * FROM `esudiospersonal` WHERE Personal_idPersonal = '".$idPersonal."'; ";
+					$Resultado4 = $Mysql->Consulta($Consulta4);
+					$row4 = mysqli_fetch_array($Resultado4);
+					$UltimoGrado = $row4['UltimoGrado'];
+	            	$Carrera = $row4['Carrera'];
+	            	$AreaConocimiento = $row4['AreaConocimiento'];
+	            	$EntidadFederativa = $row4['EntidadFederativa'];
+	            	$Institucion = $row4['Institucion'];
+	            	$Estatus = $row4['Estatus'];
+	            	$DocAcademico = $row4['DocAcademico'];
+	            	$FechaExpedicion = $row4['FechaExpedicion'];
+	            	$NoFolioDoc = $row4['NoFolioDoc'];
+
+
+					$Consulta5 = "SELECT * FROM `informacionlaboral` WHERE idInformacionLaboral = '".$idIL."'; ";
+					$Resultado5 = $Mysql->Consulta($Consulta5);
+					$row5 = mysqli_fetch_array($Resultado5);
+					$NoEmpleado = $row5['NoEmpleado']; 
+					$FechaIngreso = $row5['FechaIngreso'];
+					$Departamento = $row5['Departamento'];
+					$Puesto = $row5['Puesto'];
+					$Horas = $row5['Horas'];
+					$Neto = $row5['Neto'];
+					$Bruto = $row5['Bruto'];
+
+
+
+
 	$html = "<h2 align=\"center\"> -- Cédula Básica -- </h2>
 	<br>
 	<table>
@@ -177,7 +192,7 @@ $pdf->AddPage();
 			<tr>
 				<td><h3>= Información Personal =</h3>
 	<b>No. Empleado: </b> ".$NoEmpleado." <br>
-	<b>Nombre: </b> ".$Nombre."<br>
+	<b>Nombre: </b> ".$Nombre." ".$ApellidoP." ".$ApellidoM."<br>
 	<b>RFC: </b> ".$RFC."<br>
 	<b>CURP: </b> ".$CURP."<br>
 	<b>No. IMSS: </b> ".$IMSS."<br>
@@ -216,7 +231,7 @@ $pdf->AddPage();
 				</td>
 			</tr>
 			<tr>
-				<td colspan=\"2\">
+			<td colspan=\"2\">
 	<h3>= Información Academica =</h3>
 	<b>Último Grado de estudios: </b> ".$UltimoGrado." <br>
 	<b>Carrera o Especialidad: </b> ".$Carrera."<br>

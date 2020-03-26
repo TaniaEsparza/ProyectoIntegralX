@@ -324,8 +324,8 @@ miCampoTexto = document.getElementById("NoEmpleado").value;
 										<input type="text" name="Neto" id="Neto" placeholder="" class="form-control input-sm"onkeypress="return NumeroDecimal(event, this);">
 										<br>
 									</div>
-
 								</div>
+								<br>
 								<button type="submit" class="btn btn-success glyphicon glyphicon-plus" > Guardar registro</button><br>
 							</div>
 

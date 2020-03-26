@@ -1,5 +1,5 @@
 <?php
-if (!isset($_SESSION)) { session_start(); $_SESSION['NombreUsuarioCAP'] = 1; }
+if (!isset($_SESSION)) { session_start(); $_SESSION['NombreUsuarioCAP'] = 8; }
 /*if (!isset ($_SESSION['LoggedinCAP']))
 {
    echo "<script language='javascript'>window.location='LoginCE.php'</script>";
@@ -140,11 +140,6 @@ function soloLetras(e) {
 <script language="javascript" type="text/javascript">
 	function validar() {
   //obteniendo el valor que se puso en el campo text del formulario
-  miCampoTexto = document.getElementById("EstadoCivil").value;
-  if (miCampoTexto.length == 0 || /^\s+$/.test(miCampoTexto)) {
-  	alert('Verifica el campo Estado Civil esta vacio!');
-  	return false;
-  }
 
   var txtFecha = document.getElementById('FechaNacimiento').value;
   if(!isNaN(txtFecha)){
@@ -378,7 +373,16 @@ function soloLetras(e) {
 									</div>
 									<div class="col-md-4">
 										<b>Estado Civil:</b>
-										<input type="text" name="EstadoCivil" class="form-control" id="EstadoCivil" value="<?php echo $EstadoCivil?>" onkeypress="return soloLetras(event);" maxlength="20">
+										<select name="EstadoCivil" class="m-1 custom-select">
+											<option value="Soltero/a" <?php if($EstadoCivil == 'Soltero/a'){ echo "selected"; }?>>Soltero/a</option>
+											<option value="Comprometido/a" <?php if($EstadoCivil == 'Comprometido/a'){ echo "selected"; }?>>Comprometido/a</option>
+											<option value="En Relación ( más de 1 Año de noviazgo)"  <?php if($EstadoCivil == 'En Relación ( más de 1 Año de noviazgo)'){ echo "selected"; }?>>En Relación ( más de 1 Año de noviazgo)</option>
+											<option value="Casado/a"  <?php if($EstadoCivil == 'Casado/a'){ echo "selected"; }?>>Casado/a</option>
+											<option value="Unión libre o unión de hecho"  <?php if($EstadoCivil == 'Unión libre o unión de hecho'){ echo "selected"; }?>>Unión libre o unión de hecho</option>
+											<option value="Separado/a" <?php if($EstadoCivil == 'Separado/a'){ echo "selected"; }?>>Separado/a</option>
+											<option value="Divorciado/a" <?php if($EstadoCivil == 'Divorciado/a'){ echo "selected"; }?>>Divorciado/a</option>
+											<option value="Viudo/a" <?php if($EstadoCivil == 'Viudo/a'){ echo "selected"; }?>>Viudo/a</option>
+										</select>
 									</div>
 									<div class="col-md-4">
 										<b>Fecha Nacimiento:</b>
@@ -586,10 +590,11 @@ function soloLetras(e) {
 										</div>
 										<div class="col-md-6">
 											<b>No. De folio del documento académico:</b>
-											<input type="text" name="FolioDocAcademico" class="form-control input-sm" value="<?php echo $NoFolioDoc?>" onkeypress="return soloNumeros(event);">
+											<input type="text" name="FolioDocAcademico" class="form-control input-sm" value="<?php echo $NoFolioDoc?>" onkeypress="return NumerosLetras(event);">
 										</div>
 								</div>
-								<br>	
+								<br>
+									
 								<button type="submit" class="btn btn-success glyphicon glyphicon-plus" > Guardar registro</button><br>
 							</div>
 						</div>

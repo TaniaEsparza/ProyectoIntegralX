@@ -1,5 +1,5 @@
 <?php
-if (!isset($_SESSION)) { session_start(); $_SESSION['NombreUsuarioCAP'] = 1; }
+if (!isset($_SESSION)) { session_start(); $_SESSION['NombreUsuarioCAP'] = 8; }
 /*if (!isset ($_SESSION['LoggedinCAP']))
 {
    echo "<script language='javascript'>window.location='LoginCE.php'</script>";
@@ -140,12 +140,7 @@ function soloLetras(e) {
 <script language="javascript" type="text/javascript">
 	function validar() {
   //obteniendo el valor que se puso en el campo text del formulario
-  miCampoTexto = document.getElementById("EstadoCivil").value;
-  if (miCampoTexto.length == 0 || /^\s+$/.test(miCampoTexto)) {
-  	alert('Verifica el campo Estado Civil esta vacio!');
-  	return false;
-  }
-
+ 
   var txtFecha = document.getElementById('FechaNacimiento').value;
   if(!isNaN(txtFecha)){
   	alert('Seleccione o intraduzca una fecha!');
@@ -275,10 +270,13 @@ function soloLetras(e) {
 
 					$Mysql = new MySQLConector();
 					$Mysql->Conectar();
-					$Consulta = "SELECT * FROM `personal` WHERE idPersonal ='".$_SESSION['NombreUsuarioCAP']."';";
+					$Consulta = "SELECT * FROM `personal`, `informacionlaboral` WHERE idPersonal = '".$_SESSION['idPersonal']."' AND Personal.InformacionLaboral_idInformacionLaboral = informacionlaboral.idInformacionLaboral;";
 					$Resultado = $Mysql->Consulta($Consulta);
 					$row = mysqli_fetch_array($Resultado);
 
+					$idIL = $row['idInformacionLaboral'];
+					$idLN = $row['LugarNacimiento_idLugarNacimiento'];
+					$idD=$row['Domicilio_idDomicilio'];
 					$Nombre=$row["Nombre"];
 					$ApellidoP=$row["ApellidoP"];
 					$ApellidoM = $row['ApellidoM']; 
@@ -290,6 +288,15 @@ function soloLetras(e) {
 					$Departamento = $row['Departamento'];
 					$Puesto = $row['Puesto'];
 					$Horas = $row['Horas'];
+					$TelefonoCelular = $row['TelefonoCel'];
+					$Correo = $row['Correo'];
+					$FechaNacimiento = $row['FechaNacimiento'];
+					$TipoSangre = $row['TipoSangre'];
+					$Sexo = $row['Sexo'];
+					$EstadoCivil = $row['EstadoCivil'];
+					
+	            	$Neto = $row['Neto'];
+					$Bruto = $row['Bruto'];
 
 					?>
 					<form action="AltaCedulaPersonal.php" method="POST" onsubmit="return validar()">
@@ -342,7 +349,16 @@ function soloLetras(e) {
 									</div>
 									<div class="col-md-4">
 										<b>Estado Civil:</b>
-										<input type="text" name="EstadoCivil" class="form-control" id="EstadoCivil" placeholder="Estado Civil" onkeypress="return soloLetras(event);" maxlength="20">
+										<select name="EstadoCivil" class="m-1 custom-select">
+											<option value="Soltero/a">Soltero/a</option>
+											<option value="Comprometido/a">Comprometido/a</option>
+											<option value="En Relación ( más de 1 Año de noviazgo)">En Relación ( más de 1 Año de noviazgo)</option>
+											<option value="Casado/a">Casado/a</option>
+											<option value="Unión libre o unión de hecho">Unión libre o unión de hecho</option>
+											<option value="Separado/a">Separado/a</option>
+											<option value="Divorciado/a">Divorciado/a</option>
+											<option value="Viudo/a">Viudo/a</option>
+										</select>
 									</div>
 									<div class="col-md-4">
 										<b><i>Fecha Nacimiento:</i></b>
@@ -497,13 +513,13 @@ function soloLetras(e) {
 									</div>
 									<div class="col-md-4">
 										<b>Bruto: </b>
-										<input type="text" name="Bruto" placeholder="<?php //echo $Horas; ?>" class="form-control input-sm" readonly="readonly">
+										<input type="text" name="Bruto" placeholder="<?php echo $Bruto; ?>" class="form-control input-sm" readonly="readonly">
 									</div>
 								</div>
 								<div class="row">
 									<div class="col-md-4">
 										<b>Neto: </b>
-										<input type="text" name="Neto" placeholder="<?php //echo $Puesto; ?>" class="form-control input-sm" readonly="readonly">
+										<input type="text" name="Neto" placeholder="<?php echo $Neto; ?>" class="form-control input-sm" readonly="readonly">
 									</div>
 								</div>
 							</div>
@@ -547,11 +563,11 @@ function soloLetras(e) {
 									</div>
 									<div class="col-md-6">
 										<b>Fecha de Expedición del documento:</b>
-										<input type="text" name="ExpDocAcademico" class="form-control input-sm" onkeypress="return soloLetras(event);">
+										<input type="date" name="ExpDocAcademico" class="form-control input-sm" onkeypress="return soloNumeros(event);">
 									</div>
 									<div class="col-md-6">
 										<b>No. De folio del documento académico:</b>
-										<input type="text" name="FolioDocAcademico" class="form-control input-sm" onkeypress="return soloLetras(event);">
+										<input type="text" name="FolioDocAcademico" class="form-control input-sm" onkeypress="return NumerosLetras(event);">
 									</div>
 								</div>
 								<button type="submit" class="btn btn-success glyphicon glyphicon-plus" > Guardar registro</button><br>
@@ -647,7 +663,7 @@ function soloLetras(e) {
             $CarreraEspecialidad = $_POST['CarreraEspecialidad'];
             $AreaConocimientos = $_POST['AreaConocimientos'];
             $EntidadFederativa = $_POST['EntidadFedEstudio'];
-            $Institucion = $_POST['Institucion'];
+            $Institucion = $_POST['NombreInstitucion'];
             $Estatus = $_POST['Estatus'];
             $DocAcademico = $_POST['DocAcademico'];
             $FechaExpedicion = $_POST['ExpDocAcademico'];

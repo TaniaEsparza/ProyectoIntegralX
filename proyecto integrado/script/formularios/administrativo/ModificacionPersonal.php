@@ -247,7 +247,7 @@ miCampoTexto = document.getElementById("NoEmpleado").value;
 
 					$Mysql = new MySQLConector();
 					$Mysql->Conectar();
-					$Consulta = "SELECT * FROM `personal`, `esudiospersonal`, `informacionlaboral` WHERE idPersonal = '".$_SESSION['idPersonal']."' AND esudiospersonal.Personal_idPersonal = personal.idPersonal AND Personal.InformacionLaboral_idInformacionLaboral = informacionlaboral.idInformacionLaboral;";
+					$Consulta = "SELECT * FROM `personal`, `informacionlaboral` WHERE idPersonal = '".$_SESSION['idPersonal']."' AND Personal.InformacionLaboral_idInformacionLaboral = informacionlaboral.idInformacionLaboral;";
 
 					$Resultado = $Mysql->Consulta($Consulta);
 					$row = mysqli_fetch_array($Resultado);
@@ -271,22 +271,14 @@ miCampoTexto = document.getElementById("NoEmpleado").value;
 					$TipoSangre = $row['TipoSangre'];
 					$Sexo = $row['Sexo'];
 					$EstadoCivil = $row['EstadoCivil'];
-					$UltimoGrado = $row['UltimoGrado'];
-	            	$Carrera = $row['Carrera'];
-	            	$AreaConocimiento = $row['AreaConocimiento'];
-	            	$EntidadFederativa = $row['EntidadFederativa'];
-	            	$Institucion = $row['Institucion'];
-	            	$Estatus = $row['Estatus'];
-	            	$DocAcademico = $row['DocAcademico'];
-	            	$FechaExpedicion = $row['FechaExpedicion'];
-	            	$NoFolioDoc = $row['NoFolioDoc'];
+					
 	            	$Neto = $row['Neto'];
 					$Bruto = $row['Bruto'];
 
 					?>
 
 
-					<form action="AltaPersonal.php" method="POST" onsubmit="return validar()">
+					<form action="ModificacionPersonal.php" method="POST" onsubmit="return validar()">
 						<br>
 						<div class="card border-success">
 							<div class="card-body">
@@ -325,7 +317,7 @@ miCampoTexto = document.getElementById("NoEmpleado").value;
 								<br>
 
 								<h4 align="center">Información Laboral</h4><br>
-								<input type="hidden" name="idIL" placeholder="<?php echo $idIL;?>">
+								<input type="hidden" name="idIL" value="<?php echo $idIL;?>">
 								<div class="row">
 									<div class="col-md-4">
 										<b>Número Empleado:</b>
@@ -364,12 +356,12 @@ miCampoTexto = document.getElementById("NoEmpleado").value;
 
 									<div class="col-md-4">
 										<b>Bruto:</b>
-										<input type="text" name="Bruto" id="Bruto" value="" class="form-control input-sm"onkeypress="return NumeroDecimal(event, this);">
+										<input type="text" name="Bruto" id="Bruto" value="<?php echo $Bruto; ?>" class="form-control input-sm"onkeypress="return NumeroDecimal(event, this);">
 										<br>
 									</div>
 									<div class="col-md-4">
 										<b>Neto:</b>
-										<input type="text" name="Neto" id="Neto" value="" class="form-control input-sm"onkeypress="return NumeroDecimal(event, this);">
+										<input type="text" name="Neto" id="Neto" value="<?php echo $Neto; ?>" class="form-control input-sm"onkeypress="return NumeroDecimal(event, this);">
 										<br>
 									</div>
 

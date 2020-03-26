@@ -1865,9 +1865,9 @@
 						}
 
 
-					if(($Personal->getApellidoP()== $Apellido) && ($InformacionLaboral->getNoEmpleado()) == $NumEmpleado){
+					if(($Personal->getApellidoP() != $Apellido) && ($InformacionLaboral->getNoEmpleado()) != $NumEmpleado){
 
-						$Consulta = "UPDATE `personal` SET `Nombre` = '".$Personal->getNombre()."', `ApellidoP` = '".$Personal->getApellidoP()."', `ApellidoM` = '".$Personal->getApellidoM()."', `CURP` = ".$Personal->getCURP()."', `RFC` = '".$Personal->getRFC()."', `SS` = '".$Personal->getSS()."' WHERE `personal`.`idPersonal` = '".$Personal->getidPersonal()."'; ";
+						$Consulta = "UPDATE `personal` SET `Nombre` = '".$Personal->getNombre()."', `ApellidoP` = '".$Personal->getApellidoP()."', `ApellidoM` = '".$Personal->getApellidoM()."', `CURP` = '".$Personal->getCURP()."', `RFC` = '".$Personal->getRFC()."', `SS` = '".$Personal->getSS()."' WHERE `personal`.`idPersonal` = '".$Personal->getidPersonal()."'; ";
 
 					if($Mysql->Consulta($Consulta) === true){
 					
@@ -1875,7 +1875,7 @@
 
 						if($Mysql->Consulta($Consulta3) === true){
 
-								$Consulta4 = "UPDATE `usuarios` SET `NombreUsuario` = '".$InformacionLaboral->getNoEmpleado()."', `Contrasena` = '".md5(strtolower($Personal->getApellidoP()))." WHERE `usuarios`.`Personal_idPersonal` = '".$Personal->getidPersonal()."'; ";
+								$Consulta4 = "UPDATE `usuarios` SET `NombreUsuario` = '".$InformacionLaboral->getNoEmpleado()."', `Contrasena` = '".md5(strtolower($Personal->getApellidoP()))."' WHERE `usuarios`.`Personal_idPersonal` = '".$Personal->getidPersonal()."'; ";
 
 								if (($Mysql->Consulta($Consulta4) === true)){
 									echo "<script language='javascript'>window.location = 'ConsultaPersonales.php'</script>";
@@ -1894,7 +1894,7 @@
 //------------------------------------------------------------------------------------------------------------------------------
 					}else{
 
-						$Consulta = "UPDATE `personal` SET `Nombre` = '".$Personal->getNombre()."', `ApellidoP` = '".$Personal->getApellidoP()."', `ApellidoM` = '".$Personal->getApellidoM()."', `CURP` = ".$Personal->getCURP()."', `RFC` = '".$Personal->getRFC()."', `SS` = '".$Personal->getSS()."' WHERE `personal`.`idPersonal` = '".$Personal->getidPersonal()."'; ";
+						$Consulta = "UPDATE `personal` SET `Nombre` = '".$Personal->getNombre()."', `ApellidoP` = '".$Personal->getApellidoP()."', `ApellidoM` = '".$Personal->getApellidoM()."', `CURP` = '".$Personal->getCURP()."', `RFC` = '".$Personal->getRFC()."', `SS` = '".$Personal->getSS()."' WHERE `personal`.`idPersonal` = '".$Personal->getidPersonal()."'; ";
 
 					if($Mysql->Consulta($Consulta) === true){
 						
