@@ -758,3 +758,10 @@ function ModificacionAsignacionPrivilegio(){
 		}
 	});
 }
+
+function VerNota(datos){
+	d=datos.split('||');
+	$('#Asunto').val(d[2]);
+	$('#Fecha').val(d[3]);
+	$('#Observacion').val(d[4]);
+}

@@ -13,6 +13,7 @@ if (!isset($_SESSION)) { session_start(); }
             <a class="dropdown-item" href="ConsultasCanalizacionesDirectivos.php">Canalización</a>
             <a class="dropdown-item" href="ConsultasSolicitudBajaDirectivos.php">Solicitud de baja</a>
             <a class="dropdown-item" href="#">Calficaciones</a>
+            <a class="dropdown-item" href="ConsultasNotasDirectivos.php">Notas/Observaciones</a>
         </div>';
  
 ?>
